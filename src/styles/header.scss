@@ -1,0 +1,29 @@
+@import 'variables';
+header {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: 0px 1px 15px $background-main-dark;
+    .btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: $primary-main;
+        margin: 12px 48px 12px 0;
+        line-height: normal;
+        padding: 3px 4px;
+        &:hover,
+        &:focus {
+            color: $secondary-main;
+            .underline {
+                border: 1px solid $secondary-main;
+                width: 100%;
+            }
+        }
+        .underline {
+            border: 0px solid $primary-main;
+            width: 0;
+            transition: width 0.25s ease-in-out, border-color 0.5s linear;
+        }
+    }
+}
