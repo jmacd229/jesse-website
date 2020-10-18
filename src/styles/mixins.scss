@@ -1,0 +1,7 @@
+@import 'variables';
+@import 'animations';
+@mixin animated-gradient {
+    background: linear-gradient(90deg, $accent-1 0%, $secondary-main 33%, $accent-1 66%, $secondary-main 100%);
+    background-size: 400%;
+    animation: animatedGradient 10s ease infinite;
+}

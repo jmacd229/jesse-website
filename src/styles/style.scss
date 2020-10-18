@@ -1,8 +1,11 @@
 @import 'variables';
-.wrapper {
-    height: 100vh;
+body {
     background-color: $background-main;
     color: $primary-main;
+}
+
+.main {
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }

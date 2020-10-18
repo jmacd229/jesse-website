@@ -8,11 +8,13 @@ const currentPage = Pages.HOME;
 
 const Layout = () => {
   return (
-    <div className="wrapper">
+      <div>
+    <div className="main">
       <Header />
       <Home />
+      </div>
       <Footer />
-    </div>
+      </div>
   )
 }
 

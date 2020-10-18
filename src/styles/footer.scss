@@ -1,5 +1,21 @@
 @import 'variables';
+@import 'mixins';
 footer {
+    position: relative;
     z-index: 1;
     margin-top: auto;
+    background-color: $background-main-dark;
+    font-size: 12px;
+    >div:nth-child(2) {
+        font-size: 8px;
+    }
+    &:before {
+        content: '';
+        height: 2px;
+        opacity: 0.2;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        @include animated-gradient;
+    }
 }
