@@ -1,20 +1,35 @@
 import { Link } from "gatsby"
 import React from "react"
+import { Pages } from "../enums/pages.enum"
 import "../styles/header.scss"
 
-const links = ['About Me','Work','Contact']
-
 const Header = () => {
-return <header>{links.map((link, i) =><HeaderLink key={i}>{link}</HeaderLink>)}</header>
+  return (
+    <header>
+      {getLinks()}
+    </header>
+  )
 }
 
-const HeaderLink = (props) => {
+function getLinks() {
+  if(!process.env.IS_UNDER_CONSTRUCTION){
+    return Object.values(Pages).map((link, i) => link !== "" ? <HeaderLink key={i}>{link}</HeaderLink> : null);
+  } else {
+    return <div className="NA-text mr-4">More coming soon...</div>;
+  }
+}
 
-  function test(event){
-    console.log(event);
+const HeaderLink = props => {
+  function test(event) {
+    console.log(event)
   }
 
-  return <button className="btn" onClick={test}>{props.children}<div className="underline"></div></button>
+  return (
+    <button className="btn" onClick={test}>
+      {props.children}
+      <div className="underline"></div>
+    </button>
+  )
 }
 
 export default Header

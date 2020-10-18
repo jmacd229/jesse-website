@@ -16,3 +16,11 @@ header+* {
     box-shadow: none !important;
     border-bottom: 3px double white;
 }
+
+.NA-text {
+    opacity: 0.5;
+    transition: opacity linear 0.25s;
+    &:hover {
+        opacity: 1;
+    }
+}

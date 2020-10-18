@@ -39,10 +39,24 @@ header {
         content: '';
         height: 3px;
         opacity: 0.4;
-        background-color: $secondary-main;
+        background: linear-gradient(90deg, $accent-1 0%, $secondary-main 33%, $accent-1 66%, $secondary-main 100%);
+        background-size: 400%;
         width: 50%;
         position: absolute;
         bottom: 0;
         border-top-left-radius: 100%;
+        animation: animatedGradient 10s ease infinite;
+    }
+}
+
+@keyframes animatedGradient {
+    from {
+        background-position-x: 0%;
+    }
+    50% {
+        background-position-x: 100%;
+    }
+    to {
+        background-position-x: 0%;
     }
 }
