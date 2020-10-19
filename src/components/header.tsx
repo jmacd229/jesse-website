@@ -15,7 +15,7 @@ function getLinks() {
   if(!process.env.IS_UNDER_CONSTRUCTION){
     return Object.values(Pages).map((link, i) => link !== "" ? <HeaderLink key={i}>{link}</HeaderLink> : null);
   } else {
-    return <div className="NA-text mr-4">More coming soon...</div>;
+    return <div className="light-text mr-4">More coming soon...</div>;
   }
 }
 

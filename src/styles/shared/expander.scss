@@ -1,0 +1,11 @@
+@import '../variables';
+.expander {
+    display: flex;
+    align-items: center;
+    height: 16px;
+    &-label {
+        color: $secondary-main;
+        text-decoration: underline;
+        font-size: 12px;
+    }
+}
