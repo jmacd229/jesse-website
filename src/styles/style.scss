@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 body {
     background-color: $background-main;
     color: $primary-main;
@@ -16,9 +17,7 @@ header+* {
 }
 
 *:focus {
-    box-shadow: none !important;
-    outline: none;
-    border-bottom: 3px double white;
+    @include focus;
 }
 
 .light-text {

@@ -5,3 +5,9 @@
     background-size: 400%;
     animation: animatedGradient 10s ease infinite;
 }
+
+@mixin focus {
+    box-shadow: none !important;
+    outline: none;
+    border-bottom: 2px double rgba(255, 255, 255, 0.5);
+}
