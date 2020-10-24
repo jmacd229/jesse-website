@@ -5,8 +5,8 @@ import animation from "../../animations/menu.json";
 import "../../styles/shared/expander.scss";
 
 interface ExpanderProps {
-  label: String;
-  maxWidth: Number;
+  label: string;
+  maxWidth: number;
 }
 
 const Expander = (props: ExpanderProps) => {
@@ -21,6 +21,7 @@ const Expander = (props: ExpanderProps) => {
       autoplay: false,
       animationData: animation,
     });
+    anim.setSpeed(0.75);
     function expand() {
       anim.play();
       anim.setDirection((anim.playDirection * -1) as AnimationDirection);
@@ -36,18 +37,23 @@ const Expander = (props: ExpanderProps) => {
   }, []);
 
   return (
-    <div className={"expander" + (isExpanded ? " expanded" : "")}>
+    <div className={"expander" + (isExpanded ? " expanded" : "")} style={{
+      width: `${props.maxWidth + 50}px`
+    }}>
       <button
         className="btn p-0 expander-trigger"
         style={{
           transform: `translateX(${isExpanded ? props.maxWidth : 0}px)`,
         }}
       >
-        <div className="expander-label py-4">{props.label}</div>
-        <div className="icon flex-shrink-0">
-          <div className="animation-container" ref={animationContainer} />
+        <div className="expander-label">{props.label}</div>
+        <div className="icon-wrapper">
+          <div className="icon flex-shrink-0">
+            <div className="animation-container" ref={animationContainer} />
           </div>
+        </div>
       </button>
+      <div className="expander-panel"></div>
     </div>
   );
 };

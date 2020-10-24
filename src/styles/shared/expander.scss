@@ -2,14 +2,23 @@
 @import '../mixins';
 .expander {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
     &-trigger.btn {
         display: flex;
         align-items: center;
         transition: transform 1s ease-in-out;
+        margin-top: 8px;
+        z-index: 1;
+        >.icon-wrapper {
+            height: 32px;
+            display: flex;
+            align-items: center;
+        }
         &:focus {
             border-bottom: none;
-            >.icon,
+            >.icon-wrapper,
             .expander-label {
                 @include focus;
             }
@@ -23,12 +32,37 @@
         white-space: nowrap;
         overflow-x: hidden;
         transition: width 750ms ease-in-out;
-        line-height: 0;
+        padding: 6px 0;
+    }
+    &-panel {
+        &:before {
+            content: '';
+            position: absolute;
+            @include animated-gradient;
+            width: 100%;
+            height: 2px;
+            opacity: 0;
+            transition: opacity 1s linear,
+        }
+        background-color: $background-main-dark;
+        width: 100%;
+        height: 0px;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: opacity 1s linear,
+        height 1s linear;
     }
     &.expanded {
-        width: 100%;
         .expander-label {
             width: 0;
+        }
+        .expander-panel {
+            &:before {
+                opacity: 0.8;
+            }
+            opacity: 0.8;
+            height: 200px;
         }
     }
 }
