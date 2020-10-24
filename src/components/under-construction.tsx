@@ -28,7 +28,7 @@ const UnderConstruction = () => {
             Sorry, this site is still in progress - please check back later for
             updates!
           </div>
-        <Expander label="More info" maxWidth={400} ></Expander>
+        <Expander label="More info" maxWidth={500} ></Expander>
       </div>
     </div>
   )

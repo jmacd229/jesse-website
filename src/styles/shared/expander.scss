@@ -9,10 +9,9 @@
         display: flex;
         align-items: center;
         transition: transform 1s ease-in-out;
-        margin-top: 8px;
         z-index: 1;
         >.icon-wrapper {
-            height: 32px;
+            height: 22px;
             display: flex;
             align-items: center;
         }
@@ -31,8 +30,8 @@
         width: 100%;
         white-space: nowrap;
         overflow-x: hidden;
-        transition: width 750ms ease-in-out;
-        padding: 6px 0;
+        transition: width 750ms ease-in-out, padding-right 750ms ease-in-out;
+        padding-right: 6px;
     }
     &-panel {
         &:before {
@@ -56,6 +55,7 @@
     &.expanded {
         .expander-label {
             width: 0;
+            padding-right: 0px;
         }
         .expander-panel {
             &:before {

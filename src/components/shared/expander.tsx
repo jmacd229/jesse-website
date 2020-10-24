@@ -27,7 +27,7 @@ const Expander = (props: ExpanderProps) => {
       anim.setDirection((anim.playDirection * -1) as AnimationDirection);
       setExpandedState(anim.playDirection === 1);
     }
-    animationContainer.current.parentElement.parentElement.addEventListener(
+    animationContainer.current.parentElement.parentElement.parentElement.addEventListener(
       "click",
       expand
     );
@@ -38,17 +38,18 @@ const Expander = (props: ExpanderProps) => {
 
   return (
     <div className={"expander" + (isExpanded ? " expanded" : "")} style={{
-      width: `${props.maxWidth + 50}px`
+      width: `${props.maxWidth}px`
     }}>
       <button
         className="btn p-0 expander-trigger"
         style={{
-          transform: `translateX(${isExpanded ? props.maxWidth : 0}px)`,
+          // subtract 25 for the icon width and 5 for padding
+          transform: `translate(${isExpanded ? props.maxWidth - 30 : 0}px,${isExpanded ? 5 : 0}px)`,
         }}
       >
         <div className="expander-label">{props.label}</div>
-        <div className="icon-wrapper">
-          <div className="icon flex-shrink-0">
+        <div className="icon-wrapper flex-shrink-0">
+          <div className="icon-small">
             <div className="animation-container" ref={animationContainer} />
           </div>
         </div>
