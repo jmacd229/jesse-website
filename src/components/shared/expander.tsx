@@ -7,6 +7,7 @@ import "../../styles/shared/expander.scss";
 interface ExpanderProps {
   label: string;
   maxWidth: number;
+  maxHeight: number;
 }
 
 const Expander = (props: ExpanderProps) => {
@@ -38,13 +39,13 @@ const Expander = (props: ExpanderProps) => {
 
   return (
     <div className={"expander" + (isExpanded ? " expanded" : "")} style={{
-      width: `${props.maxWidth}px`
+      height: `${isExpanded ? props.maxHeight : 0}px`
     }}>
       <button
         className="btn p-0 expander-trigger"
         style={{
-          // subtract 25 for the icon width and 5 for padding
-          transform: `translate(${isExpanded ? props.maxWidth - 30 : 0}px,${isExpanded ? 5 : 0}px)`,
+          // subtract 25 for the icon width
+          transform: `translate(${isExpanded ? props.maxWidth - 25 : 0}px,${isExpanded ? 21 : 0}px)`,
         }}
       >
         <div className="expander-label">{props.label}</div>
@@ -54,7 +55,9 @@ const Expander = (props: ExpanderProps) => {
           </div>
         </div>
       </button>
-      <div className="expander-panel"></div>
+      <div className="expander-panel" style={{
+      height: `${isExpanded ? props.maxHeight : 0}px`
+    }}></div>
     </div>
   );
 };

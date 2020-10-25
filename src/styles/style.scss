@@ -6,7 +6,6 @@ body {
 }
 
 .main {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -14,6 +13,7 @@ body {
 header+* {
     flex-grow: 1;
     padding: 25px;
+    min-height: 100vh;
 }
 
 *:focus {

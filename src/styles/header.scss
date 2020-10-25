@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'mixins';
 header {
+    z-index: 1;
     position: relative;
     height: 50px;
     display: flex !important;

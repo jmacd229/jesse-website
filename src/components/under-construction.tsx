@@ -24,11 +24,11 @@ const UnderConstruction = () => {
           <div className="animation-container" ref={animationContainer} />
         </div>
         <div className="d-flex flex-column mt-3">
-          <div className="mb-1">
+          <div>
             Sorry, this site is still in progress - please check back later for
             updates!
           </div>
-        <Expander label="More info" maxWidth={500} ></Expander>
+        <Expander label="More info" maxWidth={500} maxHeight={200}></Expander>
       </div>
     </div>
   )

@@ -43,6 +43,7 @@
             opacity: 0;
             transition: opacity 1s linear,
         }
+        margin-top: 16px;
         background-color: $background-main-dark;
         width: 100%;
         height: 0px;
@@ -62,7 +63,6 @@
                 opacity: 0.8;
             }
             opacity: 0.8;
-            height: 200px;
         }
     }
 }
