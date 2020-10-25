@@ -1,4 +1,4 @@
-import React, { useEffect, createRef, useState } from "react";
+import React, { useEffect, createRef, useState, ReactElement } from "react";
 
 import lottie, { AnimationDirection } from "lottie-web";
 import animation from "../../animations/menu.json";
@@ -10,9 +10,9 @@ interface ExpanderProps {
   maxHeight: number;
 }
 
-const Expander = (props: ExpanderProps) => {
+const Expander = (props: ExpanderProps): ReactElement => {
   const [isExpanded, setExpandedState] = useState(false);
-  let animationContainer = createRef<HTMLDivElement>();
+  const animationContainer = createRef<HTMLDivElement>();
 
   useEffect(() => {
     const anim = lottie.loadAnimation({

@@ -1,12 +1,12 @@
-import React, { useEffect, createRef } from "react"
+import React, { useEffect, createRef, ReactElement } from "react"
 
 import lottie from "lottie-web"
 import animation from "./../animations/under-construction.json"
 import "../styles/under-construction.scss"
 import Expander from "./shared/expander"
 
-const UnderConstruction = () => {
-  let animationContainer = createRef<HTMLDivElement>()
+const UnderConstruction = (): ReactElement => {
+  const animationContainer = createRef<HTMLDivElement>()
 
   useEffect(() => {
     lottie.loadAnimation({

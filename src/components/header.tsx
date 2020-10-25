@@ -1,9 +1,8 @@
-import { Link } from "gatsby"
-import React from "react"
+import React, { DOMAttributes, ReactElement } from "react"
 import { Pages } from "../enums/pages.enum"
 import "../styles/header.scss"
 
-const Header = () => {
+const Header = (): ReactElement => {
   return (
     <header>
       {getLinks()}
@@ -19,7 +18,7 @@ function getLinks() {
   }
 }
 
-const HeaderLink = props => {
+const HeaderLink = (props: DOMAttributes<string>): ReactElement => {
   function test(event) {
     console.log(event)
   }

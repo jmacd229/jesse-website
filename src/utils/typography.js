@@ -23,7 +23,7 @@ const typography = new Typography({
     ],
     headerFontFamily: ['Raleway', 'sans-serif'],
     bodyFontFamily: bodyFontFamily,
-    overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
+    overrideStyles: () => ({
         '.btn': {
             fontFamily: bodyFontFamily.join(',')
         }

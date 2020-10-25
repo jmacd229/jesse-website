@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import Header from "./header"
 import Footer from "./footer"
 import { Pages } from "../enums/pages.enum";
@@ -6,7 +6,7 @@ import Home from "./pages/home";
 
 const currentPage = Pages.HOME;
 
-const Layout = () => {
+const Layout = (): ReactElement => {
   return (
     <div className="main">
       <Header />

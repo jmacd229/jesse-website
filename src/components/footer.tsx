@@ -1,7 +1,7 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import "../styles/footer.scss"
 
-const Footer = () => {
+const Footer = (): ReactElement => {
   return (
     <footer className="p-3 d-flex flex-column align-items-center">
       <div className="light-text">A personal website built by and for Jesse MacDougall</div>
