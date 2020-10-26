@@ -1,10 +1,17 @@
-import React, { useEffect, createRef, useState, ReactElement } from "react";
+import React, {
+  useEffect,
+  createRef,
+  useState,
+  ReactElement,
+  ReactChildren,
+  DOMAttributes,
+} from "react";
 
 import lottie, { AnimationDirection } from "lottie-web";
 import animation from "../../animations/menu.json";
 import "../../styles/shared/expander.scss";
 
-interface ExpanderProps {
+interface ExpanderProps extends DOMAttributes<Element> {
   label: string;
   maxWidth: number;
   maxHeight: number;
@@ -38,15 +45,18 @@ const Expander = (props: ExpanderProps): ReactElement => {
   }, []);
 
   return (
-    <div className={"expander" + (isExpanded ? " expanded" : "")} style={{
-      height: `${isExpanded ? props.maxHeight : 0}px`
-    }}>
+    <div
+      className={"expander" + (isExpanded ? " expanded" : "")}
+      style={{
+        height: `${isExpanded ? props.maxHeight : 0}px`,
+      }}
+    >
       <button
         className="btn p-0 expander-trigger"
         style={{
           // subtract 25 for the icon width
-          transform: `translateX(${isExpanded ? props.maxWidth - 25 : 0}px)`,
-          marginTop: `${isExpanded ? 21 : 0}px`,
+          transform: `translateX(${isExpanded ? props.maxWidth - 15 : 0}px)`,
+          marginTop: `${isExpanded ? 17 : 0}px`,
         }}
       >
         <div className="expander-label">{props.label}</div>
@@ -56,9 +66,21 @@ const Expander = (props: ExpanderProps): ReactElement => {
           </div>
         </div>
       </button>
-      <div className="expander-panel" style={{
-      height: `${isExpanded ? props.maxHeight : 0}px`
-    }}></div>
+      <div
+        className="expander-panel"
+        style={{
+          height: `${isExpanded ? props.maxHeight : 0}px`,
+        }}
+      >
+        <div
+          className="expander-panel-content"
+          style={{
+            height: `${isExpanded ? props.maxHeight : 0}px`,
+          }}
+        >
+          {props.children}
+        </div>
+      </div>
     </div>
   );
 };
