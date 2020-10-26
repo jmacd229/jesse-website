@@ -45,7 +45,8 @@ const Expander = (props: ExpanderProps): ReactElement => {
         className="btn p-0 expander-trigger"
         style={{
           // subtract 25 for the icon width
-          transform: `translate(${isExpanded ? props.maxWidth - 25 : 0}px,${isExpanded ? 21 : 0}px)`,
+          transform: `translateX(${isExpanded ? props.maxWidth - 25 : 0}px)`,
+          marginTop: `${isExpanded ? 21 : 0}px`,
         }}
       >
         <div className="expander-label">{props.label}</div>

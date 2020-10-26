@@ -8,7 +8,7 @@
     &-trigger.btn {
         display: flex;
         align-items: center;
-        transition: transform 1s ease-in-out;
+        transition: transform 1s ease-in-out, margin-top 0.1s 0s linear;
         z-index: 1;
         >.icon-wrapper {
             height: 22px;

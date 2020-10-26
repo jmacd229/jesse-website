@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import "../../styles/pages/home.scss"
-import * as BackgroundImg from "../../assets/home.jpg"
+import BackgroundImg from "../../assets/home.jpg"
 import UnderConstruction from "../under-construction"
 
 const Home = (): ReactElement => {
