@@ -51,6 +51,9 @@
         top: 0;
         transition: height 1s linear;
         &-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             overflow: hidden;
             font-weight: 200;
             font-size: 12px;

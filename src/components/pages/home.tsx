@@ -11,7 +11,7 @@ const Home = (): ReactElement => {
         <h2 className="mb-4">A full-stack web developer based in Toronto</h2>
         <UnderConstruction/>
       </div>
-      <img src={BackgroundImg} className="h-100" />
+      <img src={BackgroundImg} className="background-image" />
     </div>
   )
 }

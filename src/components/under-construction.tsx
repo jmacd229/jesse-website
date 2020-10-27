@@ -4,6 +4,7 @@ import lottie from "lottie-web";
 import animation from "./../animations/under-construction.json";
 import "../styles/under-construction.scss";
 import Expander from "./shared/expander";
+import LinkedInImg from "../assets/linkedin.svg";
 
 const UnderConstruction = (): ReactElement => {
   const animationContainer = createRef<HTMLDivElement>();
@@ -54,8 +55,16 @@ const UnderConstruction = (): ReactElement => {
           </p>
           <p>
             Finally, if you&apos;d like to find more information on me, or
-            contact me, please visit my LinkedIn profile.
+            contact me, please visit my LinkedIn profile:
           </p>
+          <a
+            href="https://www.linkedin.com/in/jesse-macdougall-6709b7114"
+            rel="noreferrer"
+            target="_blank"
+            aria-label="link to navigate to Jesse MacDougall's LinkedIn profile"
+          >
+            <img className="linkedIn" src={LinkedInImg} />
+          </a>
         </Expander>
       </div>
     </div>

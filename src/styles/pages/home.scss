@@ -22,7 +22,8 @@
             animation: 1.5s ease-in 1s 1 normal both fadeIn;
         }
     }
-    img {
+    .background-image {
+        height: 100%;
         position: fixed;
         top: 0;
         right: 0;

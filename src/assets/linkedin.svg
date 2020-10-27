@@ -1,0 +1,12 @@
+<svg width="154" height="24" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="26" width="156" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" fill="#FFFFFF" d="m21.8,0l-19.6,0c-1.2,0 -2.2,1 -2.2,2.2l0,19.6c0,1.2 1,2.2 2.2,2.2l19.6,0c1.2,0 2.2,-1 2.2,-2.2l0,-19.6c0,-1.2 -1,-2.2 -2.2,-2.2zm-14.8,20l-4,0l0,-11l4,0l0,11zm-2,-12.3l0,0c-1.2,0 -2,-0.8 -2,-1.8c0,-1.1 0.8,-1.9 2,-1.9c1.2,0 2,0.8 2,1.8c0,1.1 -0.8,1.9 -2,1.9zm16,12.3l-4,0l0,-6c0,-1.6 -1.1,-2 -1.4,-2c-0.3,0 -1.6,0.2 -1.6,2c0,0.2 0,6 0,6l-4,0l0,-11l4,0l0,1.6c0.6,-0.9 1.6,-1.6 3.5,-1.6s3.5,1.5 3.5,5l0,6z"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="15" id="svg_2" y="17.5" x="29.5" stroke-width="0" stroke="#000" fill="#FFFFFF">Jesse MacDougall</text>
+ </g>
+</svg>
