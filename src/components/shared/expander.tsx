@@ -1,88 +1,100 @@
-import React, {
-  useEffect,
-  createRef,
-  useState,
-  ReactElement,
-  ReactChildren,
-  DOMAttributes,
-} from "react";
+import React, { createRef, DOMAttributes, RefObject } from "react";
 
-import lottie, { AnimationDirection } from "lottie-web";
+import lottie, { AnimationDirection, AnimationItem } from "lottie-web";
 import animation from "../../animations/menu.json";
 import "../../styles/shared/expander.scss";
+import { FadeIn } from "./fade-in";
 
-interface ExpanderProps extends DOMAttributes<Element> {
+export interface ExpanderProps extends DOMAttributes<Element> {
   label: string;
   maxWidth: number;
   maxHeight: number;
 }
 
-const Expander = (props: ExpanderProps): ReactElement => {
-  const [isExpanded, setExpandedState] = useState(false);
-  const animationContainer = createRef<HTMLDivElement>();
+export default class Expander extends React.Component<
+  ExpanderProps,
+  { isExpanded: boolean }
+> {
+  animationContainer: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
+  fadeInContent: RefObject<FadeIn> = createRef<FadeIn>();
+  anim: AnimationItem;
 
-  useEffect(() => {
-    const anim = lottie.loadAnimation({
-      container: animationContainer.current,
+  constructor(props?: ExpanderProps) {
+    super(props);
+    this.state = { isExpanded: false };
+
+    this.expand = this.expand.bind(this);
+  }
+
+  expand(): void {
+    this.anim.play();
+    this.anim.setDirection(
+      (this.anim.playDirection * -1) as AnimationDirection
+    );
+    this.setState({ isExpanded: this.anim.playDirection === 1 }, () => {
+      this.fadeInContent.current.changeVisibility(this.state.isExpanded);
+    });
+  }
+
+  componentDidMount(): void {
+    this.anim = lottie.loadAnimation({
+      container: this.animationContainer.current,
       renderer: "svg",
       loop: false,
       autoplay: false,
       animationData: animation,
     });
-    anim.setSpeed(0.75);
-    function expand() {
-      anim.play();
-      anim.setDirection((anim.playDirection * -1) as AnimationDirection);
-      setExpandedState(anim.playDirection === 1);
-    }
-    animationContainer.current.parentElement.parentElement.parentElement.addEventListener(
-      "click",
-      expand
-    );
-    return () => {
-      anim.destroy();
-    };
-  }, []);
+    this.anim.setSpeed(0.75);
+    this.anim.play();
+  }
 
-  return (
-    <div
-      className={"expander" + (isExpanded ? " expanded" : "")}
-      style={{
-        height: `${isExpanded ? props.maxHeight : 0}px`,
-      }}
-    >
-      <button
-        className="btn p-0 expander-trigger"
-        style={{
-          // subtract 25 for the icon width
-          transform: `translateX(${isExpanded ? props.maxWidth - 15 : 0}px)`,
-          marginTop: `${isExpanded ? 17 : 0}px`,
-        }}
-      >
-        <div className="expander-label">{props.label}</div>
-        <div className="icon-wrapper flex-shrink-0">
-          <div className="icon-small">
-            <div className="animation-container" ref={animationContainer} />
-          </div>
-        </div>
-      </button>
+  render(): React.ReactElement {
+    return (
       <div
-        className="expander-panel"
+        className={"expander" + (this.state.isExpanded ? " expanded" : "")}
         style={{
-          height: `${isExpanded ? props.maxHeight : 0}px`,
+          height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
         }}
       >
-        <div
-          className="expander-panel-content"
+        <button
+          className="btn p-0 expander-trigger"
+          onClick={this.expand}
           style={{
-            height: `${isExpanded ? props.maxHeight : 0}px`,
+            // subtract 25 for the icon width
+            transform: `translateX(${
+              this.state.isExpanded ? this.props.maxWidth - 17 : 0
+            }px)`,
+            marginTop: `${this.state.isExpanded ? 20 : 0}px`,
           }}
         >
-          {props.children}
+          <div className="expander-label">{this.props.label}</div>
+          <div className="icon-wrapper flex-shrink-0">
+            <div className="icon-small">
+              <div
+                className="animation-container"
+                ref={this.animationContainer}
+              />
+            </div>
+          </div>
+        </button>
+        <div
+          className="expander-panel"
+          style={{
+            height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
+          }}
+        >
+          <div
+            className="expander-panel-content"
+            style={{
+              height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
+            }}
+          >
+            <FadeIn initialDelay={750} delay={100} ref={this.fadeInContent}>
+              {this.props.children}
+            </FadeIn>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default Expander;
+    );
+  }
+}

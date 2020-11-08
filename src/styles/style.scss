@@ -1,13 +1,14 @@
 @import 'variables';
 @import 'mixins';
 body {
-    background-color: $background-main;
+    background-color: $background-dark;
     color: $primary-main;
 }
 
 .main {
     display: flex;
     flex-direction: column;
+    background-color: $background-main;
 }
 
 header+* {
