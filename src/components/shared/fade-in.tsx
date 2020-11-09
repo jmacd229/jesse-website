@@ -1,23 +1,20 @@
 import React, { DOMAttributes } from "react";
-import { timer } from "rxjs";
-import { finalize, take } from "rxjs/operators";
+import { Observable, Subscription, timer } from "rxjs";
+import { finalize, take, takeWhile } from "rxjs/operators";
 import "../../styles/shared/fade-in.scss";
 
 export interface FadeInProps extends DOMAttributes<string> {
   whenLoaded?: boolean;
   initialDelay?: number;
   delay?: number;
-  reverse?: boolean;
 }
 
 export class FadeIn extends React.Component<FadeInProps, { visible: number }> {
-  element;
+  timer: Subscription;
   constructor(props: FadeInProps) {
     super(props);
     this.state = {
-      visible: this.props.reverse
-        ? React.Children.count(this.props.children)
-        : -1,
+      visible: -1,
     };
   }
   render(): React.ReactElement {
@@ -28,11 +25,7 @@ export class FadeIn extends React.Component<FadeInProps, { visible: number }> {
             className="fade-in"
             key={i}
             style={{
-              opacity:
-                (i <= this.state.visible && !this.props.reverse) ||
-                (i >= this.state.visible && this.props.reverse)
-                  ? 1
-                  : 0,
+              opacity: i <= this.state.visible ? 1 : 0,
             }}
           >
             {element}
@@ -44,29 +37,20 @@ export class FadeIn extends React.Component<FadeInProps, { visible: number }> {
 
   componentDidMount(): void {
     if (this.props.whenLoaded) {
-      this.changeVisibility(!this.props.reverse);
+      this.changeVisibility(true);
     }
   }
 
   changeVisibility(makingVisible: boolean): void {
-    timer(this.props.initialDelay, this.props.delay)
-      .pipe(
-        take(React.Children.count(this.props.children)),
-        finalize(() => {
-          if (!makingVisible) {
-            this.setState({
-              visible: this.props.reverse
-                ? React.Children.count(this.props.children)
-                : -1,
-            });
-          }
-        })
-      )
+    if (this.timer && !this.timer.closed) {
+      this.timer.unsubscribe();
+    }
+    this.timer = timer(this.props.initialDelay, this.props.delay)
+      .pipe(takeWhile(val => val <= React.Children.count(this.props.children)))
       .subscribe(val => {
-        const visibility =
-          makingVisible && !this.props.reverse
-            ? val
-            : React.Children.count(this.props.children) - 1 - val;
+        const visibility = makingVisible
+          ? val
+          : React.Children.count(this.props.children) - 1 - val;
         this.setState({ visible: visibility });
       });
   }

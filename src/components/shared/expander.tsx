@@ -9,9 +9,10 @@ export interface ExpanderProps extends DOMAttributes<Element> {
   label: string;
   maxWidth: number;
   maxHeight: number;
+  isExpanded(isExpanded: boolean);
 }
 
-export default class Expander extends React.Component<
+export class Expander extends React.Component<
   ExpanderProps,
   { isExpanded: boolean }
 > {
@@ -22,7 +23,6 @@ export default class Expander extends React.Component<
   constructor(props?: ExpanderProps) {
     super(props);
     this.state = { isExpanded: false };
-
     this.expand = this.expand.bind(this);
   }
 
@@ -33,6 +33,7 @@ export default class Expander extends React.Component<
     );
     this.setState({ isExpanded: this.anim.playDirection === 1 }, () => {
       this.fadeInContent.current.changeVisibility(this.state.isExpanded);
+      this.props.isExpanded(this.state.isExpanded);
     });
   }
 
