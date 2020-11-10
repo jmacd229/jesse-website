@@ -5,6 +5,7 @@
     align-items: flex-start;
     flex-direction: column;
     position: relative;
+    transition: height 1s linear;
     &-trigger.btn {
         display: flex;
         align-items: center;

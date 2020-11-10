@@ -3,7 +3,6 @@ import React, { useEffect, createRef, ReactElement, useState } from "react";
 import lottie from "lottie-web";
 import animation from "./../animations/under-construction.json";
 import "../styles/under-construction.scss";
-import LinkedInImg from "../assets/linkedin.svg";
 import { Expander } from "./shared/expander";
 
 const UnderConstruction = (): ReactElement => {
@@ -12,14 +11,14 @@ const UnderConstruction = (): ReactElement => {
 
   const panelContent: React.ReactElement[] = [
     <p key="0">
-      Unfortunately, while this website has been a personal passion project of
+      Unfortunately, while this website has been an enjoyable personal project of
       mine, it can still be difficult to find time to work on it.
     </p>,
     <p key="1">
-      I currently work full-time as a developer along with having other hobbies
-      and interests to occupy my time. Furthermore, this is my first time
-      working with React and I&apos;ve been doing my best to teach myself the
-      framework.
+      This is my first time working with React and I&apos;ve been doing my best to teach myself the
+      framework. While it has been fairly easy and fun to learn, I typically work in Angular, so my
+      progress has been hindered. Additionally, I do still continue to work as a full-time developer
+      through the week, which does occupy much of my time.
     </p>,
     <p key="2">
       I&apos;ll try to make updates often, but if you&apos;d like to check in on
@@ -35,8 +34,8 @@ const UnderConstruction = (): ReactElement => {
       &nbsp;for this site.
     </p>,
     <p key="3">
-      Finally, if you&apos;d like to find more information on me, or contact me,
-      please visit my LinkedIn profile:
+      Finally, if you&apos;d like to read more about me and my work history,
+      or to contact me, please visit my LinkedIn profile:
     </p>,
     <a
       className="linkedIn"
