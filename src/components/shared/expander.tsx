@@ -90,7 +90,7 @@ export class Expander extends React.Component<
               height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
             }}
           >
-            <FadeIn initialDelay={750} delay={100} ref={this.fadeInContent}>
+            <FadeIn forwards={{initialDelay:750, delay:100}} reverse={{delay:50}} ref={this.fadeInContent}>
               {this.props.children}
             </FadeIn>
           </div>

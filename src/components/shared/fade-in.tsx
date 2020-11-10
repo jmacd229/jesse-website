@@ -1,12 +1,18 @@
 import React, { DOMAttributes } from "react";
-import { Observable, Subscription, timer } from "rxjs";
-import { finalize, take, takeWhile } from "rxjs/operators";
+import { Subscription, timer } from "rxjs";
+import { takeWhile } from "rxjs/operators";
 import "../../styles/shared/fade-in.scss";
 
 export interface FadeInProps extends DOMAttributes<string> {
   whenLoaded?: boolean;
-  initialDelay?: number;
-  delay?: number;
+  forwards?: {
+    initialDelay?: number;
+    delay?: number;
+  };
+  reverse?: {
+    initialDelay?: number;
+    delay?: number;
+  }
 }
 
 export class FadeIn extends React.Component<FadeInProps, { visible: number }> {
@@ -42,10 +48,11 @@ export class FadeIn extends React.Component<FadeInProps, { visible: number }> {
   }
 
   changeVisibility(makingVisible: boolean): void {
+    const direction = makingVisible ? 'forwards' : 'reverse';
     if (this.timer && !this.timer.closed) {
       this.timer.unsubscribe();
     }
-    this.timer = timer(this.props.initialDelay, this.props.delay)
+    this.timer = timer(this.props[direction].initialDelay, this.props[direction].delay)
       .pipe(takeWhile(val => val <= React.Children.count(this.props.children)))
       .subscribe(val => {
         const visibility = makingVisible

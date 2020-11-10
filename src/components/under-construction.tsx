@@ -39,15 +39,14 @@ const UnderConstruction = (): ReactElement => {
       please visit my LinkedIn profile:
     </p>,
     <a
+      className="linkedIn"
       key="4"
       href="https://www.linkedin.com/in/jesse-macdougall-6709b7114"
       aria-label="link to navigate to Jesse MacDougall's LinkedIn profile"
       target="_blank"
       rel="noreferrer"
       tabIndex={expanded ? 0 : -1}
-    >
-      <img className="linkedIn" src={LinkedInImg} />
-    </a>,
+    ><div></div></a>,
   ];
 
   useEffect(() => {
