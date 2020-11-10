@@ -46,7 +46,7 @@ export class Expander extends React.Component<
       animationData: animation,
     });
     this.anim.setSpeed(0.75);
-    this.anim.play();
+    this.anim.setDirection(-1);
   }
 
   render(): React.ReactElement {
@@ -90,7 +90,11 @@ export class Expander extends React.Component<
               height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
             }}
           >
-            <FadeIn forwards={{initialDelay:750, delay:100}} reverse={{delay:50}} ref={this.fadeInContent}>
+            <FadeIn
+              forwards={{ initialDelay: 750, delay: 100 }}
+              reverse={{ delay: 50 }}
+              ref={this.fadeInContent}
+            >
               {this.props.children}
             </FadeIn>
           </div>
