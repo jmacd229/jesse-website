@@ -17,7 +17,7 @@ const UnderConstruction = (): ReactElement => {
     <p key="1">
       This is my first time working with React and I&apos;ve been doing my best to teach myself the
       framework. While it has been fairly easy and fun to learn, I typically work in Angular, so my
-      progress has been hindered. Additionally, I do still continue to work as a full-time developer
+      progress has been hindered slightly. Additionally, I do still continue to work as a full-time developer
       through the week, which does occupy much of my time.
     </p>,
     <p key="2">
