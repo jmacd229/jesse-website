@@ -4,6 +4,7 @@ import lottie, { AnimationDirection, AnimationItem } from "lottie-web";
 import animation from "../../animations/menu.json";
 import "../../styles/shared/expander.scss";
 import { FadeIn } from "./fade-in";
+import { pagePadding } from "../layout";
 
 export interface ExpanderProps extends DOMAttributes<Element> {
   label: string;
@@ -12,18 +13,29 @@ export interface ExpanderProps extends DOMAttributes<Element> {
   isExpanded(isExpanded: boolean);
 }
 
-export class Expander extends React.Component<
-  ExpanderProps,
-  { isExpanded: boolean }
-> {
+export interface ExpanderState {
+  isExpanded: boolean;
+  width: number;
+  height: number;
+}
+
+export class Expander extends React.Component<ExpanderProps, ExpanderState> {
   animationContainer: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
   fadeInContent: RefObject<FadeIn> = createRef<FadeIn>();
   anim: AnimationItem;
 
   constructor(props?: ExpanderProps) {
     super(props);
-    this.state = { isExpanded: false };
+    this.state = { isExpanded: false, width: 0, height: 0 };
     this.expand = this.expand.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  updateWindowDimensions(): void {
+    this.setState({
+      width: Math.min(window.innerWidth - pagePadding * 2, this.props.maxWidth),
+      height: this.props.maxHeight,
+    });
   }
 
   expand(): void {
@@ -47,6 +59,12 @@ export class Expander extends React.Component<
     });
     this.anim.setSpeed(0.75);
     this.anim.setDirection(-1);
+    this.updateWindowDimensions();
+    window.addEventListener("resize", this.updateWindowDimensions);
+  }
+
+  componentWillUnmount(): void {
+    window.removeEventListener("resize", this.updateWindowDimensions);
   }
 
   render(): React.ReactElement {
@@ -55,16 +73,14 @@ export class Expander extends React.Component<
         className={"expander" + (this.state.isExpanded ? " expanded" : "")}
         style={{
           height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
+          width: `${this.state.isExpanded ? this.state.width : 0}px`,
         }}
       >
         <button
           className="btn p-0 expander-trigger"
           onClick={this.expand}
           style={{
-            // subtract 25 for the icon width
-            transform: `translateX(${
-              this.state.isExpanded ? this.props.maxWidth - 17 : 0
-            }px)`,
+            transform: `translateX(${this.state.isExpanded ? this.state.width - 30 : 0}px)`,
             marginTop: `${this.state.isExpanded ? 20 : 0}px`,
           }}
         >
@@ -82,6 +98,7 @@ export class Expander extends React.Component<
           className="expander-panel"
           style={{
             height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
+            width: `${this.state.width}px`
           }}
         >
           <div

@@ -5,6 +5,7 @@ import { Pages } from "../enums/pages.enum";
 import Home from "./pages/home";
 
 const currentPage = Pages.HOME;
+export const pagePadding = 25;
 
 const Layout = (): ReactElement => {
   return (

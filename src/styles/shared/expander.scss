@@ -52,6 +52,7 @@
         top: 0;
         transition: height 1s linear;
         &-content {
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
