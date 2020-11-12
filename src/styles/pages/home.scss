@@ -2,6 +2,7 @@
 $image-aspect-ratio: 1.46;
 .home {
     position: relative;
+    overflow: hidden;
     >div {
         position: relative;
         z-index: 1;

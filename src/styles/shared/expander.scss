@@ -1,5 +1,5 @@
-@import '../variables';
-@import '../mixins';
+@import "../variables";
+@import "../mixins";
 .expander {
     display: flex;
     align-items: flex-start;
@@ -18,7 +18,6 @@
         }
         &:focus {
             border-bottom: none;
-            >.icon-wrapper,
             .expander-label {
                 @include focus;
             }
@@ -36,13 +35,13 @@
     }
     &-panel {
         &:before {
-            content: '';
+            content: "";
             position: absolute;
             @include animated-gradient;
             width: 100%;
             height: 2px;
             opacity: 0;
-            transition: opacity 1s linear,
+            transition: opacity 1s linear;
         }
         margin-top: 16px;
         background-color: $background-dark;
@@ -52,7 +51,6 @@
         top: 0;
         transition: height 1s linear;
         &-content {
-            overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -61,8 +59,11 @@
             font-size: 12px;
             padding: 0px 8px;
             transition: height 1s linear, padding 250ms 750ms linear;
-            >:first-child {
-                padding-right: 32px;
+            >div {
+                overflow-y: auto;
+                > :first-child {
+                    padding-right: 32px;
+                }
             }
         }
     }

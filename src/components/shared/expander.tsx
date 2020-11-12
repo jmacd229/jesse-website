@@ -10,6 +10,7 @@ export interface ExpanderProps extends DOMAttributes<Element> {
   label: string;
   maxWidth: number;
   maxHeight: number;
+  buttonMargin?: number;
   isExpanded(isExpanded: boolean);
 }
 
@@ -77,11 +78,12 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
         }}
       >
         <button
-          className="btn p-0 expander-trigger"
+          className='btn p-0 expander-trigger'
           onClick={this.expand}
           style={{
-            transform: `translateX(${this.state.isExpanded ? this.state.width - 30 : 0}px)`,
+            transform: `translateX(${this.state.isExpanded ? this.state.width - (30 + this.props.buttonMargin) : 0}px)`,
             marginTop: `${this.state.isExpanded ? 20 : 0}px`,
+            marginLeft: `${this.props.buttonMargin}px`
           }}
         >
           <div className="expander-label">{this.props.label}</div>

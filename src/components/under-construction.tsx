@@ -11,14 +11,15 @@ const UnderConstruction = (): ReactElement => {
 
   const panelContent: React.ReactElement[] = [
     <p key="0">
-      Unfortunately, while this website has been an enjoyable personal project of
-      mine, it can still be difficult to find time to work on it.
+      Unfortunately, while this website has been an enjoyable personal project
+      of mine, it can still be difficult to find time to work on it.
     </p>,
     <p key="1">
-      This is my first time working with React and I&apos;ve been doing my best to teach myself the
-      framework. While it has been fairly easy and fun to learn, I typically work in Angular, so my
-      progress has been hindered slightly. Additionally, I do still continue to work as a full-time developer
-      through the week, which does occupy much of my time.
+      This is my first time working with React and I&apos;ve been doing my best
+      to teach myself the framework. While it has been fairly easy and fun to
+      learn, I typically work in Angular, so my progress has been hindered
+      slightly. Additionally, I do still continue to work as a full-time
+      developer through the week, which does occupy much of my time.
     </p>,
     <p key="2">
       I&apos;ll try to make updates often, but if you&apos;d like to check in on
@@ -34,8 +35,8 @@ const UnderConstruction = (): ReactElement => {
       &nbsp;for this site.
     </p>,
     <p key="3">
-      Finally, if you&apos;d like to read more about me and my work history,
-      or to contact me, please visit my LinkedIn profile:
+      Finally, if you&apos;d like to read more about me and my work history, or
+      to contact me, please visit my LinkedIn profile:
     </p>,
     <a
       className="linkedIn"
@@ -45,7 +46,9 @@ const UnderConstruction = (): ReactElement => {
       target="_blank"
       rel="noreferrer"
       tabIndex={expanded ? 0 : -1}
-    ><div></div></a>,
+    >
+      <div></div>
+    </a>,
   ];
 
   useEffect(() => {
@@ -59,24 +62,27 @@ const UnderConstruction = (): ReactElement => {
   }, []);
 
   return (
-    <div className="d-flex">
-      <div className="icon mr-2">
-        <div className="animation-container" ref={animationContainer} />
-      </div>
-      <div className="d-flex flex-column mt-3">
-        <div>
-          Sorry, this site is still in progress - please check back later for
-          updates!
+    <div className="d-flex flex-column">
+      <div className="d-flex align-items-end">
+        <div className="icon mr-2 flex-shrink-0">
+          <div className="animation-container" ref={animationContainer} />
         </div>
-        <Expander
-          label="More info"
-          maxWidth={500}
-          maxHeight={300}
-          isExpanded={setExpanded}
-        >
-          {panelContent}
-        </Expander>
+        <div className="d-flex flex-column mt-3">
+          <div>
+            Sorry, this site is still in progress - please check back later for
+            updates!
+          </div>
+        </div>
       </div>
+      <Expander
+        label="More info"
+        buttonMargin={40}
+        maxWidth={530}
+        maxHeight={300}
+        isExpanded={setExpanded}
+      >
+        {panelContent}
+      </Expander>
     </div>
   );
 };
