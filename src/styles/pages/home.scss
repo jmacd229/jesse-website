@@ -15,12 +15,7 @@ $image-aspect-ratio: 1.46;
             -webkit-text-stroke-width: 3px;
             -webkit-text-stroke-color: $secondary-main;
             background-repeat: repeat;
-            opacity: 0%;
-            animation: animatedBackground 10s linear infinite, 1.5s ease-in 0s 1 normal both fadeIn;
-        }
-        h2 {
-            opacity: 0%;
-            animation: 1.5s ease-in 1s 1 normal both fadeIn;
+            animation: animatedBackground 10s linear infinite;
         }
     }
     .background-image {
@@ -40,14 +35,5 @@ $image-aspect-ratio: 1.46;
     }
     to {
         background-position: 100px 100px;
-    }
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0%;
-    }
-    100% {
-        opacity: 100%;
     }
 }

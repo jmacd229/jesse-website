@@ -5,9 +5,9 @@ footer {
     z-index: 1;
     margin-top: auto;
     background-color: $background-dark;
-    font-size: 12px;
+    @include small-font;
     >div:nth-child(2) {
-        font-size: 8px;
+        @include tiny-font;
     }
     &:before {
         content: '';

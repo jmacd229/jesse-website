@@ -75,10 +75,11 @@ const UnderConstruction = (): ReactElement => {
         </div>
       </div>
       <Expander
+      id="under-construction"
         label="More info"
         buttonMargin={40}
         maxWidth={530}
-        maxHeight={300}
+        maxHeight={280}
         isExpanded={setExpanded}
       >
         {panelContent}

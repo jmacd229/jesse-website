@@ -7,6 +7,7 @@ import { FadeIn } from "./fade-in";
 import { pagePadding } from "../layout";
 
 export interface ExpanderProps extends DOMAttributes<Element> {
+  id: string;
   label: string;
   maxWidth: number;
   maxHeight: number;
@@ -80,6 +81,9 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
         <button
           className='btn p-0 expander-trigger'
           onClick={this.expand}
+          aria-expanded={this.state.isExpanded}
+          aria-controls={this.props.id}
+          aria-label={this.state.isExpanded ? `Close ${this.props.label} section` : null}
           style={{
             transform: `translateX(${this.state.isExpanded ? this.state.width - (30 + this.props.buttonMargin) : 0}px)`,
             marginTop: `${this.state.isExpanded ? 20 : 0}px`,
@@ -104,7 +108,10 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
           }}
         >
           <div
+          id={this.props.id}
             className="expander-panel-content"
+            tabIndex={this.state.isExpanded ? 0 : -1}
+            aria-hidden={!this.state.isExpanded}
             style={{
               height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
             }}

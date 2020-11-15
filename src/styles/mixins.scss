@@ -1,5 +1,11 @@
 @import 'variables';
 @import 'animations';
+$min_width: 20rem;
+$max_width: 60rem;
+$min_font: 0.75rem;
+$max_font: 1rem;
+$mod_1: 1.5; // mobile
+$mod_2: 2.3; // desktop
 @mixin animated-gradient {
     background: linear-gradient(90deg, $accent-1 0%, $secondary-main 33%, $accent-1 66%, $secondary-main 100%);
     background-size: 400%;
@@ -10,6 +16,14 @@
     box-shadow: none !important;
     outline: none;
     border-bottom: 3px solid rgba($secondary-dark, 0.5);
+}
+
+@mixin small-font {
+    font-size: $min_font;
+}
+
+@mixin tiny-font {
+    font-size: $max_font / 2;
 }
 
 @function strip-unit($value) {

@@ -24,9 +24,9 @@
         }
     }
     &-label {
+        @include small-font;
         color: $secondary-main;
         text-decoration: underline;
-        font-size: 12px;
         width: 100%;
         white-space: nowrap;
         overflow-x: hidden;
@@ -51,16 +51,15 @@
         top: 0;
         transition: height 1s linear;
         &-content {
+            @include small-font;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: hidden;
             font-weight: 200;
-            font-size: 12px;
             padding: 0px 8px;
             transition: height 1s linear, padding 250ms 750ms linear;
             >div {
-                overflow-y: auto;
                 > :first-child {
                     padding-right: 32px;
                 }
@@ -79,6 +78,11 @@
             opacity: 0.8;
             &-content {
                 padding: 8px 8px 8px 8px;
+            }
+        }
+        .expander-trigger.btn:focus {
+            .icon-wrapper {
+                @include focus;
             }
         }
     }
