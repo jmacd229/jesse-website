@@ -1,7 +1,7 @@
-import React, { DOMAttributes } from "react";
-import { Subscription, timer } from "rxjs";
-import { takeWhile } from "rxjs/operators";
-import "../../styles/shared/fade-in.scss";
+import React, { DOMAttributes } from 'react';
+import { Subscription, timer } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
+import '../../styles/shared/fade-in.scss';
 
 export interface FadeInProps extends DOMAttributes<string> {
   whenLoaded?: boolean;
@@ -12,7 +12,7 @@ export interface FadeInProps extends DOMAttributes<string> {
   reverse?: {
     initialDelay?: number;
     delay?: number;
-  }
+  };
 }
 
 export class FadeIn extends React.Component<FadeInProps, { visible: number }> {
@@ -28,12 +28,11 @@ export class FadeIn extends React.Component<FadeInProps, { visible: number }> {
       <div>
         {React.Children.toArray(this.props.children).map((element, i) => (
           <div
-            className="fade-in"
+            className='fade-in'
             key={i}
             style={{
               opacity: i <= this.state.visible ? 1 : 0,
-            }}
-          >
+            }}>
             {element}
           </div>
         ))}
@@ -52,7 +51,10 @@ export class FadeIn extends React.Component<FadeInProps, { visible: number }> {
     if (this.timer && !this.timer.closed) {
       this.timer.unsubscribe();
     }
-    this.timer = timer(this.props[direction].initialDelay, this.props[direction].delay)
+    this.timer = timer(
+      this.props[direction].initialDelay,
+      this.props[direction].delay
+    )
       .pipe(takeWhile(val => val <= React.Children.count(this.props.children)))
       .subscribe(val => {
         const visibility = makingVisible

@@ -1,7 +1,7 @@
 {
     "name": "jesse-website",
     "private": true,
-    "description": "A simplified bare-bones starter for Gatsby",
+    "description": "A personal portfolio website for Jesse MacDougall",
     "version": "1.0.0",
     "license": "0BSD",
     "scripts": {
@@ -18,6 +18,7 @@
         "bootstrap": "^4.5.2",
         "gatsby": "^2.24.66",
         "gatsby-plugin-react-helmet": "^3.4.0",
+        "gatsby-plugin-robots-txt": "^1.5.3",
         "gatsby-plugin-sass": "^2.3.14",
         "gatsby-plugin-typography": "^2.5.13",
         "lottie-web": "^5.7.3",

@@ -1,10 +1,10 @@
-import React, { createRef, DOMAttributes, RefObject } from "react";
+import React, { createRef, DOMAttributes, RefObject } from 'react';
 
-import lottie, { AnimationDirection, AnimationItem } from "lottie-web";
-import animation from "../../animations/menu.json";
-import "../../styles/shared/expander.scss";
-import { FadeIn } from "./fade-in";
-import { pagePadding } from "../layout";
+import lottie, { AnimationDirection, AnimationItem } from 'lottie-web';
+import animation from '../../animations/menu.json';
+import '../../styles/shared/expander.scss';
+import { FadeIn } from './fade-in';
+import { pagePadding } from '../layout';
 
 export interface ExpanderProps extends DOMAttributes<Element> {
   id: string;
@@ -54,7 +54,7 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
   componentDidMount(): void {
     this.anim = lottie.loadAnimation({
       container: this.animationContainer.current,
-      renderer: "svg",
+      renderer: 'svg',
       loop: false,
       autoplay: false,
       animationData: animation,
@@ -62,65 +62,66 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
     this.anim.setSpeed(0.75);
     this.anim.setDirection(-1);
     this.updateWindowDimensions();
-    window.addEventListener("resize", this.updateWindowDimensions);
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
   componentWillUnmount(): void {
-    window.removeEventListener("resize", this.updateWindowDimensions);
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
   render(): React.ReactElement {
     return (
       <div
-        className={"expander" + (this.state.isExpanded ? " expanded" : "")}
+        className={'expander' + (this.state.isExpanded ? ' expanded' : '')}
         style={{
           height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
           width: `${this.state.isExpanded ? this.state.width : 0}px`,
-        }}
-      >
+        }}>
         <button
           className='btn p-0 expander-trigger'
           onClick={this.expand}
           aria-expanded={this.state.isExpanded}
           aria-controls={this.props.id}
-          aria-label={this.state.isExpanded ? `Close ${this.props.label} section` : null}
+          aria-label={
+            this.state.isExpanded ? `Close ${this.props.label} section` : null
+          }
           style={{
-            transform: `translateX(${this.state.isExpanded ? this.state.width - (30 + this.props.buttonMargin) : 0}px)`,
+            transform: `translateX(${
+              this.state.isExpanded
+                ? this.state.width - (30 + this.props.buttonMargin)
+                : 0
+            }px)`,
             marginTop: `${this.state.isExpanded ? 20 : 0}px`,
-            marginLeft: `${this.props.buttonMargin}px`
-          }}
-        >
-          <div className="expander-label">{this.props.label}</div>
-          <div className="icon-wrapper flex-shrink-0">
-            <div className="icon-small">
+            marginLeft: `${this.props.buttonMargin}px`,
+          }}>
+          <div className='expander-label'>{this.props.label}</div>
+          <div className='icon-wrapper flex-shrink-0'>
+            <div className='icon-small'>
               <div
-                className="animation-container"
+                className='animation-container'
                 ref={this.animationContainer}
               />
             </div>
           </div>
         </button>
         <div
-          className="expander-panel"
+          className='expander-panel'
           style={{
             height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
-            width: `${this.state.width}px`
-          }}
-        >
+            width: `${this.state.width}px`,
+          }}>
           <div
-          id={this.props.id}
-            className="expander-panel-content"
+            id={this.props.id}
+            className='expander-panel-content'
             tabIndex={this.state.isExpanded ? 0 : -1}
             aria-hidden={!this.state.isExpanded}
             style={{
               height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
-            }}
-          >
+            }}>
             <FadeIn
               forwards={{ initialDelay: 750, delay: 100 }}
               reverse={{ delay: 50 }}
-              ref={this.fadeInContent}
-            >
+              ref={this.fadeInContent}>
               {this.props.children}
             </FadeIn>
           </div>
