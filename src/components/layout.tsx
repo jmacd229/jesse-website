@@ -14,7 +14,7 @@ const Layout = (): ReactElement => {
       <Helmet htmlAttributes={{ lang: 'en' }}>
         <meta charSet='utf-8' />
         <title>Jesse MacDougall - Full-stack Web Developer</title>
-        <link rel='canonical' href='http://jessemacdougall.ca' />
+        <link rel='canonical' href='https://jessemacdougall.ca' />
       </Helmet>
       <Header />
       <Home />
