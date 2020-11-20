@@ -7,11 +7,7 @@ import { FadeIn } from '../shared/fade-in';
 
 const Home = (): ReactElement => {
   const MAX_OPACITY_WIDTH = 1200;
-  const [opacity, setOpacity] = useState(
-    window.innerWidth >= MAX_OPACITY_WIDTH
-      ? 1
-      : window.innerWidth / MAX_OPACITY_WIDTH
-  );
+  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
     function handleWindowResize() {
@@ -22,6 +18,7 @@ const Home = (): ReactElement => {
       );
     }
     window.addEventListener('resize', handleWindowResize);
+    handleWindowResize();
     return () => window.removeEventListener('resize', handleWindowResize);
   });
 
