@@ -10,7 +10,7 @@ const Footer = (): ReactElement => {
       <div className='light-text text-center'>
         V{process.env.VERSION}
         <br />
-        Last Updated: {process.env.RELEASE_DATE}
+        Last Updated: { new Date(process.env.RELEASE_DATE).toDateString()}
       </div>
     </footer>
   );
