@@ -1,14 +1,5 @@
 @import 'variables';
 @import 'mixins';
-html {
-    @include fluid-type($min_width, $max_width, $min_font, $max_font);
-}
-
-h1 {
-    font-size: $mod_1*$mod_1*$mod_1*$mod_1 *1rem;
-    @include fluid-type($min_width, $max_width, $mod_1*$mod_1*$mod_1*$mod_1*$min_font, $mod_2*$mod_2*$mod_2 *$min_font);
-}
-
 body {
     background-color: $background-dark;
     color: $primary-main;
@@ -30,6 +21,14 @@ header+* {
 
 *:focus {
     @include focus;
+}
+
+.small-text {
+    font-size: 0.75rem;
+}
+
+.tiny-text {
+    font-size: 0.5rem;
 }
 
 .light-text {

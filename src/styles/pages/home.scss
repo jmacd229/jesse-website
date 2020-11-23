@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 $image-aspect-ratio: 1.46;
 .home {
     position: relative;
@@ -7,9 +7,12 @@ $image-aspect-ratio: 1.46;
         position: relative;
         z-index: 1;
         h1 {
+            font-size: clamp(1rem, 29vw, 10.25rem);
+            word-break: keep-all;
+            overflow-wrap: normal;
             font-weight: 900;
             background-color: #111111;
-            background-image: url("../../assets/grid.svg");
+            background-image: url('../../assets/grid.svg');
             background-clip: text;
             -webkit-text-fill-color: transparent;
             -webkit-text-stroke-width: 3px;
@@ -24,7 +27,7 @@ $image-aspect-ratio: 1.46;
         position: fixed;
         top: 0;
         right: 0;
-        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
+        -webkit-mask-image: -webkit-gradient( linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
         mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     }
 }

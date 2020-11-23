@@ -24,7 +24,6 @@
         }
     }
     &-label {
-        @include small-font;
         color: $secondary-main;
         text-decoration: underline;
         width: 100%;
@@ -51,7 +50,6 @@
         top: 0;
         transition: height 1s linear;
         &-content {
-            @include small-font;
             overflow-y: auto;
             display: flex;
             flex-direction: column;

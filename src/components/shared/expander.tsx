@@ -78,7 +78,7 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
           width: `${this.state.isExpanded ? this.state.width : 0}px`,
         }}>
         <button
-          className='btn p-0 expander-trigger'
+          className='btn p-0 expander-trigger small-text'
           onClick={this.expand}
           aria-expanded={this.state.isExpanded}
           aria-controls={this.props.id}
@@ -112,7 +112,7 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
           }}>
           <div
             id={this.props.id}
-            className='expander-panel-content'
+            className='expander-panel-content small-text'
             tabIndex={this.state.isExpanded ? 0 : -1}
             aria-hidden={!this.state.isExpanded}
             style={{
