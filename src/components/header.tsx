@@ -1,5 +1,5 @@
 import React, { DOMAttributes, ReactElement } from 'react';
-import { Pages } from '../enums/pages.enum';
+import { Page } from '../enums/pages.enum';
 import '../styles/header.scss';
 
 const Header = (): ReactElement => {
@@ -8,8 +8,8 @@ const Header = (): ReactElement => {
 
 function getLinks() {
   if (!process.env.IS_UNDER_CONSTRUCTION) {
-    return Object.values(Pages).map((link, i) =>
-      link !== '' ? <HeaderLink key={i}>{link}</HeaderLink> : null
+    return Object.values(Page).map((link, i) =>
+      link !== Page.HOME ? <HeaderLink key={i}>{link}</HeaderLink> : null
     );
   } else {
     return <div className='light-text mr-4'>More coming soon...</div>;

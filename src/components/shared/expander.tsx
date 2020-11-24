@@ -4,7 +4,7 @@ import lottie, { AnimationDirection, AnimationItem } from 'lottie-web';
 import animation from '../../animations/menu.json';
 import '../../styles/shared/expander.scss';
 import { FadeIn } from './fade-in';
-import { pagePadding } from '../layout';
+import { pagePadding } from '../../pages/index';
 
 export interface ExpanderProps extends DOMAttributes<Element> {
   id: string;
