@@ -10,9 +10,8 @@ import { Helmet } from 'react-helmet';
 
 export const pagePadding = 25;
 
-
 export interface IndexState {
-  currentPage: Page;
+  currentPage: ReactElement;
 }
 
 export class Index extends React.Component<
@@ -21,22 +20,32 @@ export class Index extends React.Component<
 > {
   constructor(props?: Record<string, unknown>) {
     super(props);
+    this.state = { currentPage: <Home /> };
     if (window.location.hash) {
       this.state = { currentPage: Page[window.location.hash.substr(1)] };
-    } else {
-      this.state = { currentPage: Page.HOME };
     }
-    this.getCurrentPage.bind(this);
   }
 
-  getCurrentPage(): ReactElement {
-    switch (this.state.currentPage) {
-      case Page.HOME:
-        return <Home />;
-      case Page.NOT_FOUND:
-      default:
-        return <NotFound />;
-    }
+  componentDidMount(): void {
+    window.addEventListener('hashchange', this.setCurrentPage.bind(this));
+    this.setCurrentPage();
+  }
+
+  componentWillUnmount(): void {
+    window.removeEventListener('hashchange', this.setCurrentPage);
+  }
+
+  setCurrentPage(): void {
+      let page = <Home />;
+      if (window.location.hash) {
+        switch (Page[window.location.hash.substr(1)]) {
+          case Page.NOT_FOUND:
+          default:
+            page = <NotFound />;
+            break;
+        }
+      }
+      this.setState({ currentPage: page });
   }
 
   render(): ReactElement {
@@ -49,7 +58,7 @@ export class Index extends React.Component<
           <link rel='canonical' href='https://jessemacdougall.ca' />
         </Helmet>
         <Header />
-        {this.getCurrentPage()}
+        {this.state.currentPage}
         <Footer />
       </div>
     );

@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'mixins';
+@import 'animations';
 body {
     background-color: $background-dark;
     color: $primary-main;
@@ -17,6 +18,21 @@ header+* {
     height: 100%;
     min-height: 100vh;
     transition: height 1s linear;
+}
+
+h1 {
+    font-size: clamp(1rem, 29vw, 10.25rem);
+    word-break: keep-all;
+    overflow-wrap: normal;
+    font-weight: 900;
+    background-color: #111111;
+    background-image: url('../assets/grid.svg');
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: $secondary-main;
+    background-repeat: repeat;
+    animation: animatedBackground 10s linear infinite;
 }
 
 *:focus {

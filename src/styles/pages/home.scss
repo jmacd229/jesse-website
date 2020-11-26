@@ -6,20 +6,6 @@ $image-aspect-ratio: 1.46;
     >div {
         position: relative;
         z-index: 1;
-        h1 {
-            font-size: clamp(1rem, 29vw, 10.25rem);
-            word-break: keep-all;
-            overflow-wrap: normal;
-            font-weight: 900;
-            background-color: #111111;
-            background-image: url('../../assets/grid.svg');
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            -webkit-text-stroke-width: 3px;
-            -webkit-text-stroke-color: $secondary-main;
-            background-repeat: repeat;
-            animation: animatedBackground 10s linear infinite;
-        }
     }
     .background-image {
         height: 100%;
@@ -29,14 +15,5 @@ $image-aspect-ratio: 1.46;
         right: 0;
         -webkit-mask-image: -webkit-gradient( linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
         mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-    }
-}
-
-@keyframes animatedBackground {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 100px 100px;
     }
 }

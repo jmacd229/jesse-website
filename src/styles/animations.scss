@@ -9,3 +9,12 @@
         background-position-x: 0%;
     }
 }
+
+@keyframes animatedBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100px 100px;
+    }
+}

@@ -74,7 +74,7 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
       <div
         className={'expander' + (this.state.isExpanded ? ' expanded' : '')}
         style={{
-          height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
+          height: `${this.state.isExpanded ? this.props.maxHeight : pagePadding}px`,
           width: `${this.state.isExpanded ? this.state.width : 0}px`,
         }}>
         <button
