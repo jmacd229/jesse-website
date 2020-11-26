@@ -1,10 +1,10 @@
 import React, { createRef, DOMAttributes, RefObject } from 'react';
 
 import lottie, { AnimationDirection, AnimationItem } from 'lottie-web';
-import animation from '../../animations/menu.json';
-import '../../styles/shared/expander.scss';
-import { FadeIn } from './fade-in';
-import { pagePadding } from '../../pages/index';
+import animation from '../../../animations/menu.json';
+import './expander.scss';
+import { FadeIn } from '../fade-in/fade-in';
+import { pagePadding } from '../../../pages/index';
 
 export interface ExpanderProps extends DOMAttributes<Element> {
   id: string;

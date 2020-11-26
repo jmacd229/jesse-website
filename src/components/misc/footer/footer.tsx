@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import '../styles/footer.scss';
-import packageJson from '../../package.json'
+import './footer.scss';
+import packageJson from '../../../../package.json'
 
 const Footer = (): ReactElement => {
   return (

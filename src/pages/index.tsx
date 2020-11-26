@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import '../styles/style.scss';
-import Footer from '../components/footer';
-import Header from '../components/header';
-import Home from '../components/pages/home';
+import Footer from '../components/misc/footer/footer';
+import Home from '../components/pages/home/home';
 import { Page } from '../enums/pages.enum';
-import NotFound from '../components/pages/notFound';
+import NotFound from '../components/pages/notFound/notFound';
 import { Helmet } from 'react-helmet';
+import Header from '../components/misc/header/header';
+import '../styles/style.scss';
 
 export const pagePadding = 25;
 

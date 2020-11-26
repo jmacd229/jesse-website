@@ -1,7 +1,7 @@
 import React, { DOMAttributes } from 'react';
 import { Subscription, timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import '../../styles/shared/fade-in.scss';
+import './fade-in.scss';
 
 export interface FadeInProps extends DOMAttributes<string> {
   whenLoaded?: boolean;

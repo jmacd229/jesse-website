@@ -1,9 +1,9 @@
 import React, { useEffect, createRef, ReactElement, useState } from 'react';
 
 import lottie from 'lottie-web';
-import animation from './../animations/under-construction.json';
-import '../styles/under-construction.scss';
-import { Expander } from './shared/expander';
+import animation from '../../../animations/under-construction.json';
+import './under-construction.scss';
+import { Expander } from '../../shared/expander/expander';
 
 const UnderConstruction = (): ReactElement => {
   const [expanded, setExpanded] = useState(false);

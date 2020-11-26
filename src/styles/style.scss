@@ -64,6 +64,10 @@ h1 {
     }
 }
 
+.btn {
+    color: $primary-main;
+}
+
 a {
     color: $secondary-light;
     transition: color 0.25s linear;

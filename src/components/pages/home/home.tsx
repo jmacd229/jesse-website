@@ -1,9 +1,9 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import '../../styles/pages/home.scss';
-import BackgroundImg from '../../assets/home.jpg';
-import BackgroundWebp from '../../assets/home.webp';
-import UnderConstruction from '../under-construction';
-import { FadeIn } from '../shared/fade-in';
+import './home.scss';
+import BackgroundImg from '../../../assets/home.jpg';
+import BackgroundWebp from '../../../assets/home.webp';
+import UnderConstruction from '../../misc/under-construction/under-construction';
+import { FadeIn } from '../../shared/fade-in/fade-in';
 
 const Home = (): ReactElement => {
   const MAX_OPACITY_WIDTH = 1200;
