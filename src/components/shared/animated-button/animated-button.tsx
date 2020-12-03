@@ -1,6 +1,6 @@
 import React, { useEffect, createRef, ReactElement } from 'react';
 import { Position } from '../../../enums/position.enum';
-
+import './animated-button.scss';
 import lottie, { AnimationItem } from 'lottie-web';
 
 export interface AnimatedButtonProps {
@@ -34,7 +34,7 @@ const AnimatedButton = (props: AnimatedButtonProps): ReactElement => {
 
   return (
     <button
-      className={'icon-' + props.iconPosition}
+      className={'btn anim-button ' + props.iconPosition}
       onMouseEnter={playAnimation}
       onFocus={playAnimation}>
       <div className='icon animation-container' ref={animationContainer} />

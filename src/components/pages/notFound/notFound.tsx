@@ -8,11 +8,11 @@ const NotFound = (): ReactElement => {
   return (
     <main className='notFound'>
       <h1>404</h1>
-      <h2>
+      <h2 className="text-center">
         Sorry, you&apos;ve managed to stumble upon a page that doesn&apos;t
         exist.
       </h2>
-      <AnimatedButton animation={animation} text="Back to home page" iconPosition={Position.RIGHT}/>
+      <AnimatedButton animation={animation} text="Back to home page" iconPosition={Position.ABOVE}/>
     </main>
   );
 };

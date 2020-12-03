@@ -19,17 +19,6 @@ header {
             content: '';
             height: 1px
         }
-        &:hover,
-        &:focus {
-            color: $secondary-main;
-            &:after {
-                height: 0;
-            }
-            .underline {
-                border: 1px solid $secondary-main;
-                width: 100%;
-            }
-        }
         .underline {
             border: 0px solid $primary-main;
             width: 0;
