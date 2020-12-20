@@ -9,7 +9,7 @@ import './404.scss';
 
 export const Index: FC = () => {
   return (
-    <Layout>
+    <Layout image={<div className="notFound-background"></div>}>
       <SEO title='404' />
       <div className='notFound'>
       <h1>404</h1>
@@ -21,6 +21,7 @@ export const Index: FC = () => {
         animation={arrow}
         text='Back to home page'
         iconPosition={Position.ABOVE}
+        link="/"
       />
 </div>
     </Layout>

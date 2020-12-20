@@ -2,6 +2,7 @@
 @import "../../../styles/mixins";
 header {
     z-index: 1;
+    background-color: $background-main;
     position: relative;
     height: 50px;
     display: flex !important;

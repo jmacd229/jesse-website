@@ -2,11 +2,13 @@ import React, { useEffect, createRef, ReactElement } from 'react';
 import { Position } from 'enums/position.enum';
 import './animated-button.scss';
 import lottie, { AnimationItem } from 'lottie-web';
+import { Link } from 'gatsby';
 
 export interface AnimatedButtonProps {
   animation: Record<string, unknown>;
   text: string;
   iconPosition: Position;
+  link?: string;
 }
 
 const AnimatedButton = (props: AnimatedButtonProps): ReactElement => {
@@ -33,13 +35,14 @@ const AnimatedButton = (props: AnimatedButtonProps): ReactElement => {
   }
 
   return (
-    <button
+    <Link
+      to={props.link}
       className={'btn anim-button ' + props.iconPosition}
       onMouseEnter={playAnimation}
       onFocus={playAnimation}>
       <div className='icon animation-container' ref={animationContainer} />
       <div>{props.text}</div>
-    </button>
+    </Link>
   );
 };
 
