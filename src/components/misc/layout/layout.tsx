@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
-import Footer from '../footer/footer';
-import Header from '../header/header';
+import Header from '@misc/header/header';
+import Footer from '@misc/footer/footer';
 import PropTypes from 'prop-types';
 
 const Layout: FC = ({children}): ReactElement => {

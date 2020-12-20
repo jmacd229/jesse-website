@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     siteMetadata: {
         title: `Jesse MacDougall`,
@@ -45,5 +47,15 @@ module.exports = {
                 icon: `src/assets/favicon.png`,
             },
         },
+        {
+            resolve: 'gatsby-plugin-root-import',
+            options: {
+                '@misc': path.join(__dirname, 'src/components/misc'),
+                '@pages': path.join(__dirname, 'src/components/pages'),
+                '@shared': path.join(__dirname, 'src/components/shared'),
+                'animations': path.join(__dirname, 'src/animations'),
+                'enums': path.join(__dirname, 'src/enums'),
+            }
+        }
     ],
 }

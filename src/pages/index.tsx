@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
-import Home from '../components/pages/home/home';
-import Layout from '../components/misc/layout/layout';
-import SEO from '../components/misc/SEO/SEO';
-
-export const pagePadding = 25;
+import Home from '@pages/home/home';
+import Layout from '@misc/layout/layout';
+import SEO from '@misc/SEO/SEO';
 
 export const Index: FC = () => {
     return (

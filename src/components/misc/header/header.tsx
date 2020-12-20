@@ -1,5 +1,5 @@
 import React, { DOMAttributes, ReactElement } from 'react';
-import { Page } from '../../../enums/pages.enum';
+import { Page } from 'enums/pages.enum';
 import './header.scss';
 
 const Header = (): ReactElement => {

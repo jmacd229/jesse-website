@@ -3,7 +3,7 @@ $image-aspect-ratio: 1.46;
 .home {
     position: relative;
     overflow: hidden;
-    >div {
+    >div:first-of-type {
         position: relative;
         z-index: 1;
     }

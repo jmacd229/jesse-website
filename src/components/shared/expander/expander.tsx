@@ -1,10 +1,9 @@
 import React, { createRef, DOMAttributes, RefObject } from 'react';
 
 import lottie, { AnimationDirection, AnimationItem } from 'lottie-web';
-import animation from '../../../animations/menu.json';
 import './expander.scss';
-import { FadeIn } from '../fade-in/fade-in';
-import { pagePadding } from '../../../pages/index';
+import menu from 'animations/menu.json';
+import { FadeIn } from '@shared/fade-in/fade-in';
 
 export interface ExpanderProps extends DOMAttributes<Element> {
   id: string;
@@ -20,6 +19,8 @@ export interface ExpanderState {
   width: number;
   height: number;
 }
+
+const pagePadding = 25;
 
 export class Expander extends React.Component<ExpanderProps, ExpanderState> {
   animationContainer: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
@@ -57,7 +58,7 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
       renderer: 'svg',
       loop: false,
       autoplay: false,
-      animationData: animation,
+      animationData: menu,
     });
     this.anim.setSpeed(0.75);
     this.anim.setDirection(-1);
@@ -74,7 +75,9 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
       <div
         className={'expander' + (this.state.isExpanded ? ' expanded' : '')}
         style={{
-          height: `${this.state.isExpanded ? this.props.maxHeight : pagePadding}px`,
+          height: `${
+            this.state.isExpanded ? this.props.maxHeight : pagePadding
+          }px`,
           width: `${this.state.isExpanded ? this.state.width : 0}px`,
         }}>
         <button

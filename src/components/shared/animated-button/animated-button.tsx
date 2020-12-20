@@ -1,5 +1,5 @@
 import React, { useEffect, createRef, ReactElement } from 'react';
-import { Position } from '../../../enums/position.enum';
+import { Position } from 'enums/position.enum';
 import './animated-button.scss';
 import lottie, { AnimationItem } from 'lottie-web';
 

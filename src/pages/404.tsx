@@ -1,13 +1,11 @@
 import React, { FC } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import Layout from '../components/misc/layout/layout';
-import SEO from '../components/misc/SEO/SEO';
-import arrow from '../animations/arrow.json';
-import AnimatedButton from '../components/shared/animated-button/animated-button';
-import { Position } from '../enums/position.enum';
+import Layout from '@misc/layout/layout';
+import SEO from '@misc/SEO/SEO';
+import arrow from 'animations/arrow.json';
+import AnimatedButton from '@shared/animated-button/animated-button';
+import { Position } from 'enums/position.enum';
 import './404.scss';
-
-export const pagePadding = 25;
 
 export const Index: FC = () => {
   return (
