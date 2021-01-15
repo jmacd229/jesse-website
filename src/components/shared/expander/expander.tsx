@@ -6,7 +6,7 @@ import menu from 'animations/menu.json';
 import { FadeIn } from '@shared/fade-in/fade-in';
 
 export interface ExpanderProps extends DOMAttributes<Element> {
-  id: string;
+  propId: string;
   label: string;
   maxWidth: number;
   maxHeight: number;
@@ -84,7 +84,7 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
           className='btn p-0 expander-trigger small-text'
           onClick={this.expand}
           aria-expanded={this.state.isExpanded}
-          aria-controls={this.props.id}
+          aria-controls={this.props.propId}
           aria-label={
             this.state.isExpanded ? `Close ${this.props.label} section` : null
           }
@@ -114,7 +114,7 @@ export class Expander extends React.Component<ExpanderProps, ExpanderState> {
             width: `${this.state.width}px`,
           }}>
           <div
-            id={this.props.id}
+            id={this.props.propId}
             className='expander-panel-content small-text'
             tabIndex={this.state.isExpanded ? 0 : -1}
             aria-hidden={!this.state.isExpanded}
