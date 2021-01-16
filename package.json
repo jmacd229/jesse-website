@@ -6,7 +6,7 @@
     "releaseDate": "11-22-2020",
     "license": "0BSD",
     "scripts": {
-        "build": "json -I -f package.json -e \"this.releaseDate='$(date '+%m-%d-%Y')'\" && gatsby build",
+        "build": "sed -i 's|\"releaseDate\": \".*\"|\"releaseDate\": \"'$(date +%m-%d-%Y)'\"|g' package.json && gatsby build",
         "develop": "gatsby develop",
         "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "start": "npm run develop",

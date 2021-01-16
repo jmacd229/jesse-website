@@ -24,7 +24,7 @@ export const Index: FC = () => {
       <Layout image={<Img fluid={data.backgroundImage.childImageSharp.fluid} alt='' />}>
         <SEO title='Home' />
         <div>
-        <FadeIn whenLoaded forwards={{ initialDelay: 0, delay: 500 }}>
+        <FadeIn isVisible forwards={{ initialDelay: 0, delay: 500 }}>
           <h1>Hi, I&apos;m Jesse</h1>
           <h2 className='mb-4'>A full-stack web developer based in Toronto</h2>
           <UnderConstruction />

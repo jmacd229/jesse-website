@@ -1,4 +1,11 @@
-import React, { createRef, DOMAttributes, RefObject } from 'react';
+import React, {
+  createRef,
+  DOMAttributes,
+  ReactElement,
+  RefObject,
+  useEffect,
+  useState,
+} from 'react';
 
 import lottie, { AnimationDirection, AnimationItem } from 'lottie-web';
 import './expander.scss';
@@ -22,114 +29,96 @@ export interface ExpanderState {
 
 const pagePadding = 25;
 
-export class Expander extends React.Component<ExpanderProps, ExpanderState> {
-  animationContainer: RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
-  fadeInContent: RefObject<FadeIn> = createRef<FadeIn>();
-  anim: AnimationItem;
+export const Expander = (props: ExpanderProps): ReactElement => {
+  const [expanded, setExpanded] = useState(false);
+  const [width, setWidth] = useState(0);
+  const [animation, setAnimation] = useState({
+    item: null,
+    container: createRef<HTMLDivElement>(),
+    data: menu,
+  });
 
-  constructor(props?: ExpanderProps) {
-    super(props);
-    this.state = { isExpanded: false, width: 0, height: 0 };
-    this.expand = this.expand.bind(this);
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  function updateWindowDimensions(): void {
+    setWidth(Math.min(window.innerWidth - pagePadding * 2, props.maxWidth));
   }
 
-  updateWindowDimensions(): void {
-    this.setState({
-      width: Math.min(window.innerWidth - pagePadding * 2, this.props.maxWidth),
-      height: this.props.maxHeight,
-    });
+  function expand(): void {
+    const anim = animation.item;
+    if (anim) {
+      anim.play();
+      anim.setDirection((anim.playDirection * -1) as AnimationDirection);
+      setExpanded(anim.playDirection === 1);
+    }
+    props.isExpanded(expanded);
   }
 
-  expand(): void {
-    this.anim.play();
-    this.anim.setDirection(
-      (this.anim.playDirection * -1) as AnimationDirection
-    );
-    this.setState({ isExpanded: this.anim.playDirection === 1 }, () => {
-      this.fadeInContent.current.changeVisibility(this.state.isExpanded);
-      this.props.isExpanded(this.state.isExpanded);
-    });
-  }
-
-  componentDidMount(): void {
-    this.anim = lottie.loadAnimation({
-      container: this.animationContainer.current,
+  useEffect(() => {
+    const item = lottie.loadAnimation({
+      container: animation.container.current,
       renderer: 'svg',
       loop: false,
       autoplay: false,
       animationData: menu,
     });
-    this.anim.setSpeed(0.75);
-    this.anim.setDirection(-1);
-    this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
+    item.setSpeed(0.75);
+    item.setDirection(-1);
+    setAnimation({ ...animation, item });
+    updateWindowDimensions();
+    window.addEventListener('resize', updateWindowDimensions);
+    return () => {
+      window.removeEventListener('resize', updateWindowDimensions);
+    };
+  }, []);
 
-  componentWillUnmount(): void {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
-
-  render(): React.ReactElement {
-    return (
-      <div
-        className={'expander' + (this.state.isExpanded ? ' expanded' : '')}
+  return (
+    <div
+      className={'expander' + (expanded ? ' expanded' : '')}
+      style={{
+        height: `${expanded ? props.maxHeight : pagePadding}px`,
+        width: `${expanded ? width : 0}px`,
+      }}>
+      <button
+        className='btn p-0 expander-trigger small-text'
+        onClick={expand}
+        aria-expanded={expanded}
+        aria-controls={props.propId}
+        aria-label={expanded ? `Close ${props.label} section` : null}
         style={{
-          height: `${
-            this.state.isExpanded ? this.props.maxHeight : pagePadding
-          }px`,
-          width: `${this.state.isExpanded ? this.state.width : 0}px`,
+          transform: `translateX(${
+            expanded ? width - (30 + props.buttonMargin) : 0
+          }px)`,
+          marginTop: `${expanded ? 20 : 0}px`,
+          marginLeft: `${props.buttonMargin}px`,
         }}>
-        <button
-          className='btn p-0 expander-trigger small-text'
-          onClick={this.expand}
-          aria-expanded={this.state.isExpanded}
-          aria-controls={this.props.propId}
-          aria-label={
-            this.state.isExpanded ? `Close ${this.props.label} section` : null
-          }
-          style={{
-            transform: `translateX(${
-              this.state.isExpanded
-                ? this.state.width - (30 + this.props.buttonMargin)
-                : 0
-            }px)`,
-            marginTop: `${this.state.isExpanded ? 20 : 0}px`,
-            marginLeft: `${this.props.buttonMargin}px`,
-          }}>
-          <div className='expander-label'>{this.props.label}</div>
-          <div className='icon-wrapper flex-shrink-0'>
-            <div className='icon-small'>
-              <div
-                className='animation-container'
-                ref={this.animationContainer}
-              />
-            </div>
-          </div>
-        </button>
-        <div
-          className='expander-panel'
-          style={{
-            height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
-            width: `${this.state.width}px`,
-          }}>
-          <div
-            id={this.props.propId}
-            className='expander-panel-content small-text'
-            tabIndex={this.state.isExpanded ? 0 : -1}
-            aria-hidden={!this.state.isExpanded}
-            style={{
-              height: `${this.state.isExpanded ? this.props.maxHeight : 0}px`,
-            }}>
-            <FadeIn
-              forwards={{ initialDelay: 750, delay: 100 }}
-              reverse={{ delay: 50 }}
-              ref={this.fadeInContent}>
-              {this.props.children}
-            </FadeIn>
+        <div className='expander-label'>{props.label}</div>
+        <div className='icon-wrapper flex-shrink-0'>
+          <div className='icon-small'>
+            <div className='animation-container' ref={animation.container} />
           </div>
         </div>
+      </button>
+      <div
+        className='expander-panel'
+        style={{
+          height: `${expanded ? props.maxHeight : 0}px`,
+          width: `${width}px`,
+        }}>
+        <div
+          id={props.propId}
+          className='expander-panel-content small-text'
+          tabIndex={expanded ? 0 : -1}
+          aria-hidden={!expanded}
+          style={{
+            height: `${expanded ? props.maxHeight : 0}px`,
+          }}>
+          <FadeIn
+            isVisible={expanded}
+            forwards={{ initialDelay: 750, delay: 100 }}
+            reverse={{ delay: 50 }}>
+            {props.children}
+          </FadeIn>
+        </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
