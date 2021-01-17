@@ -1,16 +1,16 @@
+import { FadeIn } from '@shared/fade-in/fade-in';
+import menu from 'animations/menu.json';
+import lottie, { AnimationDirection } from 'lottie-web';
 import React, {
   createRef,
   DOMAttributes,
   ReactElement,
-  RefObject,
-  useEffect,
-  useState,
-} from 'react';
 
-import lottie, { AnimationDirection, AnimationItem } from 'lottie-web';
+  useEffect,
+  useState
+} from 'react';
 import './expander.scss';
-import menu from 'animations/menu.json';
-import { FadeIn } from '@shared/fade-in/fade-in';
+
 
 export interface ExpanderProps extends DOMAttributes<Element> {
   propId: string;
@@ -19,12 +19,6 @@ export interface ExpanderProps extends DOMAttributes<Element> {
   maxHeight: number;
   buttonMargin?: number;
   isExpanded(isExpanded: boolean);
-}
-
-export interface ExpanderState {
-  isExpanded: boolean;
-  width: number;
-  height: number;
 }
 
 const pagePadding = 25;
@@ -49,8 +43,9 @@ export const Expander = (props: ExpanderProps): ReactElement => {
       anim.setDirection((anim.playDirection * -1) as AnimationDirection);
       setExpanded(anim.playDirection === 1);
     }
-    props.isExpanded(expanded);
   }
+
+  useEffect(() => props.isExpanded(expanded), [expanded]);
 
   useEffect(() => {
     const item = lottie.loadAnimation({
