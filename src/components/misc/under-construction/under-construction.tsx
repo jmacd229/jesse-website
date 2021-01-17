@@ -73,7 +73,7 @@ const UnderConstruction = (): ReactElement => {
         </div>
       </div>
       <Expander
-        propId='under-construction'
+        id='under-construction-expander'
         label='More info'
         buttonMargin={40}
         maxWidth={530}

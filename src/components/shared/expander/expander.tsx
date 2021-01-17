@@ -13,7 +13,7 @@ import './expander.scss';
 
 
 export interface ExpanderProps extends DOMAttributes<Element> {
-  propId: string;
+  id: string;
   label: string;
   maxWidth: number;
   maxHeight: number;
@@ -76,7 +76,7 @@ export const Expander = (props: ExpanderProps): ReactElement => {
         className='btn p-0 expander-trigger small-text'
         onClick={expand}
         aria-expanded={expanded}
-        aria-controls={props.propId}
+        aria-controls={props.id}
         aria-label={expanded ? `Close ${props.label} section` : null}
         style={{
           transform: `translateX(${
@@ -99,7 +99,7 @@ export const Expander = (props: ExpanderProps): ReactElement => {
           width: `${width}px`,
         }}>
         <div
-          id={props.propId}
+          id={props.id}
           className='expander-panel-content small-text'
           tabIndex={expanded ? 0 : -1}
           aria-hidden={!expanded}
