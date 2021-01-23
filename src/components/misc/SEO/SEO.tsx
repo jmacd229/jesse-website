@@ -1,13 +1,12 @@
-import React, { FC, ReactElement } from "react"
-import PropTypes from "prop-types"
+import { graphql, useStaticQuery } from "gatsby"
+import React, { ReactElement } from "react"
 import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
 
 export interface SEOProps {
     title: string
 }
 
-const SEO: FC<SEOProps> = ({title}): ReactElement => {
+export const SEO = ({title}): ReactElement => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -68,11 +67,6 @@ const SEO: FC<SEOProps> = ({title}): ReactElement => {
       ]}
     />
   )
-}
-
-
-SEO.propTypes = {
-  title: PropTypes.string.isRequired,
 }
 
 export default SEO

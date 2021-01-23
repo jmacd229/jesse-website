@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
 import Layout from '@misc/layout/layout';
 import SEO from '@misc/SEO/SEO';
-import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import UnderConstruction from '@misc/under-construction/under-construction';
 import { FadeIn } from '@shared/fade-in/fade-in';
+import { graphql, useStaticQuery } from 'gatsby';
+import Img from 'gatsby-image';
+import React, { ReactElement } from 'react';
 
-export const Index: FC = () => {
+
+export const Index = (): ReactElement => {
   const data = useStaticQuery(graphql`
     query {
       backgroundImage: file(relativePath: { eq: "home.jpg" }) {
@@ -18,7 +19,6 @@ export const Index: FC = () => {
       }
     }
   `);
-
 
     return (
       <Layout image={<Img fluid={data.backgroundImage.childImageSharp.fluid} alt='' />}>

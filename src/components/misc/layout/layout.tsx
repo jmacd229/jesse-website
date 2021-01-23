@@ -1,14 +1,13 @@
-import React, { FC, PropsWithChildren, ReactElement } from 'react';
-import Header from '@misc/header/header';
-import Footer from '@misc/footer/footer';
-import PropTypes from 'prop-types';
 import BackgroundImage from '@misc/background-image/background-image';
+import Footer from '@misc/footer/footer';
+import Header from '@misc/header/header';
+import React, { DOMAttributes, ReactElement } from 'react';
 
-type LayoutProps = {
-  image: React.ReactNode;
+interface LayoutProps extends DOMAttributes<Element> {
+  image?: React.ReactNode;
 };
 
-const Layout: FC<PropsWithChildren<LayoutProps>> = (props): ReactElement => {
+export const Layout = (props:LayoutProps): ReactElement => {
   return (
     <div className='main'>
       <Header />
@@ -18,7 +17,5 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = (props): ReactElement => {
     </div>
   );
 };
-
-Layout.propTypes = { children: PropTypes.node, image: PropTypes.node };
 
 export default Layout;

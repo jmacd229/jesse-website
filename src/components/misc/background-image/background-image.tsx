@@ -1,8 +1,7 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 
-const BackgroundImage: FC = ({children}): ReactElement => {
+export const BackgroundImage = ({children}): ReactElement => {
   const MAX_OPACITY_WIDTH = 1200;
   const [opacity, setOpacity] = useState(0);
 
@@ -25,9 +24,5 @@ const BackgroundImage: FC = ({children}): ReactElement => {
 </div>
   );
 };
-
-BackgroundImage.propTypes = {
-    children: PropTypes.node
-}
 
 export default BackgroundImage;
