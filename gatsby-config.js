@@ -56,6 +56,12 @@ module.exports = {
                 'animations': path.join(__dirname, 'src/animations'),
                 'enums': path.join(__dirname, 'src/enums'),
             }
-        }
+        },
+        {
+            resolve: `gatsby-plugin-google-gtag`,
+            options: {
+                trackingIds: ["G-G1EXN1KN2T", "GTM-N5CSTZ6"],
+            }
+        },
     ],
 }

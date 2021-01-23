@@ -4,6 +4,7 @@ import lottie from 'lottie-web';
 import animation from '../../../animations/under-construction.json';
 import './under-construction.scss';
 import { Expander } from '@shared/expander/expander';
+import { OutboundLink } from 'gatsby-plugin-google-gtag';
 
 const UnderConstruction = (): ReactElement => {
   const [expanded, setExpanded] = useState(false);
@@ -24,20 +25,20 @@ const UnderConstruction = (): ReactElement => {
     <p key='2'>
       I&apos;ll try to make updates often, but if you&apos;d like to check in on
       the progress, you can view&nbsp;
-      <a
+      <OutboundLink
         href='https://github.com/jmacd229/jesse-website'
         target='_blank'
         rel='noreferrer'
         tabIndex={expanded ? 0 : -1}>
         the public GitHub repo
-      </a>
+      </OutboundLink>
       &nbsp;for this site.
     </p>,
     <p key='3'>
       Finally, if you&apos;d like to read more about me and my work history, or
       to contact me, please visit my LinkedIn profile:
     </p>,
-    <a
+    <OutboundLink
       className='linkedIn'
       key='4'
       href='https://www.linkedin.com/in/jesse-macdougall-6709b7114'
@@ -46,7 +47,7 @@ const UnderConstruction = (): ReactElement => {
       rel='noreferrer'
       tabIndex={expanded ? 0 : -1}>
       <div></div>
-    </a>,
+    </OutboundLink>,
   ];
 
   useEffect(() => {

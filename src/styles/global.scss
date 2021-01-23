@@ -109,3 +109,31 @@ a {
         color: $accent-1-light;
     }
 }
+
+.privacy-modal {
+    background-color: $background-main !important;
+}
+
+.privacy-title {
+    color: $primary-main !important;
+}
+
+.privacy-content {
+    color: $primary-main !important;
+    text-align: left !important;
+    font-size: 12px !important;
+}
+
+.privacy-btn {
+    color: $primary-main !important;
+    background-color: $accent-1-dark !important;
+    border: 1px solid $accent-1 !important;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.privacy-icon {
+    color: $secondary-main !important;
+    border-color: $secondary-main !important;
+}
