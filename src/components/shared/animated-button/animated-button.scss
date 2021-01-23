@@ -1,0 +1,27 @@
+@import '../../../styles/variables.scss';
+$icon-spacing: 8px;
+.btn.anim-button {
+    display: flex;
+    text-decoration: underline;
+    &.right {
+        flex-direction: row-reverse;
+        align-items: center;
+        >div:first-child {
+            margin-left: $icon-spacing;
+        }
+    }
+    &.left {
+        align-items: center;
+        >div:first-child {
+            margin-right: $icon-spacing;
+        }
+    }
+    &.above {
+        flex-direction: column;
+        align-items: center;
+    }
+    &.below {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+}

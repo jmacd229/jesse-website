@@ -1,14 +1,10 @@
-@import 'variables';
-@import 'mixins';
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
 footer {
     position: relative;
     z-index: 1;
     margin-top: auto;
     background-color: $background-dark;
-    @include small-font;
-    >div:nth-child(2) {
-        @include tiny-font;
-    }
     &:before {
         content: '';
         height: 2px;

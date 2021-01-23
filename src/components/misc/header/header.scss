@@ -1,7 +1,8 @@
-@import 'variables';
-@import 'mixins';
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
 header {
     z-index: 1;
+    background-color: $background-main;
     position: relative;
     height: 50px;
     display: flex !important;
@@ -12,24 +13,12 @@ header {
         display: flex;
         flex-direction: column;
         align-items: center;
-        color: $primary-main;
         margin: 12px 48px 12px 0;
         line-height: normal;
         padding: 3px 4px;
         &:after {
             content: '';
             height: 1px
-        }
-        &:hover,
-        &:focus {
-            color: $secondary-main;
-            &:after {
-                height: 0;
-            }
-            .underline {
-                border: 1px solid $secondary-main;
-                width: 100%;
-            }
         }
         .underline {
             border: 0px solid $primary-main;
