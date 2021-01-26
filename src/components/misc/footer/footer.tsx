@@ -21,7 +21,7 @@ const Footer = (): ReactElement => {
             title: 'Privacy Policy',
             html: privacy,
             icon: 'info',
-            width: '64rem',
+            width: '100rem',
             customClass: {
               popup: 'privacy-modal',
               title: 'privacy-title',

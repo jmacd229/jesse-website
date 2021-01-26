@@ -12,12 +12,14 @@ context('Under Construction', () => {
 
     it('Should not allow tabbing inside of expander when collapsed', () => {
         cy.get('#under-construction button.expander-trigger').focus().tab()
-        cy.get('#under-construction button.expander-trigger').should('have.focus');
+        cy.get('#under-construction .expander-panel-content').should('not.have.focus');
     })
 
     it('Should expand and collapse on click with tabbing inside', () => {
         cy.get('#under-construction button.expander-trigger').click();
         cy.get('#under-construction .expander').should('have.class', 'expanded');
+        cy.wait(1550);
+        cy.document().toMatchImageSnapshot();
         cy.tab();
         cy.get('#under-construction .expander-panel-content').should('have.focus');
         cy.get('#under-construction button.expander-trigger').click();

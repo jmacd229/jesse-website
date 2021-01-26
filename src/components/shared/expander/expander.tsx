@@ -21,7 +21,7 @@ export interface ExpanderProps extends DOMAttributes<Element> {
   isExpanded(isExpanded: boolean);
 }
 
-const pagePadding = 25;
+const pagePadding = 2.5;
 
 export const Expander = (props: ExpanderProps): ReactElement => {
   const [expanded, setExpanded] = useState(false);
@@ -69,8 +69,8 @@ export const Expander = (props: ExpanderProps): ReactElement => {
     <div
       className={'expander' + (expanded ? ' expanded' : '')}
       style={{
-        height: `${expanded ? props.maxHeight : pagePadding}px`,
-        width: `${expanded ? width : 0}px`,
+        height: `${expanded ? props.maxHeight : pagePadding}rem`,
+        width: `${expanded ? width : 0}rem`,
       }}>
       <button
         className='btn p-0 expander-trigger small-text'
@@ -80,10 +80,10 @@ export const Expander = (props: ExpanderProps): ReactElement => {
         aria-label={expanded ? `Close ${props.label} section` : null}
         style={{
           transform: `translateX(${
-            expanded ? width - (30 + props.buttonMargin) : 0
-          }px)`,
-          marginTop: `${expanded ? 20 : 0}px`,
-          marginLeft: `${props.buttonMargin}px`,
+            expanded ? width - (3 + props.buttonMargin) : 0
+          }rem)`,
+          marginTop: `${expanded ? 2 : 0}rem`,
+          marginLeft: `${props.buttonMargin}rem`,
         }}>
         <div className='expander-label'>{props.label}</div>
         <div className='icon-wrapper flex-shrink-0'>
@@ -95,8 +95,8 @@ export const Expander = (props: ExpanderProps): ReactElement => {
       <div
         className='expander-panel'
         style={{
-          height: `${expanded ? props.maxHeight : 0}px`,
-          width: `${width}px`,
+          height: `${expanded ? props.maxHeight : 0}rem`,
+          width: `${width}rem`,
         }}>
         <div
           id={props.id}
@@ -104,7 +104,7 @@ export const Expander = (props: ExpanderProps): ReactElement => {
           tabIndex={expanded ? 0 : -1}
           aria-hidden={!expanded}
           style={{
-            height: `${expanded ? props.maxHeight : 0}px`,
+            height: `${expanded ? props.maxHeight : 0}rem`,
           }}>
           <FadeIn
             isVisible={expanded}

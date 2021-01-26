@@ -5,8 +5,8 @@
     width: fit-content;
     >div {
         content: "";
-        width: 154px;
-        height: 24px;
+        width: 15.4rem;
+        height: 2.4rem;
         display: block;
         background-color: white;
         transition: background-color 1s linear;
@@ -14,8 +14,8 @@
         &::after {
             @include animated-gradient;
             content: "";
-            width: 154px;
-            height: 24px;
+            width: 15.4rem;
+            height: 2.4rem;
             display: block;
             opacity: 0;
             transition: opacity 0.5s linear;

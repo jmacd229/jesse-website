@@ -10,9 +10,25 @@ module.exports = {
     },
     plugins: ["gatsby-plugin-sass",
         {
-            resolve: `gatsby-plugin-typography`,
+            resolve: 'gatsby-plugin-webfonts',
             options: {
-                pathToConfigModule: `src/utils/typography`,
+                fonts: {
+                    google: [{
+                            family: 'Raleway',
+                            variants: [
+                                '400',
+                                '400i',
+                                '700',
+                                '700i',
+                                '900'
+                            ],
+                        },
+                        {
+                            family: 'Kadwa',
+                            variants: [700]
+                        }
+                    ]
+                }
             },
         },
         `gatsby-plugin-react-helmet`,
