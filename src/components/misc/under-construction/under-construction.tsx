@@ -61,7 +61,7 @@ const UnderConstruction = (): ReactElement => {
   }, []);
 
   return (
-    <div id="under-construction" className='d-flex flex-column'>
+    <div id='under-construction' className='d-flex flex-column'>
       <div className='d-flex align-items-end'>
         <div className='icon mr-2 flex-shrink-0'>
           <div className='animation-container' ref={animationContainer} />

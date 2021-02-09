@@ -3,30 +3,24 @@ import SEO from '@misc/SEO/SEO';
 import AnimatedButton from '@shared/animated-button/animated-button';
 import arrow from 'animations/arrow.json';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Page } from 'enums/pages.enum';
 import { Position } from 'enums/position.enum';
 import React from 'react';
-import './404.scss';
 
-export const NotFound = () => {
+export const Work = () => {
   return (
-    <Layout image={<div className='notFound-background'></div>}>
-      <SEO title='404' />
+    <Layout>
+      <SEO title='Work' />
       <div className='notFound'>
-        <h1>404</h1>
-        <h2 className='text-center'>
-          Sorry, you&apos;ve managed to stumble upon a page that doesn&apos;t
-          exist.
-        </h2>
+        <h1>Work</h1>
         <AnimatedButton
           animation={arrow}
           text='Back to home page'
           iconPosition={Position.ABOVE}
-          link={Page.HOME}
+          link='/'
         />
       </div>
     </Layout>
   );
 };
 
-export default NotFound;
+export default Work;

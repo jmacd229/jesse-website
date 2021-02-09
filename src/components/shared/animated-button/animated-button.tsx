@@ -2,7 +2,7 @@ import React, { useEffect, createRef, ReactElement } from 'react';
 import { Position } from 'enums/position.enum';
 import './animated-button.scss';
 import lottie, { AnimationItem } from 'lottie-web';
-import { Link } from 'gatsby';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 export interface AnimatedButtonProps {
   animation: Record<string, unknown>;
@@ -35,14 +35,15 @@ const AnimatedButton = (props: AnimatedButtonProps): ReactElement => {
   }
 
   return (
-    <Link
+    <AniLink
+    paintDrip hex="#00BCBD"
       to={props.link}
       className={'btn anim-button ' + props.iconPosition}
       onMouseEnter={playAnimation}
       onFocus={playAnimation}>
       <div className='icon animation-container' ref={animationContainer} />
       <div>{props.text}</div>
-    </Link>
+    </AniLink>
   );
 };
 
