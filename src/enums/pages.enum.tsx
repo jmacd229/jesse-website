@@ -1,7 +1,7 @@
 export enum Page {
-    HOME = "Home",
+    HOME = "/",
     NOT_FOUND = "404",
     ABOUT_ME = "About Me",
-    WORK = "Work",
+    WORK = "/work/",
     CONTACT = "Contact"
 }

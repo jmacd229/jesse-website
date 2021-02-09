@@ -4,8 +4,8 @@ module.exports = {
     siteMetadata: {
         title: `Jesse MacDougall`,
         author: 'Jesse MacDougall',
-        description: `This website is to serve as a portfolio website for Jesse MacDougall, a full-stack software developer.
-        Its purpose is to provide the same information the could be found on a resume, while also displaying an ability to develop on the web.`,
+        description: `Jesse MacDougall is a full-stack web developer based in Toronto, Ontario.
+        He commonly works in JavaScript frameworks and also provides occasional freelance web development work.`,
         lang: 'en'
     },
     plugins: ["gatsby-plugin-sass",
@@ -32,11 +32,12 @@ module.exports = {
             },
         },
         `gatsby-plugin-react-helmet`,
+        `gatsby-plugin-transition-link`,
         {
             resolve: `gatsby-plugin-purgecss`,
             options: {
                 printRejected: true,
-                develop: true,
+                develop: false,
             }
         },
         {
@@ -53,8 +54,8 @@ module.exports = {
             options: {
                 lang: 'en',
                 name: `Jesse MacDougall`,
-                description: `This website is to serve as a portfolio website for Jesse MacDougall, a full-stack software developer.
-                Its purpose is to provide the same information the could be found on a resume, while also displaying an ability to develop on the web.`,
+                description: `Jesse MacDougall is a full-stack web developer based in Toronto, Ontario.
+                He commonly works in JavaScript frameworks and also provides occasional freelance web development work.`,
                 short_name: `Jesse`,
                 start_url: `/`,
                 background_color: `#1f1f1f`,
