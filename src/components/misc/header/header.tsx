@@ -1,40 +1,29 @@
-import React, { createRef, ReactElement, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import { Page } from 'enums/pages.enum';
 import './header.scss';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import lottie, { AnimationItem } from 'lottie-web';
 import home from '../../../animations/home.json';
+import { Position } from 'enums/position.enum';
+import AnimatedButton from '@shared/animated-button/animated-button';
 
 const Header = (): ReactElement => {
-  const animationContainer = createRef<HTMLDivElement>();
-  let anim: AnimationItem;
-
   const getHomeLink = ({ isCurrent }) => {
     return isCurrent ? { className: 'd-none', tabIndex: -1 } : {};
   };
 
-  useEffect(() => {
-    lottie.loadAnimation({
-      container: animationContainer.current,
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      animationData: home,
-    });
-  }, []);
-
   return (
     <header>
-      <AniLink
-        getProps={getHomeLink}
-        swipe
-        className='btn ml-4 mr-auto'
-        direction='left'
-        to={Page.HOME}>
-        <div className='icon'>
-          <div className='animation-container' ref={animationContainer}></div>
-        </div>
-      </AniLink>
+      <div className='ml-4 mr-auto'>
+        <AnimatedButton
+          id='home'
+          animation={home}
+          text='Home'
+          iconPosition={Position.LEFT}
+          link={Page.HOME}
+          textOnHover={true}
+          getProps={getHomeLink}
+        />
+      </div>
       {getLinks()}
     </header>
   );
@@ -71,7 +60,7 @@ const HeaderLink = (props: { page: Page }): ReactElement => {
     <AniLink
       activeClassName='active'
       swipe
-      className='btn'
+      className='hover-btn'
       direction='left'
       to={props.page}>
       {getPageName(props.page)}

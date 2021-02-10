@@ -16,6 +16,12 @@ body {
 
 .btn {
     font-size: 1.6rem;
+    color: $primary-main;
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: $secondary-main;
+    }
 }
 
 .main {
@@ -98,12 +104,11 @@ h1 {
     }
 }
 
-.btn {
+.hover-btn {
+    @extend .btn;
     position: relative;
-    color: $primary-main;
     &:hover,
     &:focus {
-        color: $secondary-main;
         &:after {
             border: 0.1rem solid $secondary-main;
             width: 100%;
@@ -113,10 +118,15 @@ h1 {
     &:after {
         content: '';
         position: absolute;
-        bottom: 4px;
+        bottom: 0;
         left: 50%;
         width: 0;
         transition: width 0.25s ease-in-out, left 0.25s ease-in-out, border-color 0.5s linear;
+    }
+    &.active {
+        color: $secondary-main;
+        text-decoration: underline;
+        pointer-events: none;
     }
 }
 
