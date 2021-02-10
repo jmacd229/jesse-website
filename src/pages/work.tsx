@@ -3,6 +3,7 @@ import SEO from '@misc/SEO/SEO';
 import AnimatedButton from '@shared/animated-button/animated-button';
 import arrow from 'animations/arrow.json';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Page } from 'enums/pages.enum';
 import { Position } from 'enums/position.enum';
 import React from 'react';
 
@@ -16,7 +17,7 @@ export const Work = () => {
           animation={arrow}
           text='Back to home page'
           iconPosition={Position.ABOVE}
-          link='/'
+          link={Page.HOME}
         />
       </div>
     </Layout>

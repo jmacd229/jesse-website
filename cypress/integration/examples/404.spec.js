@@ -12,7 +12,7 @@ context('404', () => {
     })
 
     it('Should go back to home page on button click', () => {
-        cy.get('a.anim-button').click();
+        cy.get('#back').click();
         cy.url().should('eq', 'http://localhost:8000/')
     })
 

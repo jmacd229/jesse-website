@@ -7,7 +7,7 @@ context('Under Construction', () => {
 
     it('Should say "More coming soon..." instead of links', () => {
         cy.get('header > div')
-            .should('have.text', 'More coming soon...')
+            .should('have.text', 'HomeMore pages coming soon...')
     })
 
     it('Should not allow tabbing inside of expander when collapsed', () => {

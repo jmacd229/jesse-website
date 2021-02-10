@@ -19,6 +19,7 @@ export const NotFound = () => {
           exist.
         </h2>
         <AnimatedButton
+        id="back"
           animation={arrow}
           text='Back to home page'
           iconPosition={Position.ABOVE}

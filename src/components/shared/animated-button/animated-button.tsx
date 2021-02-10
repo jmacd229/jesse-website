@@ -1,48 +1,62 @@
-import React, { useEffect, createRef, ReactElement } from 'react';
+import React, { useEffect, createRef, ReactElement, useState } from 'react';
 import { Position } from 'enums/position.enum';
 import './animated-button.scss';
-import lottie, { AnimationItem } from 'lottie-web';
+import lottie from 'lottie-web';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 export interface AnimatedButtonProps {
+  id?: string;
   animation: Record<string, unknown>;
   text: string;
   iconPosition: Position;
   link?: string;
+  textOnHover?: boolean;
+  getProps?: Function;
 }
 
 const AnimatedButton = (props: AnimatedButtonProps): ReactElement => {
-  const animationContainer = createRef<HTMLDivElement>();
-  let anim: AnimationItem;
+  const [animation, setAnimation] = useState({
+    item: null,
+    container: createRef<HTMLDivElement>(),
+  });
 
   useEffect(() => {
-    anim = lottie.loadAnimation({
-      container: animationContainer.current,
+    const item = lottie.loadAnimation({
+      container: animation.container.current,
       renderer: 'svg',
       loop: false,
       autoplay: false,
       animationData: props.animation,
     });
-    anim.setDirection(1);
-    anim.setSpeed(1);
+    item.setSpeed(1);
+    item.setDirection(1);
+    setAnimation({ ...animation, item });
   }, []);
 
   function playAnimation() {
-    if (anim) {
-      anim.play();
-      anim.resetSegments(false);
+    if (animation) {
+      animation.item.play();
+      animation.item.resetSegments(false);
     }
   }
 
   return (
     <AniLink
-    paintDrip hex="#00BCBD"
+      id={props.id}
+      paintDrip
+      hex='#00BCBD'
       to={props.link}
       className={'btn anim-button ' + props.iconPosition}
       onMouseEnter={playAnimation}
-      onFocus={playAnimation}>
-      <div className='icon animation-container' ref={animationContainer} />
-      <div>{props.text}</div>
+      onFocus={playAnimation}
+      getProps={props.getProps}>
+      <div
+        className='icon animation-container flex-shrink-0'
+        ref={animation.container}
+      />
+      <div className={props.textOnHover ? 'hover-text' : null}>
+        {props.text}
+      </div>
     </AniLink>
   );
 };

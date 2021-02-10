@@ -2,7 +2,17 @@
 $icon-spacing: 0.8rem;
 .btn.anim-button {
     display: flex;
+    align-items: center;
     text-decoration: underline;
+    .hover-text {
+        overflow: auto;
+        width: 0;
+        transition: width linear 500ms;
+    }
+    &:hover .hover-text {
+        width: 100%;
+        color: $primary-main;
+    }
     &.right {
         flex-direction: row-reverse;
         align-items: center;
