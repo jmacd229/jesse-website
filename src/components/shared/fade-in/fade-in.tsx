@@ -1,37 +1,69 @@
+import { TimeDuration } from '../../model/time-duration';
+import { TimeUnit } from 'enums/time-unit';
 import React, { DOMAttributes, ReactElement, useEffect, useState } from 'react';
 import { timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import './fade-in.scss';
+import styled from 'styled-components';
 
 export interface FadeInProps extends DOMAttributes<string> {
   isVisible?: boolean;
-  forwards?: {
-    initialDelay?: number;
-    delay?: number;
-  };
-  reverse?: {
-    initialDelay?: number;
-    delay?: number;
-  };
+  animationDuration?: TimeDuration;
+  forwards?: FadeInDelay;
+  reverse?: FadeInDelay;
 }
 
+interface FadeInDelay {
+  initialDelay?: number;
+  delay?: number;
+}
+
+export enum FadeDirection {
+  FORWARDS = 'forwards',
+  REVERSE = 'reverse',
+}
+
+// Animation duration can be customized, defauly is 0.5s
+const FadeInUnit = styled.div.attrs(
+  (props: { opacity: number; animationDuration: TimeDuration }) => ({
+    animationDuration: (
+      props.animationDuration || new TimeDuration(0.5, TimeUnit.SECONDS)
+    ).getValue(),
+  })
+)`
+  opacity: ${props => props.opacity};
+  transition: opacity ${props => props.animationDuration} linear;
+`;
+
 export const FadeIn = (props: FadeInProps): ReactElement => {
-  const [visible, setVisible] = useState(-1);
+  // An integer that keeps track of what elements are currently hidden and which are visible
+  // All elements less than the visibleIndex are visible, and all above the visibleIndex are hidden
+  const [visibleIndex, setVisibleIndex] = useState(-1);
   const [fadeTimer, setTimer] = useState(undefined);
 
   function changeVisibility(makingVisible: boolean): void {
-    const direction = makingVisible ? 'forwards' : 'reverse';
+    const direction = makingVisible
+      ? FadeDirection.FORWARDS
+      : FadeDirection.REVERSE;
+
+    // If the visibility is changed before the timer has run out (interruption in the middle of fade-in/out)
+    // unsubscribe because a new subscription will be created instead.
     if (fadeTimer && !fadeTimer.closed) {
       fadeTimer.unsubscribe();
     }
     setTimer(
       timer(props[direction].initialDelay, props[direction].delay)
-        .pipe(takeWhile(val => val <= React.Children.count(props.children)))
-        .subscribe(val => {
+        .pipe(
+          takeWhile(
+            currentTime => currentTime <= React.Children.count(props.children)
+          )
+        )
+        .subscribe(currentTime => {
+          // If showing elements, the visibleIndex is incremented up until the number of children provided
+          // If hiding elements, the visibleIndex is decremented to -1
           const visibility = makingVisible
-            ? val
-            : React.Children.count(props.children) - 1 - val;
-          setVisible(visibility);
+            ? currentTime
+            : React.Children.count(props.children) - 1 - currentTime;
+          setVisibleIndex(visibility);
         })
     );
   }
@@ -43,14 +75,9 @@ export const FadeIn = (props: FadeInProps): ReactElement => {
   return (
     <div>
       {React.Children.toArray(props.children).map((element, i) => (
-        <div
-          className='fade-in'
-          key={i}
-          style={{
-            opacity: i <= visible ? 1 : 0,
-          }}>
+        <FadeInUnit key={i} opacity={i <= visibleIndex ? 1 : 0}>
           {element}
-        </div>
+        </FadeInUnit>
       ))}
     </div>
   );
