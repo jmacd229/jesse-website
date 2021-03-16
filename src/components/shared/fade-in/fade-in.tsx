@@ -22,17 +22,15 @@ export enum FadeDirection {
   REVERSE = 'reverse',
 }
 
-// Animation duration can be customized, defauly is 0.5s
-const FadeInUnit = styled.div.attrs(
-  (props: { opacity: number; animationDuration: TimeDuration }) => ({
-    animationDuration: (
-      props.animationDuration || new TimeDuration(0.5, TimeUnit.SECONDS)
-    ).getValue(),
-  })
-)`
-  opacity: ${props => props.opacity};
-  transition: opacity ${props => props.animationDuration} linear;
-`;
+// Animation duration can be customized, default is 0.5s
+const FadeInUnit = styled.div(
+  (props: { opacity: number; animationDuration: TimeDuration }) => `
+  opacity: ${props.opacity};
+  transition: opacity ${(
+    props.animationDuration || new TimeDuration(0.5, TimeUnit.SECONDS)
+  ).getValue()} linear;
+`
+);
 
 export const FadeIn = (props: FadeInProps): ReactElement => {
   // An integer that keeps track of what elements are currently hidden and which are visible
@@ -40,8 +38,8 @@ export const FadeIn = (props: FadeInProps): ReactElement => {
   const [visibleIndex, setVisibleIndex] = useState(-1);
   const [fadeTimer, setTimer] = useState(undefined);
 
-  function changeVisibility(makingVisible: boolean): void {
-    const direction = makingVisible
+  useEffect(() => {
+    const direction = props.isVisible
       ? FadeDirection.FORWARDS
       : FadeDirection.REVERSE;
 
@@ -60,16 +58,18 @@ export const FadeIn = (props: FadeInProps): ReactElement => {
         .subscribe(currentTime => {
           // If showing elements, the visibleIndex is incremented up until the number of children provided
           // If hiding elements, the visibleIndex is decremented to -1
-          const visibility = makingVisible
+          const visibility = props.isVisible
             ? currentTime
             : React.Children.count(props.children) - 1 - currentTime;
           setVisibleIndex(visibility);
         })
     );
-  }
-
-  useEffect(() => {
-    changeVisibility(props.isVisible);
+    return () => {
+      if (fadeTimer && !fadeTimer.closed) {
+        fadeTimer.unsubscribe();
+      }
+    };
+    // take if statement from line 49
   }, [props.isVisible]);
 
   return (

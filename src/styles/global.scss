@@ -2,10 +2,20 @@
 @import 'mixins';
 @import 'animations';
 $image-aspect-ratio: 1.46;
-html {
+:root {
     font-size: 10px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    --background-main: #1f1f1f;
+    --background-dark: #1b1b1b;
+    --primary-main: #ffffff;
+    --secondary-light: #47fdff;
+    --secondary-main: #00bcbd;
+    --secondary-dark: #005e5e;
+    --secondary-extra-dark: #005e5e;
+    --accent-1-light: #d97aff;
+    --accent-1: #b500ff;
+    --accent-1-dark: #3c2445;
 }
 
 body {
