@@ -5,12 +5,12 @@ import React, {
   createRef,
   DOMAttributes,
   ReactElement,
-
   useEffect,
-  useState
+  useState,
 } from 'react';
 import './expander.scss';
-
+import styled from 'styled-components';
+import { animatedGradient } from '../../../styles/animations';
 
 export interface ExpanderProps extends DOMAttributes<Element> {
   id: string;
@@ -22,6 +22,43 @@ export interface ExpanderProps extends DOMAttributes<Element> {
 }
 
 const pagePadding = 2.5;
+
+const Panel = styled.div`
+  height: ${props => (props.expanded ? props.maxHeight : 0)}rem;
+  width: ${props => props.width}rem;
+  margin-top: 1.6rem;
+  background-color: var(--background-dark);
+  position: absolute;
+  top: 0;
+  transition: height 1s linear;
+  &:before {
+    content: '';
+    position: absolute;
+    ${animatedGradient}
+    width: 100%;
+    height: 0.2rem;
+    opacity: ${props => (props.expanded ? 0.8 : 0)};
+    transition: opacity 1s linear;
+  }
+`;
+
+const PanelContent = styled.div.attrs(props => ({
+  tabIndex: props.expanded ? 0 : -1,
+  'aria-hidden': !props.expanded,
+}))`
+  height: ${props => (props.expanded ? props.maxHeight : 0)}rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 200;
+  padding: ${props =>
+    props.expanded ? '0.8rem 0.8rem 0.8rem 0.8rem' : '0rem 0.8rem'};
+  transition: height 1s linear, padding 250ms 750ms linear;
+  & > div > :first-child {
+    padding-right: 3.2rem;
+  }
+`;
 
 export const Expander = (props: ExpanderProps): ReactElement => {
   const [expanded, setExpanded] = useState(false);
@@ -92,28 +129,20 @@ export const Expander = (props: ExpanderProps): ReactElement => {
           </div>
         </div>
       </button>
-      <div
-        className='expander-panel'
-        style={{
-          height: `${expanded ? props.maxHeight : 0}rem`,
-          width: `${width}rem`,
-        }}>
-        <div
+      <Panel expanded={expanded} maxHeight={props.maxHeight} width={width}>
+        <PanelContent
+          expanded={expanded}
+          maxHeight={props.maxHeight}
           id={props.id}
-          className='expander-panel-content small-text'
-          tabIndex={expanded ? 0 : -1}
-          aria-hidden={!expanded}
-          style={{
-            height: `${expanded ? props.maxHeight : 0}rem`,
-          }}>
+          className='small-text'>
           <FadeIn
             isVisible={expanded}
             forwards={{ initialDelay: 750, delay: 100 }}
             reverse={{ delay: 50 }}>
             {props.children}
           </FadeIn>
-        </div>
-      </div>
+        </PanelContent>
+      </Panel>
     </div>
   );
 };
