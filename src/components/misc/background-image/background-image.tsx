@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 
 
-export const BackgroundImage = ({children}): ReactElement => {
+const BackgroundImage = ({children}): any => {
   const MAX_OPACITY_WIDTH = 1200;
   const [opacity, setOpacity] = useState(0);
 

@@ -80,5 +80,6 @@ module.exports = {
                 trackingIds: ["G-G1EXN1KN2T", "GTM-N5CSTZ6"],
             }
         },
+        'gatsby-plugin-image'
     ],
 }

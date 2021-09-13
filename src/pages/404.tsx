@@ -2,7 +2,6 @@ import Layout from '@misc/layout/layout';
 import SEO from '@misc/SEO/SEO';
 import AnimatedButton from '@shared/animated-button/animated-button';
 import arrow from 'animations/arrow.json';
-import 'bootstrap/dist/css/bootstrap.css';
 import { Page } from 'enums/pages.enum';
 import { Position } from 'enums/position.enum';
 import React from 'react';

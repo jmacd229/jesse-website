@@ -1,0 +1,1 @@
+export default (size: number) => `${size}rem`;
