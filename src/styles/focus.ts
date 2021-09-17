@@ -4,5 +4,4 @@ import color from 'styles/color';
 export default css`
     box-shadow: none !important;
 	outline: 3px solid ${color.darkBlue};
-	outline-offset: 3px;
 `;

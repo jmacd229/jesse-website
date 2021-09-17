@@ -1,4 +1,7 @@
 const path = require('path');
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
     siteMetadata: {
@@ -14,19 +17,19 @@ module.exports = {
             options: {
                 fonts: {
                     google: [{
-                            family: 'Raleway',
-                            variants: [
-                                '400',
-                                '400i',
-                                '700',
-                                '700i',
-                                '900'
-                            ],
-                        },
-                        {
-                            family: 'Kadwa',
-                            variants: [700]
-                        }
+                        family: 'Raleway',
+                        variants: [
+                            '400',
+                            '400i',
+                            '700',
+                            '700i',
+                            '900'
+                        ],
+                    },
+                    {
+                        family: 'Kadwa',
+                        variants: [700]
+                    }
                     ]
                 }
             },

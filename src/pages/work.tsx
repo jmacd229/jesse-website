@@ -1,5 +1,5 @@
-import Layout from '@misc/layout/layout';
-import SEO from '@misc/SEO/SEO';
+import Layout from '@misc/Layout';
+import SEO from '@misc/SEO';
 import AnimatedButton from '@shared/animated-button/animated-button';
 import arrow from 'animations/arrow.json';
 import { Page } from 'enums/pages.enum';

@@ -5,16 +5,20 @@ import button from './button';
 
 export default createTheme({
   palette: {
+    type: 'dark',
     primary: {
       main: color.purple,
     },
     secondary: {
       main: color.blue,
     },
+    background: {
+      paper: color.grey,
+    },
   },
 
   overrides: {
     ...accordion,
-    ...button
+    ...button,
   },
 });

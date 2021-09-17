@@ -6,13 +6,14 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import animation from '../../../animations/under-construction.json';
+import animation from '../../animations/under-construction.json';
 import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import spacing from 'styles/spacing';
 import linkedIn_image from 'assets/linkedin.svg';
 import { animatedGradient } from 'styles/animations/gradient';
 import { SmallText } from 'styles/typography';
 import { FadeIn } from '@shared/fade-in/fade-in';
+import media from 'styles/media';
 
 const LINKEDIN_DIMENSIONS = css`
   width: ${spacing(19)};
@@ -46,22 +47,30 @@ const LinkedIn = styled(OutboundLink)`
   }
 `;
 
-const PackageIcon = styled.div`
-  display: inline-block;
-  width: ${spacing(4)};
-  height: ${spacing(4)};
-  margin-right: ${spacing(2)};
-  vertical-align: middle;
+const UnderConstructionContainer = styled.div`
+  display: grid;
+  grid-template-areas:
+    'icon message'
+    'icon accordion';
+  grid-template-columns: ${spacing(4)} 1fr;
+  grid-column-gap: ${spacing(2)};
+  grid-row-gap: ${spacing(0.5)};
+  ${media.medium} {
+    grid-template-columns: ${spacing(4)} ${spacing(66)};
+  }
 `;
 
-const UnderConstructionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+const PackageIcon = styled.div`
+  grid-area: icon;
+  height: fit-content;
+`;
+
+const Message = styled.div`
+  grid-area: message;
 `;
 
 const AccordionContainer = styled.div`
-  margin-left: ${spacing(6)};
-  width: ${spacing(66)};
+  grid-area: accordion;
 `;
 
 const AccordionDetailsWithGradient = styled(AccordionDetails)`
@@ -110,7 +119,7 @@ const panelContent: React.ReactElement[] = [
     rel='noreferrer'></LinkedIn>,
 ];
 
-const UnderConstruction = (): ReactElement => {
+export default (): ReactElement => {
   const animationContainer = createRef<HTMLDivElement>();
   const [expanded, setExpanded] = useState(false);
 
@@ -128,11 +137,11 @@ const UnderConstruction = (): ReactElement => {
 
   return (
     <UnderConstructionContainer>
-      <div>
-        <PackageIcon ref={animationContainer} />
-        Sorry, this site is still in progress - please check back later for
-        updates!
-      </div>
+      <PackageIcon ref={animationContainer} />
+      <Message>
+        Sorry, this site is <em>still</em> in progress - please check back later
+        for updates!
+      </Message>
       <AccordionContainer>
         <Accordion
           expanded={expanded}
@@ -143,7 +152,9 @@ const UnderConstruction = (): ReactElement => {
             expandIcon={<ExpandMoreIcon />}
             aria-controls='underConstruction-content'
             id='underConstruction-header'>
-            <SmallText noMargin>Read More</SmallText>
+            <SmallText noMargin css={{ marginLeft: spacing(1) }}>
+              Read More
+            </SmallText>
           </AccordionSummary>
           <AccordionDetailsWithGradient>
             <FadeIn
@@ -158,5 +169,3 @@ const UnderConstruction = (): ReactElement => {
     </UnderConstructionContainer>
   );
 };
-
-export default UnderConstruction;

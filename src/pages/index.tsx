@@ -1,8 +1,8 @@
-import Layout from '@misc/layout/layout';
+import Layout from '@misc/Layout';
 import { css } from 'styled-components';
 import { StaticImage } from 'gatsby-plugin-image';
-import SEO from '@misc/SEO/SEO';
-import UnderConstruction from '@misc/under-construction/under-construction';
+import SEO from '@misc/SEO';
+import UnderConstruction from '@misc/UnderConstruction';
 import { FadeIn } from '@shared/fade-in/fade-in';
 import React, { ReactElement } from 'react';
 import { Title, Subtitle } from 'styles/typography';

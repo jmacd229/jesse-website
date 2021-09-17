@@ -12,6 +12,10 @@ export default createGlobalStyle`
     margin: unset;
   }
 
+  body {
+    margin:0;
+  }
+
   *:focus {
     ${focus}
 }
