@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -11,7 +12,7 @@ module.exports = {
         He commonly works in JavaScript frameworks and also provides occasional freelance web development work.`,
         lang: 'en'
     },
-    plugins: ["gatsby-plugin-sass",
+    plugins: [
         {
             resolve: 'gatsby-plugin-webfonts',
             options: {
@@ -83,6 +84,15 @@ module.exports = {
                 trackingIds: ["G-G1EXN1KN2T", "GTM-N5CSTZ6"],
             }
         },
-        'gatsby-plugin-image'
+        'gatsby-plugin-image',
+        {
+            resolve: `gatsby-plugin-styled-components`,
+          },
+      
     ],
+    flags:{
+        DEV_SSR: false,
+        FAST_DEV: true,
+        PRESERVE_FILE_DOWNLOAD_CACHE: true,
+    }
 }

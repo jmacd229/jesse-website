@@ -1,6 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { DOMAttributes, ReactElement, useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-export default ({ children }): any => {
+const BackgroundElement = styled.div.attrs({ 'aria-hidden': true })`
+  height: 100%;
+  min-width: calc(100vh * 1.46);
+  position: fixed;
+  top: 0;
+  right: 0;
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 1)),
+    to(rgba(0, 0, 0, 0))
+  );
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  > * {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const BackgroundImage = ({
+  children,
+}: DOMAttributes<Element>): ReactElement => {
   const MAX_OPACITY_WIDTH = 1200;
   const [opacity, setOpacity] = useState(0);
 
@@ -18,11 +41,10 @@ export default ({ children }): any => {
   });
 
   return (
-    <div
-      aria-hidden='true'
-      className='background-image'
-      style={{ opacity: opacity }}>
+    <BackgroundElement style={{ opacity: opacity }}>
       {children}
-    </div>
+    </BackgroundElement>
   );
 };
+
+export default BackgroundImage;
