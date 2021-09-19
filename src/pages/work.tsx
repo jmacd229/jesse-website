@@ -1,8 +1,9 @@
+import React, { ReactElement } from 'react';
+
 import Layout from '@misc/Layout';
 import SEO from '@misc/SEO';
-import React from 'react';
 
-export const Work = () => {
+export const Work = (): ReactElement => {
   return (
     <Layout>
       <SEO title='Work' />

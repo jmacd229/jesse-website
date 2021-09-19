@@ -1,1 +1,1 @@
-export default (size: number) => `${size}rem`;
+export default (size: number): string => `${size}rem`;

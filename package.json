@@ -1,71 +1,78 @@
 {
-    "name": "jesse-website",
-    "private": true,
-    "description": "A personal portfolio website for Jesse MacDougall",
-    "version": "1.0.1",
-    "releaseDate": "11-22-2020",
-    "license": "0BSD",
-    "scripts": {
-        "build": "sed -i 's|\"releaseDate\": \".*\"|\"releaseDate\": \"'$(date +%m-%d-%Y)'\"|g' package.json && gatsby build",
-        "develop": "gatsby develop",
-        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-        "start": "npm run develop",
-        "serve": "gatsby serve",
-        "clean": "gatsby clean",
-        "cy:open": "cypress open",
-        "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open",
-        "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
-    },
-    "dependencies": {
-        "@material-ui/core": "^4.12.3",
-        "@material-ui/icons": "^4.11.2",
-        "@types/react-helmet": "^6.1.2",
-        "eslint-plugin-cypress": "^2.12.1",
-        "gatsby": "^3.13.0",
-        "gatsby-plugin-google-gtag": "^3.13.0",
-        "gatsby-plugin-image": "^1.13.0",
-        "gatsby-plugin-manifest": "^3.13.0",
-        "gatsby-plugin-purgecss": "^6.0.2",
-        "gatsby-plugin-react-helmet": "^4.13.0",
-        "gatsby-plugin-robots-txt": "^1.6.10",
-        "gatsby-plugin-sharp": "^3.13.0",
-        "gatsby-plugin-styled-components": "^4.14.0",
-        "gatsby-plugin-transition-link": "^1.20.5",
-        "gatsby-plugin-webfonts": "^2.1.1",
-        "gatsby-source-filesystem": "^3.13.0",
-        "gatsby-transformer-sharp": "^3.13.0",
-        "gsap": "^3.7.1",
-        "lottie-web": "^5.7.13",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-helmet": "^6.1.0",
-        "rxjs": "^7.3.0",
-        "styled-components": "^5.3.1"
-    },
-    "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^4.31.0",
-        "@typescript-eslint/parser": "^4.31.0",
-        "babel-plugin-styled-components": "^1.13.2",
-        "cypress": "^8.3.1",
-        "cypress-plugin-tab": "^1.0.5",
-        "cz-conventional-changelog": "^3.3.0",
-        "eslint": "^7.32.0",
-        "eslint-plugin-react": "^7.25.1",
-        "gatsby-plugin-root-import": "^2.0.7",
-        "prettier": "2.3.2",
-        "start-server-and-test": "^1.14.0",
-        "typescript": "^4.4.2"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jmacd229/jesse-website"
-    },
-    "bugs": {
-        "url": "https://github.com/jmacd229/jesse-website/issues"
-    },
-    "config": {
-        "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
-        }
+  "name": "jesse-website",
+  "private": true,
+  "description": "A personal portfolio website for Jesse MacDougall",
+  "version": "1.0.1",
+  "releaseDate": "11-22-2020",
+  "license": "0BSD",
+  "scripts": {
+    "build": "sed -i 's|\"releaseDate\": \".*\"|\"releaseDate\": \"'$(date +%m-%d-%Y)'\"|g' package.json && gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "cy:open": "cypress open",
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open",
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx,json,md}": "prettier --write"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@types/react-helmet": "^6.1.2",
+    "eslint-plugin-cypress": "^2.12.1",
+    "gatsby": "^3.13.0",
+    "gatsby-plugin-google-gtag": "^3.13.0",
+    "gatsby-plugin-image": "^1.13.0",
+    "gatsby-plugin-manifest": "^3.13.0",
+    "gatsby-plugin-purgecss": "^6.0.2",
+    "gatsby-plugin-react-helmet": "^4.13.0",
+    "gatsby-plugin-robots-txt": "^1.6.10",
+    "gatsby-plugin-sharp": "^3.13.0",
+    "gatsby-plugin-styled-components": "^4.14.0",
+    "gatsby-plugin-transition-link": "^1.20.5",
+    "gatsby-plugin-webfonts": "^2.1.1",
+    "gatsby-source-filesystem": "^3.13.0",
+    "gatsby-transformer-sharp": "^3.13.0",
+    "gsap": "^3.7.1",
+    "lottie-web": "^5.7.13",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "rxjs": "^7.3.0",
+    "styled-components": "^5.3.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "babel-plugin-styled-components": "^1.13.2",
+    "cypress": "^8.3.1",
+    "cypress-plugin-tab": "^1.0.5",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.25.1",
+    "gatsby-plugin-root-import": "^2.0.7",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "prettier": "2.3.2",
+    "start-server-and-test": "^1.14.0",
+    "typescript": "^4.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmacd229/jesse-website"
+  },
+  "bugs": {
+    "url": "https://github.com/jmacd229/jesse-website/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
+  }
 }

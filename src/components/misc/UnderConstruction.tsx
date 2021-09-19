@@ -47,6 +47,10 @@ const LinkedIn = styled(OutboundLink)`
   }
 `;
 
+const ReadMore = styled(SmallText)`
+  margin-left: ${spacing(1)};
+`;
+
 const UnderConstructionContainer = styled.div`
   display: grid;
   grid-template-areas:
@@ -119,7 +123,7 @@ const panelContent: React.ReactElement[] = [
     rel='noreferrer'></LinkedIn>,
 ];
 
-export default (): ReactElement => {
+const UnderConstruction = (): ReactElement => {
   const animationContainer = createRef<HTMLDivElement>();
   const [expanded, setExpanded] = useState(false);
 
@@ -152,9 +156,7 @@ export default (): ReactElement => {
             expandIcon={<ExpandMoreIcon />}
             aria-controls='underConstruction-content'
             id='underConstruction-header'>
-            <SmallText noMargin css={{ marginLeft: spacing(1) }}>
-              Read More
-            </SmallText>
+            <ReadMore noMargin>Read More</ReadMore>
           </AccordionSummary>
           <AccordionDetailsWithGradient>
             <FadeIn
@@ -169,3 +171,5 @@ export default (): ReactElement => {
     </UnderConstructionContainer>
   );
 };
+
+export default UnderConstruction;

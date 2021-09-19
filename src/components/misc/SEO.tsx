@@ -1,12 +1,12 @@
-import { graphql, useStaticQuery } from "gatsby"
-import React, { ReactElement } from "react"
-import { Helmet } from "react-helmet"
+import { graphql, useStaticQuery } from 'gatsby';
+import React, { ReactElement } from 'react';
+import { Helmet } from 'react-helmet';
 
 export interface SEOProps {
-    title: string
+  title: string;
 }
 
-export const SEO = ({title}): ReactElement => {
+const SEO = ({ title }: SEOProps): ReactElement => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -20,15 +20,13 @@ export const SEO = ({title}): ReactElement => {
         }
       }
     `
-  )
+  );
 
-  const metaDescription = site.siteMetadata.description
+  const metaDescription = site.siteMetadata.description;
 
   return (
     <Helmet
-      htmlAttributes={
-        {lang: site.siteMetadata.lang}
-      }
+      htmlAttributes={{ lang: site.siteMetadata.lang }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
@@ -66,7 +64,7 @@ export const SEO = ({title}): ReactElement => {
         },
       ]}
     />
-  )
-}
+  );
+};
 
-export default SEO
+export default SEO;

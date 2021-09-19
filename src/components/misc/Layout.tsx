@@ -10,7 +10,7 @@ import spacing from 'styles/spacing';
 import color from 'styles/color';
 
 interface LayoutProps extends DOMAttributes<Element> {
-  image?: any;
+  image?: ReactElement;
 }
 
 const Content = styled.main`
@@ -32,7 +32,7 @@ const Container = styled.div`
   overflow-y: auto;
 `;
 
-export default (props: LayoutProps): ReactElement => (
+const Layout = (props: LayoutProps): ReactElement => (
   <>
     <GlobalStyle />
     <ThemeProvider theme={materialUIThemeOverride}>
@@ -45,3 +45,5 @@ export default (props: LayoutProps): ReactElement => (
     </ThemeProvider>
   </>
 );
+
+export default Layout;

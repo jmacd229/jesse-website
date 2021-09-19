@@ -7,10 +7,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import { SmallText } from 'styles/typography';
 import color from 'styles/color';
-import ButtonTheme from '@shared/Button/buttonThemes.enum';
+import { ButtonTheme } from '@shared/Button';
 import Button from '@shared/Button';
 
-const Footer = styled.footer`
+const StyledFooter = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,10 +24,10 @@ const PrivacyPolicyHeader = styled(SmallText).attrs({
   center: true,
 })``;
 
-export default (): ReactElement => {
+const Footer = (): ReactElement => {
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   return (
-    <Footer>
+    <StyledFooter>
       <SmallText tiny center>
         A personal website built by and for Jesse MacDougall
         <br />V{packageJson.version}
@@ -35,18 +35,21 @@ export default (): ReactElement => {
         Last Updated: {new Date(packageJson.releaseDate).toDateString()}
         <br />
         <Button
-        theme={ButtonTheme.LINK}
+          theme={ButtonTheme.LINK}
           aria-haspopup
           onClick={() => setPrivacyModalOpen(true)}>
           Privacy Policy
-      </Button>
+        </Button>
       </SmallText>
       <Dialog
+        aria-labelledby='privacy-modal-header'
         open={privacyModalOpen}
         onClose={() => setPrivacyModalOpen(false)}>
-        <DialogTitle>Jesse MacDougall Privacy Policy</DialogTitle>
+        <DialogTitle id='privacy-modal-header'>
+          Jesse MacDougall Privacy Policy
+        </DialogTitle>
         <DialogContent>
-          <SmallText>
+          <SmallText tag='div'>
             This Privacy Policy describes how your personal information is
             collected, used, and shared when you visit
             https://www.jessemacdougall.ca (the “Site”).
@@ -111,6 +114,8 @@ export default (): ReactElement => {
           <Button onClick={() => setPrivacyModalOpen(false)}>Okay</Button>
         </DialogActions>
       </Dialog>
-    </Footer>
+    </StyledFooter>
   );
 };
+
+export default Footer;

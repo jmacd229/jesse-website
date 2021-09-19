@@ -1,5 +1,5 @@
 import Layout from '@misc/Layout';
-import { css } from 'styled-components';
+import styled from 'styled-components';
 import { StaticImage } from 'gatsby-plugin-image';
 import SEO from '@misc/SEO';
 import UnderConstruction from '@misc/UnderConstruction';
@@ -8,7 +8,7 @@ import React, { ReactElement } from 'react';
 import { Title, Subtitle } from 'styles/typography';
 import spacing from 'styles/spacing';
 
-const subtitleSpacing = css`
+const StyledSubtitle = styled(Subtitle)`
   margin-bottom: ${spacing(4)};
 `;
 
@@ -16,15 +16,20 @@ export const Index = (): ReactElement => {
   return (
     <Layout
       image={
-        <StaticImage src='../assets/home.jpg' alt='' placeholder='blurred' height={1000}/>
+        <StaticImage
+          src='../assets/home.jpg'
+          alt=''
+          placeholder='blurred'
+          height={1000}
+        />
       }>
       <SEO title='Home' />
       <div>
         <FadeIn isVisible forwards={{ initialDelay: 0, delay: 500 }}>
           <Title>Hi, I&apos;m Jesse</Title>
-          <Subtitle css={subtitleSpacing}>
+          <StyledSubtitle>
             A full-stack web developer based in Toronto
-          </Subtitle>
+          </StyledSubtitle>
           <UnderConstruction />
         </FadeIn>
       </div>

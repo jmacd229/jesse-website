@@ -1,5 +1,5 @@
 import BaseButton, { BaseButtonProps } from '@shared/Button/BaseButton';
-import ButtonTheme from '@shared/Button/buttonThemes.enum';
+import ButtonTheme from './buttonThemes.enum';
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import color from 'styles/color';

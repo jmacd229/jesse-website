@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import color from 'styles/color';
 import spacing from 'styles/spacing';
 import grid from 'assets/grid.svg';
-import BaseText from 'styles/typography/BaseText';
+import BaseText, { BaseTextProps } from 'styles/typography/BaseText';
 
-const Title = styled(BaseText)`
+const StyledTitle = styled(BaseText)`
   font-size: clamp(${spacing(2)}, 30vw, ${spacing(20)});
   word-break: keep-all;
   overflow-wrap: normal;
@@ -19,11 +19,12 @@ const Title = styled(BaseText)`
   -webkit-text-stroke-color: ${color.blue};
   background-repeat: repeat;
   animation: animatedBackground 10s linear infinite;
-  ${props => props.css}
 `;
 
-export default ({ children, css = null, ...rest }) => (
-  <Title tag='h1' css={css} {...rest}>
+const Title = ({ children, ...rest }: BaseTextProps): ReactElement => (
+  <StyledTitle tag='h1' {...rest}>
     {children}
-  </Title>
+  </StyledTitle>
 );
+
+export default Title;

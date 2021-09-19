@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { DOMAttributes, ReactElement } from 'react';
 import styled from 'styled-components';
 
 const StyledText = styled.div`
-  ${props => props.css}
   text-align: ${props => (props.center ? 'center' : 'left')};
 `;
 
-export default ({ tag = 'p', children, css = null, center, ...rest }) => (
-  <StyledText as={tag} css={css} center={center} {...rest}>
+export interface BaseTextProps extends DOMAttributes<Element> {
+  tag?: string;
+  center?: boolean;
+}
+
+const BaseText = ({
+  tag = 'p',
+  children,
+  center = false,
+  ...rest
+}: BaseTextProps): ReactElement => (
+  <StyledText as={tag} center={center} {...rest}>
     {children}
   </StyledText>
 );
+
+export default BaseText;
