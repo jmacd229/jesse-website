@@ -1,22 +1,44 @@
+import React from 'react';
+import styled from 'styled-components';
+
 import Layout from '@misc/Layout';
 import SEO from '@misc/SEO';
 import Button from '@shared/Button';
-import { Page } from 'enums/pages.enum';
-import React from 'react';
-import './404.scss';
+import circuit from 'assets/circuit.svg';
 
-export const NotFound = () => {
+import { Subtitle, Title } from 'styles/typography';
+import { Page } from 'enums/pages.enum';
+import { ReactElement } from 'react';
+import spacing from 'styles/spacing';
+
+const NotFoundBackground = styled.div`
+  background-image: url(${circuit});
+  background-repeat: repeat;
+`;
+
+const NotFoundContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BackToHomeButton = styled(Button)`
+  margin-top: ${spacing(4)};
+`;
+
+const NotFound = (): ReactElement => {
   return (
-    <Layout image={<div className='notFound-background'></div>}>
-      <SEO title='404' />
-      <div className='notFound'>
-        <h1>404</h1>
-        <h2 className='text-center'>
+    <Layout image={<NotFoundBackground />}>
+      <SEO title='Page Not Found' />
+      <NotFoundContainer>
+        <Title>404</Title>
+        <Subtitle>
           Sorry, you&apos;ve managed to stumble upon a page that doesn&apos;t
           exist.
-        </h2>
-        <Button>Back to home</Button>
-      </div>
+        </Subtitle>
+        <BackToHomeButton to={Page.HOME}>Back to home</BackToHomeButton>
+      </NotFoundContainer>
     </Layout>
   );
 };

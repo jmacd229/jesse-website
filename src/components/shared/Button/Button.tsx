@@ -1,31 +1,33 @@
-import BaseButton from '@shared/Button/BaseButton';
+import BaseButton, { BaseButtonProps } from '@shared/Button/BaseButton';
 import ButtonTheme from '@shared/Button/buttonThemes.enum';
-import React, { DOMAttributes } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import color from 'styles/color';
 import link from 'styles/link';
 
 const LinkButton = styled(BaseButton)`
   ${link};
+  border: none;
 `;
 
 const PrimaryButton = styled(BaseButton)`
   border: 1px solid ${color.blue};
+  background-color: ${color.darkestGrey};
   transition: background-color 100ms ease-in-out;
   &:hover {
-	  background-color: ${color.darkBlue};
+    background-color: ${color.darkBlue};
   }
 `;
 
-export interface ButtonProps extends DOMAttributes<Element> {
+export interface ButtonProps extends BaseButtonProps {
   theme?: ButtonTheme;
 }
 
-export default ({
+const Button = ({
   theme = ButtonTheme.PRIMARY,
   children,
   ...rest
-}: ButtonProps) => {
+}: ButtonProps): ReactElement => {
   switch (theme) {
     case ButtonTheme.LINK:
       return <LinkButton {...rest}>{children}</LinkButton>;
@@ -33,3 +35,5 @@ export default ({
       return <PrimaryButton {...rest}>{children}</PrimaryButton>;
   }
 };
+
+export default Button;

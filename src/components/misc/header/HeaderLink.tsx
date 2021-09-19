@@ -5,10 +5,12 @@ import { Page } from 'enums/pages.enum';
 import spacing from 'styles/spacing';
 import color from 'styles/color';
 
-function getPageName(page: Page): String {
+function getPageName(page: Page): string {
   switch (page) {
     case Page.WORK:
       return 'Work';
+    case Page.HOME:
+      return 'Home';
     default:
       return page;
   }
@@ -20,8 +22,14 @@ const StyledLink = styled(AniLink)`
   text-decoration: none;
 `;
 
-export default ({ page }): ReactElement => (
-  <StyledLink swipe direction='left' to={page}>
+export interface HeaderLinkProps {
+  page: Page;
+}
+
+const HeaderLink = ({ page, ...rest }: HeaderLinkProps): ReactElement => (
+  <StyledLink swipe direction='left' to={page} {...rest}>
     {getPageName(page)}
   </StyledLink>
 );
+
+export default HeaderLink;

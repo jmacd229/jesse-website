@@ -28,17 +28,14 @@ const HeaderContainer = styled(Paper)`
   }
 `;
 
+const BackToHomeLink = styled(HeaderLink)`
+  margin-right: auto;
+`;
+
 const getcurrentUrl = () =>
   typeof window !== 'undefined' ? window.location.pathname : '';
 
-export default (): ReactElement => (
-  <HeaderContainer elevation={3} role='banner'>
-    {getcurrentUrl() !== Page.HOME && <HeaderLink page={Page.HOME} />}
-    {getLinks()}
-  </HeaderContainer>
-);
-
-function getLinks() {
+const getLinks = () => {
   if (JSON.parse(process.env.IS_UNDER_CONSTRUCTION)) {
     return 'More pages coming soon...';
   } else {
@@ -46,4 +43,13 @@ function getLinks() {
       page !== Page.HOME ? <HeaderLink page={page} key={page} /> : null
     );
   }
-}
+};
+
+const Header = (): ReactElement => (
+  <HeaderContainer elevation={3} role='banner'>
+    {getcurrentUrl() !== Page.HOME && <BackToHomeLink page={Page.HOME} />}
+    {getLinks()}
+  </HeaderContainer>
+);
+
+export default Header;

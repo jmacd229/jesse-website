@@ -23,5 +23,7 @@ module.exports = {
         "@typescript-eslint",
         "cypress"
     ],
-    "rules": {}
+    "rules": {
+        "no-console": "error"
+    }
 };
