@@ -1,23 +1,13 @@
 import Layout from '@misc/Layout';
 import SEO from '@misc/SEO';
-import AnimatedButton from '@shared/animated-button/animated-button';
-import arrow from 'animations/arrow.json';
-import { Page } from 'enums/pages.enum';
-import { Position } from 'enums/position.enum';
 import React from 'react';
 
 export const Work = () => {
   return (
     <Layout>
       <SEO title='Work' />
-      <div className='notFound'>
+      <div>
         <h1>Work</h1>
-        <AnimatedButton
-          animation={arrow}
-          text='Back to home page'
-          iconPosition={Position.ABOVE}
-          link={Page.HOME}
-        />
       </div>
     </Layout>
   );

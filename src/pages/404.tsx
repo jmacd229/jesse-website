@@ -1,9 +1,7 @@
 import Layout from '@misc/Layout';
 import SEO from '@misc/SEO';
-import AnimatedButton from '@shared/animated-button/animated-button';
-import arrow from 'animations/arrow.json';
+import Button from '@shared/Button';
 import { Page } from 'enums/pages.enum';
-import { Position } from 'enums/position.enum';
 import React from 'react';
 import './404.scss';
 
@@ -17,13 +15,7 @@ export const NotFound = () => {
           Sorry, you&apos;ve managed to stumble upon a page that doesn&apos;t
           exist.
         </h2>
-        <AnimatedButton
-        id="back"
-          animation={arrow}
-          text='Back to home page'
-          iconPosition={Position.ABOVE}
-          link={Page.HOME}
-        />
+        <Button>Back to home</Button>
       </div>
     </Layout>
   );

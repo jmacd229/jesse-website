@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import color from 'styles/color';
 import spacing from 'styles/spacing';
 import grid from 'assets/grid.svg';
+import BaseText from 'styles/typography/BaseText';
 
-const Title = styled.h1`
+const Title = styled(BaseText)`
   font-size: clamp(${spacing(2)}, 30vw, ${spacing(20)});
   word-break: keep-all;
   overflow-wrap: normal;
@@ -22,7 +23,7 @@ const Title = styled.h1`
 `;
 
 export default ({ children, css = null, ...rest }) => (
-  <Title css={css} {...rest}>
+  <Title tag='h1' css={css} {...rest}>
     {children}
   </Title>
 );

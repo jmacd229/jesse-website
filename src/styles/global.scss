@@ -15,12 +15,6 @@ $image-aspect-ratio: 1.46;
     --accent-1-dark: #3c2445;
 }
 
-body {
-    font-size: 2rem;
-    background-color: $background-dark;
-    color: $primary-main;
-}
-
 .btn {
     font-size: 2rem;
     color: $primary-main;
@@ -29,19 +23,6 @@ body {
         text-decoration: none;
         color: $secondary-main;
     }
-}
-
-.main {
-    display: flex;
-    flex-direction: column;
-    background-color: $background-main;
-    position: relative;
-    overflow: hidden;
-}
-
-main {
-    position: relative;
-    z-index: 1;
 }
 
 .background-image {
@@ -56,100 +37,4 @@ main {
         width: 100%;
         height: 100%;
     }
-}
-
-header+* {
-    flex-grow: 1;
-    padding: 2.5rem;
-    height: 100%;
-    min-height: 100vh;
-    transition: height 1s linear;
-}
-
-.small-text {
-    font-size: 1.2rem;
-}
-
-.tiny-text {
-    font-size: 0.8rem;
-}
-
-.light-text {
-    opacity: 0.5;
-    transition: opacity linear 0.25s;
-    &:hover {
-        opacity: 1;
-    }
-}
-
-.icon {
-    width: 3rem;
-    height: 3rem;
-    &-small {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-}
-
-.hover-btn {
-    @extend .btn;
-    position: relative;
-    &:hover,
-    &:focus {
-        &:after {
-            border: 0.1rem solid $secondary-main;
-            width: 100%;
-            left: 0;
-        }
-    }
-    &:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        transition: width 0.25s ease-in-out, left 0.25s ease-in-out, border-color 0.5s linear;
-    }
-    &.active {
-        color: $secondary-main;
-        text-decoration: underline;
-        pointer-events: none;
-    }
-}
-
-a {
-    color: $secondary-light;
-    transition: color 0.25s linear;
-    &:hover,
-    &:focus {
-        color: $accent-1-light;
-    }
-}
-
-.privacy-modal {
-    background-color: $background-main !important;
-}
-
-.privacy-title {
-    color: $primary-main !important;
-}
-
-.privacy-content {
-    color: $primary-main !important;
-    text-align: left !important;
-    font-size: 1.2rem !important;
-}
-
-.privacy-btn {
-    color: $primary-main !important;
-    background-color: $accent-1-dark !important;
-    border: 0.1rem solid $accent-1 !important;
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-.privacy-icon {
-    color: $secondary-main !important;
-    border-color: $secondary-main !important;
 }

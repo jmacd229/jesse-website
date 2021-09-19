@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import spacing from 'styles/spacing';
+import BaseText from 'styles/typography/BaseText';
 
-const Subtitle = styled.h2`
+const Subtitle = styled(BaseText)`
   font-size: ${spacing(4)};
   font-weight: 500;
 
@@ -10,7 +11,7 @@ const Subtitle = styled.h2`
 `;
 
 export default ({ children, css = null, ...rest }) => (
-  <Subtitle css={css} {...rest}>
+  <Subtitle tag="h2" css={css} {...rest}>
     {children}
   </Subtitle>
 );

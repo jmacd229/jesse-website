@@ -1,5 +1,6 @@
 import { createTheme } from '@material-ui/core/styles';
 import color from 'styles/color';
+import dialog from 'styles/material-ui-overrides/dialog';
 import accordion from './accordion';
 import button from './button';
 
@@ -20,5 +21,6 @@ export default createTheme({
   overrides: {
     ...accordion,
     ...button,
+    ...dialog,
   },
 });
