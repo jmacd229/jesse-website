@@ -1,29 +1,44 @@
-import Layout from '@misc/layout/layout';
-import SEO from '@misc/SEO/SEO';
-import AnimatedButton from '@shared/animated-button/animated-button';
-import arrow from 'animations/arrow.json';
-import 'bootstrap/dist/css/bootstrap.css';
-import { Position } from 'enums/position.enum';
 import React from 'react';
-import './404.scss';
+import styled from 'styled-components';
 
-export const NotFound = () => {
+import Layout from '@misc/Layout';
+import SEO from '@misc/SEO';
+import Button from '@shared/Button';
+import circuit from 'assets/circuit.svg';
+
+import { Subtitle, Title } from 'styles/typography';
+import { Page } from 'enums/pages.enum';
+import { ReactElement } from 'react';
+import spacing from 'styles/spacing';
+
+const NotFoundBackground = styled.div`
+  background-image: url(${circuit});
+  background-repeat: repeat;
+`;
+
+const NotFoundContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BackToHomeButton = styled(Button)`
+  margin-top: ${spacing(4)};
+`;
+
+const NotFound = (): ReactElement => {
   return (
-    <Layout image={<div className='notFound-background'></div>}>
-      <SEO title='404' />
-      <div className='notFound'>
-        <h1>404</h1>
-        <h2 className='text-center'>
+    <Layout image={<NotFoundBackground />}>
+      <SEO title='Page Not Found' />
+      <NotFoundContainer>
+        <Title>404</Title>
+        <Subtitle>
           Sorry, you&apos;ve managed to stumble upon a page that doesn&apos;t
           exist.
-        </h2>
-        <AnimatedButton
-          animation={arrow}
-          text='Back to home page'
-          iconPosition={Position.ABOVE}
-          link='/'
-        />
-      </div>
+        </Subtitle>
+        <BackToHomeButton to={Page.HOME}>Back to home</BackToHomeButton>
+      </NotFoundContainer>
     </Layout>
   );
 };
