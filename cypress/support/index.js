@@ -1,2 +1,2 @@
-require('cypress-plugin-tab')
-import 'cypress-plugin-snapshots/commands';
+import 'cypress-plugin-tab';
+import '@testing-library/cypress/add-commands';

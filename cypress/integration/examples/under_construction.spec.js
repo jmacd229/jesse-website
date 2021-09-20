@@ -1,29 +1,28 @@
-/// <reference types="cypress" />
-
 context('Under Construction', () => {
-    before(() => {
-        cy.visit('http://localhost:8000')
-    })
+  before(() => {
+    cy.visit(Cypress.config().baseUrl);
+  });
 
-    it('Should say "More coming soon..." instead of links', () => {
-        cy.get('header > div')
-            .should('have.text', 'HomeMore pages coming soon...')
-    })
+  it('Should say "More coming soon..." instead of navigation links', () => {
+    cy.findByRole('banner').should('have.text', 'More pages coming soon...');
+  });
 
-    it('Should not allow tabbing inside of expander when collapsed', () => {
-        cy.get('#under-construction button.expander-trigger').focus().tab()
-        cy.get('#under-construction .expander-panel-content').should('not.have.focus');
-    })
-
-    it('Should expand and collapse on click with tabbing inside', () => {
-        cy.get('#under-construction button.expander-trigger').click();
-        cy.get('#under-construction .expander').should('have.class', 'expanded');
-        cy.wait(1550);
-        cy.document().toMatchImageSnapshot();
-        cy.tab();
-        cy.get('#under-construction .expander-panel-content').should('have.focus');
-        cy.get('#under-construction button.expander-trigger').click();
-        cy.get('#under-construction .expander').should('not.have.class', 'expanded');
-    })
-
-})
+  it('Should expand and collapse on click with tabbing inside', () => {
+    cy.findByRole('button', { name: 'Read More' }).click();
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1550);
+    cy.tab();
+    cy.findByRole('link', { name: 'the public GitHub repo' }).should(
+      'have.focus'
+    );
+    cy.tab();
+    cy.findByRole('link', {
+      name: "Navigate to Jesse MacDougall's LinkedIn profile",
+    }).should('have.focus');
+    cy.findByRole('button', { name: 'Read More' }).click();
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(2050);
+    cy.tab();
+    cy.focused().should('not.have.text', 'the public GitHub repo');
+  });
+});

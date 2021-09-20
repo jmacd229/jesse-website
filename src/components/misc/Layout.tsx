@@ -1,8 +1,8 @@
 import React, { DOMAttributes, ReactElement } from 'react';
 import styled from 'styled-components';
 import BackgroundImage from '@misc/BackgroundImage';
-import Footer from '@misc/footer/Footer';
-import Header from '@misc/header/Header';
+import Footer from '@misc/Footer/Footer';
+import Header from '@misc/Header/Header';
 import { ThemeProvider } from '@material-ui/core';
 import GlobalStyle from 'styles/GlobalStyle';
 import materialUIThemeOverride from 'styles/material-ui-overrides/themeOverride';

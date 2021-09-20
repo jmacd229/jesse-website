@@ -149,7 +149,7 @@ const UnderConstruction = (): ReactElement => {
       <AccordionContainer>
         <Accordion
           expanded={expanded}
-          onChange={(_, expanded) => setExpanded(expanded)}
+          onChange={(_, isExpanded) => setExpanded(isExpanded)}
           elevation={0}
           TransitionProps={{ timeout: 2000 }}>
           <AccordionSummary
