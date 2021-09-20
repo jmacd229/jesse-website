@@ -1,7 +1,7 @@
 import React, { DOMAttributes, ReactElement } from 'react';
 import styled from 'styled-components';
 import BackgroundImage from '@misc/BackgroundImage';
-import Footer from '@misc/Footer/Footer';
+import Footer from '@misc/Footer';
 import Header from '@misc/Header/Header';
 import { ThemeProvider } from '@material-ui/core';
 import GlobalStyle from 'styles/GlobalStyle';

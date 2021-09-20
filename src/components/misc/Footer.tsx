@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import packageJson from '../../../../package.json';
+import packageJson from '../../../package.json';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -37,14 +37,16 @@ const Footer = (): ReactElement => {
         <Button
           theme={ButtonTheme.LINK}
           aria-haspopup
-          onClick={() => setPrivacyModalOpen(true)}>
+          onClick={() => setPrivacyModalOpen(true)}
+        >
           Privacy Policy
         </Button>
       </SmallText>
       <Dialog
         aria-labelledby='privacy-modal-header'
         open={privacyModalOpen}
-        onClose={() => setPrivacyModalOpen(false)}>
+        onClose={() => setPrivacyModalOpen(false)}
+      >
         <DialogTitle id='privacy-modal-header'>
           Jesse MacDougall Privacy Policy
         </DialogTitle>

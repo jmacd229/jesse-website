@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Page } from 'enums/pages.enum';
 import { animatedGradient } from 'styles/animations/gradient';
 import spacing from 'styles/spacing';
-import HeaderLink from '@misc/header/HeaderLink';
+import HeaderLink from '@misc/Header/HeaderLink';
 
 const HeaderContainer = styled(Paper)`
   display: flex;
