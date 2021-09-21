@@ -2,7 +2,7 @@
   "name": "jesse-website",
   "private": true,
   "description": "A personal portfolio website for Jesse MacDougall",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "releaseDate": "11-22-2020",
   "license": "0BSD",
   "scripts": {
@@ -25,6 +25,7 @@
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@types/react-helmet": "^6.1.2",
+    "@types/styled-components": "^5.1.14",
     "eslint-plugin-cypress": "^2.12.1",
     "gatsby": "^3.14.0",
     "gatsby-plugin-google-gtag": "^3.14.0",
@@ -60,6 +61,7 @@
     "gatsby-plugin-root-import": "^2.0.7",
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
+    "netlify-plugin-cypress": "^2.2.0",
     "prettier": "2.4.1",
     "start-server-and-test": "^1.14.0",
     "typescript": "^4.4.3"
