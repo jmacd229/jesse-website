@@ -16,7 +16,6 @@ interface LayoutProps extends DOMAttributes<Element> {
 const Content = styled.main`
   position: relative;
   z-index: 1;
-  height: 100%;
   padding: ${spacing(5)};
   flex-grow: 1;
   transition: height 1s linear;
