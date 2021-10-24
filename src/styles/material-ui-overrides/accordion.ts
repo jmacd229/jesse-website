@@ -7,6 +7,9 @@ export default {
     root: {
       color: color.white,
       backgroundColor: 'transparent',
+      '&$expanded': {
+        margin: 0,
+      },
     },
   },
   MuiAccordionSummary: {
@@ -16,6 +19,7 @@ export default {
       minHeight: null,
       width: 'fit-content',
       padding: 0,
+      'text-decoration': 'none',
       '&$expanded': {
         minHeight: null,
       },

@@ -1,18 +1,14 @@
 {
-    "compilerOptions": {
-      "jsx": "react",
-      "esModuleInterop": true,
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "baseUrl": "./src",
-      "paths": {
-        "@misc/*": ["components/misc/*"],
-        "@pages/*": ["components/pages/*"],
-        "@shared/*": ["components/shared/*"],
-        "*": [
-          "types/*",
-          "*"
-        ]
-      }
-    },
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@misc/*": ["components/misc/*"],
+      "@shared/*": ["components/shared/*"],
+      "*": ["types/*", "*"]
+    }
   }
+}

@@ -2,11 +2,12 @@ import React, { DOMAttributes, ReactElement } from 'react';
 import styled from 'styled-components';
 
 const StyledText = styled.div`
-  text-align: ${props => (props.center ? 'center' : 'left')};
+  text-align: ${(props: { center: boolean }) =>
+    props.center ? 'center' : 'left'};
 `;
 
 export interface BaseTextProps extends DOMAttributes<Element> {
-  tag?: string;
+  tag?: React.ElementType;
   center?: boolean;
 }
 

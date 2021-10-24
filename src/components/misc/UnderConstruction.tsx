@@ -14,6 +14,7 @@ import { animatedGradient } from 'styles/animations/gradient';
 import { SmallText } from 'styles/typography';
 import { FadeIn } from '@shared/fade-in/fade-in';
 import media from 'styles/media';
+import logoGradient from 'styles/logoGradient';
 
 const LINKEDIN_DIMENSIONS = css`
   width: ${spacing(19)};
@@ -25,30 +26,12 @@ const LinkedIn = styled(OutboundLink)`
   width: fit-content;
   ${LINKEDIN_DIMENSIONS}
   margin-top: ${spacing(2)};
-  content: '';
-  display: block;
-  background-color: white;
-  transition: background-color 1s linear;
-  mask: url(${linkedIn_image});
-  &::after {
-    ${animatedGradient}
-    content: '';
-    ${LINKEDIN_DIMENSIONS}
-    display: block;
-    opacity: 0;
-    transition: opacity 0.5s linear;
-  }
-  &:hover,
-  &:focus {
-    background-color: transparent;
-    &::after {
-      opacity: 1;
-    }
-  }
+  ${logoGradient(linkedIn_image, LINKEDIN_DIMENSIONS)}
 `;
 
 const ReadMore = styled(SmallText)`
   margin-left: ${spacing(1)};
+  text-decoration: underline;
 `;
 
 const UnderConstructionContainer = styled.div`
@@ -106,7 +89,8 @@ const panelContent: React.ReactElement[] = [
     <OutboundLink
       href='https://github.com/jmacd229/jesse-website'
       target='_blank'
-      rel='noreferrer'>
+      rel='noreferrer'
+    >
       the public GitHub repo
     </OutboundLink>
     &nbsp;for this site.
@@ -120,7 +104,8 @@ const panelContent: React.ReactElement[] = [
     href='https://www.linkedin.com/in/jesse-macdougall-6709b7114'
     aria-label="Navigate to Jesse MacDougall's LinkedIn profile"
     target='_blank'
-    rel='noreferrer'></LinkedIn>,
+    rel='noreferrer'
+  ></LinkedIn>,
 ];
 
 const UnderConstruction = (): ReactElement => {
@@ -151,18 +136,21 @@ const UnderConstruction = (): ReactElement => {
           expanded={expanded}
           onChange={(_, isExpanded) => setExpanded(isExpanded)}
           elevation={0}
-          TransitionProps={{ timeout: 2000 }}>
+          TransitionProps={{ timeout: 2000 }}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls='underConstruction-content'
-            id='underConstruction-header'>
+            id='underConstruction-header'
+          >
             <ReadMore noMargin>Read More</ReadMore>
           </AccordionSummary>
           <AccordionDetailsWithGradient>
             <FadeIn
               isVisible={expanded}
               forwards={{ initialDelay: 750, delay: 100 }}
-              reverse={{ delay: 150 }}>
+              reverse={{ delay: 150 }}
+            >
               {panelContent}
             </FadeIn>
           </AccordionDetailsWithGradient>
