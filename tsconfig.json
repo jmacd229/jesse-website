@@ -6,6 +6,7 @@
     "resolveJsonModule": true,
     "baseUrl": "./src",
     "paths": {
+      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
       "@misc/*": ["components/misc/*"],
       "@shared/*": ["components/shared/*"],
       "*": ["types/*", "*"]

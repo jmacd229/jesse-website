@@ -1,10 +1,10 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import packageJson from '../../../package.json';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 import { SmallText } from 'styles/typography';
 import color from 'styles/color';
 import { ButtonTheme } from '@shared/Button';

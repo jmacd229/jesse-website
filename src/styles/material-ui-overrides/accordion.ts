@@ -1,46 +1,52 @@
-import { ComponentsOverrides } from '@material-ui/core/styles/overrides';
+import { Components } from '@mui/material/styles';
 import color from 'styles/color';
 import spacing from 'styles/spacing';
 
 export default {
   MuiAccordion: {
-    root: {
-      color: color.white,
-      backgroundColor: 'transparent',
-      '&.Mui-expanded': {
-        margin: 0,
+    styleOverrides: {
+      root: {
+        color: color.white,
+        backgroundColor: 'transparent',
+        '&.Mui-expanded': {
+          margin: 0,
+        },
       },
     },
   },
   MuiAccordionSummary: {
-    root: {
-      color: color.blue,
-      textDecoration: 'underline',
-      minHeight: 'unset',
-      width: 'fit-content',
-      padding: 0,
-      'text-decoration': 'none',
-      '&.Mui-expanded': {
+    styleOverrides: {
+      root: {
+        color: color.blue,
+        textDecoration: 'underline',
         minHeight: 'unset',
+        width: 'fit-content',
+        padding: 0,
+        'text-decoration': 'none',
+        '&.Mui-expanded': {
+          minHeight: 'unset',
+        },
       },
-    },
-    content: {
-      margin: 0,
-      '&.Mui-expanded': {
+      content: {
         margin: 0,
+        '&.Mui-expanded': {
+          margin: 0,
+        },
       },
-    },
-    expandIcon: {
-      padding: `0 ${spacing(1)}`,
-      color: color.blue,
+      expandIcon: {
+        padding: `0 ${spacing(1)}`,
+        color: color.blue,
+      },
     },
   },
   MuiAccordionDetails: {
-    root: {
-      flexDirection: 'column',
-      backgroundColor: color.darkGrey,
-      position: 'relative',
-      marginTop: spacing(1),
+    styleOverrides: {
+      root: {
+        flexDirection: 'column',
+        backgroundColor: color.darkGrey,
+        position: 'relative',
+        marginTop: spacing(1),
+      },
     },
   },
-} as ComponentsOverrides;
+} as Components;

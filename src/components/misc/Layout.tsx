@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import BackgroundImage from '@misc/BackgroundImage';
 import Footer from '@misc/Footer';
 import Header from '@misc/Header/Header';
-import { ThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@mui/material';
 import GlobalStyle from 'styles/GlobalStyle';
 import materialUIThemeOverride from 'styles/material-ui-overrides/themeOverride';
 import spacing from 'styles/spacing';

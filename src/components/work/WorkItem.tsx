@@ -2,12 +2,8 @@ import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
 
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { spacing, color } from 'styles';
 import { Heading } from 'styles/typography';
 import { Tool } from 'components/work/tools/ToolItem';
