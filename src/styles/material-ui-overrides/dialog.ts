@@ -1,4 +1,4 @@
-import { Overrides } from '@material-ui/core/styles/overrides';
+import { ComponentsOverrides } from '@material-ui/core/styles/overrides';
 
 export default {
   MuiDialogActions: {
@@ -6,4 +6,4 @@ export default {
       justifyContent: 'center',
     },
   },
-} as Overrides;
+} as ComponentsOverrides;

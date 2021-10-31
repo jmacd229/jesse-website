@@ -1,4 +1,4 @@
-import { Overrides } from '@material-ui/core/styles/overrides';
+import { ComponentsOverrides } from '@material-ui/core/styles/overrides';
 import color from 'styles/color';
 import spacing from 'styles/spacing';
 
@@ -7,7 +7,7 @@ export default {
     root: {
       color: color.white,
       backgroundColor: 'transparent',
-      '&$expanded': {
+      '&.Mui-expanded': {
         margin: 0,
       },
     },
@@ -16,17 +16,17 @@ export default {
     root: {
       color: color.blue,
       textDecoration: 'underline',
-      minHeight: null,
+      minHeight: 'unset',
       width: 'fit-content',
       padding: 0,
       'text-decoration': 'none',
-      '&$expanded': {
-        minHeight: null,
+      '&.Mui-expanded': {
+        minHeight: 'unset',
       },
     },
     content: {
       margin: 0,
-      '&$expanded': {
+      '&.Mui-expanded': {
         margin: 0,
       },
     },
@@ -43,4 +43,4 @@ export default {
       marginTop: spacing(1),
     },
   },
-} as Overrides;
+} as ComponentsOverrides;
