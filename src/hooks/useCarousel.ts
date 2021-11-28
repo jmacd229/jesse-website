@@ -1,0 +1,1 @@
+// Each carousel will take its turn rotating to the next item, unless if the carousel is currently being hovered or focus on

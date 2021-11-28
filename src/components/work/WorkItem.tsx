@@ -24,13 +24,14 @@ const WorkItemContainer = styled.div`
   display: flex;
   width: 100%;
   padding: ${spacing(3)};
-  overflow: hidden;
 `;
 
 const WorkItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100% - ${ICON_SIZE});
+  // Must be manually calculated due to the way the accordion calculates width
+  // spacing(8) is used to account for the spacing(3) on the WorkItemContainer padding, with an additional margin of spacing(2)
+  width: calc(100% - calc(${ICON_SIZE} + ${spacing(8)}));
   padding-left: ${spacing(3)};
 `;
 
