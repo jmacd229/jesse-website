@@ -1,5 +1,5 @@
 import spacing from './spacing';
-import color from './color';
+import Color from './color';
 import media from './media';
 
-export { spacing, color, media };
+export { spacing, Color as color, media };

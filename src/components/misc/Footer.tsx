@@ -6,7 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import { SmallText } from 'styles/typography';
-import color from 'styles/color';
+import Color from 'styles/color';
 import { ButtonTheme } from '@shared/Button';
 import Button from '@shared/Button';
 
@@ -16,7 +16,7 @@ const StyledFooter = styled.footer`
   align-items: center;
   position: relative;
   z-index: 1;
-  background-color: ${color.grey};
+  background-color: ${Color.GREY};
 `;
 
 const PrivacyPolicyHeader = styled(SmallText).attrs({

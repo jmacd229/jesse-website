@@ -1,4 +1,6 @@
 import React, { ReactElement, useState, useRef, useEffect } from 'react';
+import ArrowLeft from '@mui/icons-material/ArrowLeft';
+import ArrowRight from '@mui/icons-material/ArrowRight';
 import { uniqueId } from 'lodash';
 import styled from 'styled-components';
 import { useTransition, animated } from 'react-spring';
@@ -8,7 +10,8 @@ import ToolItem, {
   Tool,
   TOOL_ITEM_PADDING,
 } from 'components/work/tools/ToolItem';
-import { spacing } from 'styles';
+import ToolDescriptionPanel from './ToolDescriptionPanel';
+import { color, spacing } from 'styles';
 import { toPx } from 'utilities/parsing';
 import Button from '@shared/Button';
 
@@ -21,14 +24,36 @@ const ToolsContainer = styled(animated.div)`
   display: flex;
   position: relative;
   width: 100%;
-  padding: ${spacing(2)} 0;
+  padding: ${spacing(1)} 0;
   overflow: hidden;
   min-height: calc(${TOOL_ITEM_SIZE.expanded} + calc(${TOOL_ITEM_PADDING} * 2));
+  &:before {
+    pointer-events: none;
+    z-index: 1;
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(
+      90deg,
+      ${color.GREY},
+      transparent 10%,
+      transparent 90%,
+      ${color.GREY}
+    );
+  }
 `;
 
 const CarouselControl = styled(Button)`
   background-color: transparent;
+  padding: 0;
+  margin: 0 ${spacing(1)};
+  display: flex;
+  border-radius: 50%;
   border: none;
+  font-size: ${spacing(5)};
 `;
 
 export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
@@ -61,7 +86,7 @@ export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
     }
     setOpenTool(index - distanceToMiddle);
   };
-  const closeItem = () => setOpenTool(null);
+
   const containerRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -74,7 +99,7 @@ export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
       );
     };
 
-    //DEBOUNCE THIS
+    // TODO: DEBOUNCE THIS
     window.addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
@@ -93,30 +118,54 @@ export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
     from: { opacity: 0, transform: `translateY(1rem)` },
     enter: { opacity: 1, transform: `translateY(0rem)` },
     leave: { opacity: 0, transform: `translateY(1rem)` },
-    delay: 1000,
+    trail: 100,
   });
 
+  const handleArrowClick = (direction: 'left' | 'right'): void => {
+    if (openTool) {
+      openItem(direction === 'left' ? openTool - 1 : openTool + 1);
+    } else {
+      openItem(Math.floor(numItemsOnScreen / 2));
+    }
+  };
+
   return (
-    <ControlsContainer>
-      <CarouselControl>Left</CarouselControl>
-      <ToolsContainer
-        role='list'
-        onKeyDown={onCarouselKeyPress}
-        ref={containerRef}>
-        {transitions((styles, tool, _, i) => (
-          <ToolItem
-            style={styles}
-            key={uniqueId(tool.id)}
-            tool={tool}
-            focusable={Math.floor(numItemsOnScreen / 2) === i}
-            open={openTool === i}
-            onFocus={() => openItem(i)}
-            onBlur={closeItem}
+    <>
+      <ControlsContainer>
+        <CarouselControl>
+          <ArrowLeft
+            fontSize='inherit'
+            onClick={() => handleArrowClick('left')}
           />
-        ))}
-      </ToolsContainer>
-      <CarouselControl onClick={() => toolsList.pop()}>Right</CarouselControl>
-    </ControlsContainer>
+        </CarouselControl>
+        <ToolsContainer
+          role='list'
+          onKeyDown={onCarouselKeyPress}
+          ref={containerRef}
+        >
+          {transitions((styles, tool, _, i) => (
+            <ToolItem
+              animation={styles}
+              key={uniqueId(tool.id)}
+              tool={tool}
+              focusable={Math.floor(numItemsOnScreen / 2) === i}
+              open={openTool === i}
+              onFocus={() => openItem(i)}
+            />
+          ))}
+        </ToolsContainer>
+        <CarouselControl>
+          <ArrowRight
+            fontSize='inherit'
+            onClick={() => handleArrowClick('right')}
+          />
+        </CarouselControl>
+      </ControlsContainer>
+      <ToolDescriptionPanel
+        tool={toolsList[openTool]}
+        isOpen={openTool !== null}
+      />
+    </>
   );
 };
 

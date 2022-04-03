@@ -2,7 +2,7 @@ import BaseButton, { BaseButtonProps } from '@shared/Button/BaseButton';
 import ButtonTheme from './buttonThemes.enum';
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import color from 'styles/color';
+import Color from 'styles/color';
 import link from 'styles/link';
 
 const LinkButton = styled(BaseButton)`
@@ -11,11 +11,11 @@ const LinkButton = styled(BaseButton)`
 `;
 
 const PrimaryButton = styled(BaseButton)`
-  border: 1px solid ${color.blue};
-  background-color: ${color.darkestGrey};
+  border: 1px solid ${Color.BLUE};
+  background-color: ${Color.DARKEST_GREY};
   transition: background-color 100ms ease-in-out;
   &:hover {
-    background-color: ${color.darkBlue};
+    background-color: ${Color.DARKEST_BLUE};
   }
 `;
 

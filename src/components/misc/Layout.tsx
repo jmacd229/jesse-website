@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material';
 import GlobalStyle from 'styles/GlobalStyle';
 import materialUIThemeOverride from 'styles/material-ui-overrides/themeOverride';
 import spacing from 'styles/spacing';
-import color from 'styles/color';
+import Color from 'styles/color';
 
 interface LayoutProps extends DOMAttributes<Element> {
   image?: ReactElement;
@@ -26,7 +26,7 @@ const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   position: relative;
-  background-color: ${color.grey};
+  background-color: ${Color.GREY};
   overflow-x: hidden;
   overflow-y: auto;
 `;

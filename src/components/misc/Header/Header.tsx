@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react';
 import { Paper } from '@mui/material';
 import styled from 'styled-components';
-import { Page } from 'enums/pages.enum';
-import { animatedGradient } from 'styles/animations/gradient';
+import { Page } from 'model/enums/pages.enum';
 import spacing from 'styles/spacing';
 import HeaderLink from '@misc/Header/HeaderLink';
+import createLineGradient from 'styles/lineGradient';
+import { Position } from 'model/enums/position.enum';
 
 const HeaderContainer = styled(Paper)`
   display: flex;
@@ -15,17 +16,7 @@ const HeaderContainer = styled(Paper)`
   padding: 0 ${spacing(4)};
   z-index: 1;
   flex-shrink: 0;
-  &:after {
-    ${animatedGradient}
-    content: '';
-    height: 3px;
-    opacity: 0.4;
-    width: 50%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    border-top-left-radius: 100%;
-  }
+  ${createLineGradient(Position.BELOW)}
 `;
 
 const BackToHomeLink = styled(HeaderLink)`

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import color from 'styles/color';
+import Color from 'styles/color';
 import spacing from 'styles/spacing';
 import focus from './focus';
 import link from './link';
@@ -18,8 +18,8 @@ export default createGlobalStyle`
   body {
     margin:0;
     font-size: ${spacing(2)};
-    background-color: ${color.grey};
-    color: ${color.white};
+    background-color: ${Color.GREY};
+    color: ${Color.WHITE};
   }
 
   *:focus {

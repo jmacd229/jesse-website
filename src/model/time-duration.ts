@@ -1,4 +1,4 @@
-import { TimeUnit } from 'enums/time-unit';
+import { TimeUnit } from 'model/enums/time-unit';
 
 export class TimeDuration {
   private duration: number;

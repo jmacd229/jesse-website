@@ -6,10 +6,10 @@ import SEO from '@misc/SEO';
 import WorkExperience from 'components/work/WorkExperience';
 import { Title } from 'styles/typography';
 import { PROFESSIONAL_WORK_ITEMS } from 'components/work/work_items';
-import { media } from 'styles';
+import { media, spacing } from 'styles';
 
 const WorkTitle = styled(Title)`
-  text-align: right;
+  margin-bottom: ${spacing(10)};
 `;
 
 const WorkExperienceContainer = styled.div`

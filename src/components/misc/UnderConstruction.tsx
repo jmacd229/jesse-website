@@ -6,15 +6,16 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import animation from '../../animations/under-construction.json';
 import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import spacing from 'styles/spacing';
 import linkedIn_image from 'assets/linkedin.svg';
-import { animatedGradient } from 'styles/animations/gradient';
 import { SmallText } from 'styles/typography';
 import { FadeIn } from '@shared/fade-in/fade-in';
 import media from 'styles/media';
 import logoGradient from 'styles/logoGradient';
+import createLineGradient from 'styles/lineGradient';
+import { Position } from 'model/enums/position.enum';
+import animation from '../../animations/under-construction.json';
 
 const LINKEDIN_DIMENSIONS = css`
   width: ${spacing(19)};
@@ -61,15 +62,7 @@ const AccordionContainer = styled.div`
 `;
 
 const AccordionDetailsWithGradient = styled(AccordionDetails)`
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    ${animatedGradient}
-    width: 100%;
-    height: 2px;
-  }
+  ${createLineGradient(Position.ABOVE)}
 `;
 
 const panelContent: React.ReactElement[] = [

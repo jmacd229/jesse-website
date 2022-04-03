@@ -21,6 +21,10 @@ const Tools: { [tool: string]: Tool } = {
     id: 'angular',
     name: 'Angular',
     src: angular,
+    description: [
+      '2+ years building various applications with Angular 6 through 9',
+      'Experience with ngx-translate, ngx-bootstrap, jasmine unit testing and more.',
+    ],
   },
   Java: {
     id: 'java',
@@ -56,6 +60,9 @@ const Tools: { [tool: string]: Tool } = {
     id: 'c',
     name: 'C',
     src: c,
+    description: [
+      '2+ years debugging, updating, and maintaining legacy batch programs',
+    ],
   },
   Sass: {
     id: 'sass',

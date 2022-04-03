@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { animatedGradient } from 'styles/animations/gradient';
+import { createAnimatedGradient } from 'styles/animations/gradient';
 
 export default (image, dimensions) => css`
   content: '';
@@ -8,7 +8,7 @@ export default (image, dimensions) => css`
   transition: background-color 1s linear;
   mask: url(${image});
   &::after {
-    ${animatedGradient}
+    ${createAnimatedGradient()}
     content: '';
     ${dimensions}
     display: block;

@@ -1,15 +1,15 @@
-enum color {
-	grey = '#1f1f1f',
-    darkGrey = '#1b1b1b',
-	darkestGrey = '#111111',
-    white = '#ffffff',
-    lightBlue = '#47fdff',
-    blue= '#00bcbd',
-    darkBlue= '#005e5e',
-    darkestBlue= '#005e5e',
-    lightPurple= '#d97aff',
-    purple= '#b500ff',
-    darkPurple= '#3c2445',
+enum Color {
+  GREY = '#1f1f1f',
+  DARK_GREY = '#1b1b1b',
+  DARKEST_GREY = '#111111',
+  WHITE = '#ffffff',
+  LIGHT_BLUE = '#47fdff',
+  BLUE = '#00bcbd',
+  DARK_BLUE = '#009697',
+  DARKEST_BLUE = '#005e5e',
+  LIGHT_PURPLE = '#d97aff',
+  PURPLE = '#b500ff',
+  DARK_PURPLE = '#3c2445',
 }
 
-export default color;
+export default Color;

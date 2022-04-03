@@ -1,20 +1,32 @@
-import { css, keyframes } from 'styled-components';
-import color from 'styles/color';
+import { Direction } from 'model/enums/direction.enum';
+import { css, keyframes, SimpleInterpolation } from 'styled-components';
+import Color from 'styles/color';
 
-const gradient = keyframes`
+const getGradientKeyframes = (direction: Direction) => {
+  const axis = direction === Direction.HORIZONTAL ? 'x' : 'y';
+  return keyframes`
     from {
-        background-position-x: 0%;
+        background-position-${axis}: 0%;
     }
     50% {
-        background-position-x: 100%;
+        background-position-${axis}: 100%;
     }
     to {
-        background-position-x: 0%;
+        background-position-${axis}: 0%;
     }
 `;
+};
 
-export const animatedGradient = css`
-    background: linear-gradient(90deg, ${color.purple} 0%, ${color.blue} 33%, ${color.purple} 66%, ${color.blue} 100%);
-    background-size: 400%;
-    animation: ${gradient} 10s ease infinite;
+export const createAnimatedGradient = (
+  direction: Direction = Direction.HORIZONTAL
+): SimpleInterpolation => css`
+  background-image: linear-gradient(
+    ${direction === Direction.HORIZONTAL ? 90 : 0}deg,
+    ${Color.PURPLE} 0%,
+    ${Color.BLUE} 33%,
+    ${Color.PURPLE} 66%,
+    ${Color.BLUE} 100%
+  );
+  background-size: 400% 400%;
+  animation: ${getGradientKeyframes(direction)} 10s ease infinite;
 `;

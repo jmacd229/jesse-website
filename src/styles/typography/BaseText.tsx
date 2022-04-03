@@ -1,4 +1,4 @@
-import React, { DOMAttributes, ReactElement } from 'react';
+import React, { HTMLAttributes, ReactElement } from 'react';
 import styled from 'styled-components';
 
 const StyledText = styled.div`
@@ -6,7 +6,7 @@ const StyledText = styled.div`
     props.center ? 'center' : 'left'};
 `;
 
-export interface BaseTextProps extends DOMAttributes<Element> {
+export interface BaseTextProps extends HTMLAttributes<ReactElement> {
   tag?: React.ElementType;
   center?: boolean;
 }

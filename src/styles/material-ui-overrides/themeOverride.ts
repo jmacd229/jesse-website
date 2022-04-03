@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import color from 'styles/color';
+import Color from 'styles/color';
 import dialog from 'styles/material-ui-overrides/dialog';
 import accordion from './accordion';
 import button from './button';
@@ -8,13 +8,13 @@ export default createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: color.purple,
+      main: Color.PURPLE,
     },
     secondary: {
-      main: color.blue,
+      main: Color.BLUE,
     },
     background: {
-      paper: color.grey,
+      paper: Color.GREY,
     },
   },
 

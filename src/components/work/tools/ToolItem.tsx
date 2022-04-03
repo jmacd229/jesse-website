@@ -1,5 +1,5 @@
 import React, { DOMAttributes, ReactElement, useState } from 'react';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, SpringValue } from 'react-spring';
 import styled from 'styled-components';
 
 import { spacing } from 'styles';
@@ -15,8 +15,7 @@ export interface ToolItemProps extends DOMAttributes<Element> {
   tool: Tool;
   open?: boolean;
   focusable?: boolean;
-  // src: string;
-  // description?: string[];
+  animation: { [key: string]: SpringValue<number> | SpringValue<string> };
 }
 
 export interface Tool {
@@ -43,13 +42,14 @@ export const ToolItem = ({
   tool,
   open = false,
   focusable = false,
+  animation,
   ...rest
 }: ToolItemProps): ReactElement => {
   const [isHovered, setHover] = useState(false);
 
   const shouldExpand = isHovered || open;
 
-  const animation = useSpring({
+  const expandAnimation = useSpring({
     height: shouldExpand ? TOOL_ITEM_SIZE.expanded : TOOL_ITEM_SIZE.collapsed,
     width: shouldExpand ? TOOL_ITEM_SIZE.expanded : TOOL_ITEM_SIZE.collapsed,
     filter: shouldExpand ? 'grayscale(0)' : 'grayscale(0.8)',
@@ -60,10 +60,11 @@ export const ToolItem = ({
       {...rest}
       role='listitem'
       id={tool.id}
-      style={{ ...animation, ...rest.style }}
+      style={{ ...expandAnimation, ...animation }}
       tabIndex={focusable ? 0 : -1}
       onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}>
+      onMouseLeave={() => setHover(false)}
+    >
       <img src={tool.src} alt={tool.name} />
     </ImageContainer>
   );

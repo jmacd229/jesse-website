@@ -1,12 +1,12 @@
 import { Components } from '@mui/material/styles';
-import color from 'styles/color';
+import Color from 'styles/color';
 import spacing from 'styles/spacing';
 
 export default {
   MuiAccordion: {
     styleOverrides: {
       root: {
-        color: color.white,
+        color: Color.WHITE,
         backgroundColor: 'transparent',
         '&.Mui-expanded': {
           margin: 0,
@@ -17,7 +17,7 @@ export default {
   MuiAccordionSummary: {
     styleOverrides: {
       root: {
-        color: color.blue,
+        color: Color.BLUE,
         textDecoration: 'underline',
         minHeight: 'unset',
         width: 'fit-content',
@@ -35,7 +35,7 @@ export default {
       },
       expandIcon: {
         padding: `0 ${spacing(1)}`,
-        color: color.blue,
+        color: Color.BLUE,
       },
     },
   },
@@ -43,7 +43,7 @@ export default {
     styleOverrides: {
       root: {
         flexDirection: 'column',
-        backgroundColor: color.darkGrey,
+        backgroundColor: Color.DARK_GREY,
         position: 'relative',
         marginTop: spacing(1),
       },

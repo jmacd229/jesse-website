@@ -42,7 +42,7 @@ const Icon = styled.img`
 `;
 
 const WorkDate = styled.div`
-  color: ${color.white};
+  color: ${color.WHITE};
   font-weight: 700;
 `;
 

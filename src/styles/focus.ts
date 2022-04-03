@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
-import color from 'styles/color';
+import Color from 'styles/color';
 
 export default css`
-    box-shadow: none !important;
-	outline: 3px solid ${color.darkBlue};
+  box-shadow: none !important;
+  outline: 3px solid ${Color.DARK_BLUE};
 `;
