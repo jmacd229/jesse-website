@@ -1,4 +1,5 @@
 import React, { ReactElement, useState, useRef, useEffect } from 'react';
+import { debounce } from 'lodash';
 import ArrowLeft from '@mui/icons-material/ArrowLeft';
 import ArrowRight from '@mui/icons-material/ArrowRight';
 import { uniqueId } from 'lodash';
@@ -18,6 +19,7 @@ import Button from '@shared/Button';
 const ControlsContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-top: ${spacing(1)};
 `;
 
 const ToolsContainer = styled(animated.div)`
@@ -60,7 +62,7 @@ export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
   if (!tools?.length) {
     return null;
   }
-  const [openTool, setOpenTool] = useState(null);
+  const [openTool, setOpenTool] = useState(-1);
   // Used to calculate if all of the tools can fit within their container without buttons
   const [numItemsOnScreen, setNumItemsOnScreen] = useState(0);
   const [toolsList, setToolsList] = useState(tools);
@@ -90,20 +92,25 @@ export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
   const containerRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = debounce(() => {
       setNumItemsOnScreen(
         Math.floor(
           containerRef?.current?.getBoundingClientRect().width /
             (toPx(TOOL_ITEM_SIZE.collapsed) + toPx(TOOL_ITEM_PADDING) * 2)
         )
       );
-    };
+    }, 300);
 
-    // TODO: DEBOUNCE THIS
     window.addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (openTool > -1) {
+      openItem(openTool);
+    }
+  }, [numItemsOnScreen]);
 
   const onCarouselKeyPress = event => {
     if (event.key === 'ArrowLeft') {
@@ -122,7 +129,7 @@ export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
   });
 
   const handleArrowClick = (direction: 'left' | 'right'): void => {
-    if (openTool) {
+    if (openTool > -1) {
       openItem(direction === 'left' ? openTool - 1 : openTool + 1);
     } else {
       openItem(Math.floor(numItemsOnScreen / 2));
@@ -132,11 +139,8 @@ export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
   return (
     <>
       <ControlsContainer>
-        <CarouselControl>
-          <ArrowLeft
-            fontSize='inherit'
-            onClick={() => handleArrowClick('left')}
-          />
+        <CarouselControl onClick={() => handleArrowClick('left')}>
+          <ArrowLeft fontSize='inherit' />
         </CarouselControl>
         <ToolsContainer
           role='list'
@@ -154,11 +158,8 @@ export const ToolsList = ({ tools }: { tools: Tool[] }): ReactElement => {
             />
           ))}
         </ToolsContainer>
-        <CarouselControl>
-          <ArrowRight
-            fontSize='inherit'
-            onClick={() => handleArrowClick('right')}
-          />
+        <CarouselControl onClick={() => handleArrowClick('right')}>
+          <ArrowRight fontSize='inherit' />
         </CarouselControl>
       </ControlsContainer>
       <ToolDescriptionPanel

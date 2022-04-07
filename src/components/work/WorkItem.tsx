@@ -4,7 +4,7 @@ import { format, isToday } from 'date-fns';
 
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { spacing, color } from 'styles';
+import { spacing, color, media } from 'styles';
 import { Heading } from 'styles/typography';
 import { Tool } from 'components/work/tools/ToolItem';
 import ToolsList from 'components/work/tools/ToolsList';
@@ -22,17 +22,28 @@ export interface WorkItemProps {
 
 const WorkItemContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${spacing(4)};
   width: 100%;
   padding: ${spacing(3)};
+  ${media.medium} {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
 `;
 
 const WorkItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  // Must be manually calculated due to the way the accordion calculates width
-  // spacing(8) is used to account for the spacing(3) on the WorkItemContainer padding, with an additional margin of spacing(2)
-  width: calc(100% - calc(${ICON_SIZE} + ${spacing(8)}));
-  padding-left: ${spacing(3)};
+  width: 100%;
+  ${media.medium} {
+    padding-left: ${spacing(3)};
+    // Must be manually calculated due to the way the accordion calculates width
+    // spacing(8) is used to account for the spacing(3) on the WorkItemContainer padding, with an additional margin of spacing(2)
+    width: calc(100% - calc(${ICON_SIZE} + ${spacing(8)}));
+  }
 `;
 
 const Icon = styled.img`

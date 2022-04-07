@@ -12,10 +12,11 @@ export interface ToolDescriptionPanelProps extends PanelProps {
 
 const PanelList = styled.ul`
   display: flex;
+  flex-direction: column;
   list-style-type: none;
   margin: ${spacing(0.5)} 0;
   padding-left: ${spacing(1)};
-  gap: ${spacing(3)};
+  gap: ${spacing(2)};
 `;
 
 const PanelListItem = styled.li`

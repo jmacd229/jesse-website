@@ -38,7 +38,6 @@ export const PROFESSIONAL_WORK_ITEMS: WorkItemProps[] = [
       Tools.Java,
       Tools.TypeScript,
       Tools.Sass,
-      Tools.Spring,
       Tools.Mongo,
       Tools.Docker,
       Tools.CSharp,
