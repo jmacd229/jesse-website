@@ -6,8 +6,9 @@ import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { spacing, color, media } from 'styles';
 import { Heading } from 'styles/typography';
-import { Tool } from 'components/work/tools/ToolItem';
-import ToolsList from 'components/work/tools/ToolsList';
+import { Tool } from 'components/work/tools/tool_items';
+import Carousel from '@shared/Carousel';
+import ToolDescriptionPanel from 'components/work/tools/ToolDescriptionPanel';
 
 const ICON_SIZE = '10rem';
 
@@ -83,6 +84,7 @@ export const WorkItem = ({
   tools,
 }: WorkItemProps): ReactElement => {
   const [expanded, setExpanded] = useState(false);
+  const [openTool, setOpenTool] = useState(undefined);
   const id = title.replace(/\s+/g, '');
   return (
     <WorkItemContainer role='listitem'>
@@ -113,7 +115,16 @@ export const WorkItem = ({
             ))}
           </AccordionDetails>
         </Accordion>
-        <ToolsList tools={tools} />
+        <Carousel
+          onItemOpen={id => setOpenTool(tools.find(tool => tool.id === id))}
+        >
+          {tools?.map(tool => (
+            <Carousel.Item key={tool.id} id={tool.id}>
+              <img src={tool.src} alt={tool.name} />
+            </Carousel.Item>
+          ))}
+        </Carousel>
+        <ToolDescriptionPanel tool={openTool} isOpen={Boolean(openTool)} />
       </WorkItemInfo>
     </WorkItemContainer>
   );

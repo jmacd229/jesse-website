@@ -1,5 +1,3 @@
-import { Tool } from './ToolItem';
-
 import angular from 'assets/logos/angular.svg';
 import java from 'assets/logos/java.png';
 import python from 'assets/logos/python.png';
@@ -14,6 +12,13 @@ import mongo from 'assets/logos/mongo.png';
 import csharp from 'assets/logos/csharp.png';
 import asp from 'assets/logos/asp.png';
 import unix from 'assets/logos/unix.png';
+
+export interface Tool {
+  id: string;
+  name: string;
+  src: string;
+  description?: string[];
+}
 
 const Tools: { [tool: string]: Tool } = {
   Angular: {

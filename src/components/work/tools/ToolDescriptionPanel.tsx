@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import Panel, { PanelProps } from '@shared/Panel';
 import styled from 'styled-components';
 import spacing from 'styles/spacing';
-import { Tool } from 'components/work/tools/ToolItem';
+import { Tool } from 'components/work/tools/tool_items';
 import { Heading } from 'styles/typography';
 import { color } from 'styles';
 

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNodeArray } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
 import WorkItem, { WorkItemProps } from 'components/work/WorkItem';
@@ -19,6 +19,12 @@ const WorkExperienceTitle = styled(Subtitle)`
   grid-area: title;
 `;
 
+const WorkList = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const WorkExperience = ({
   title,
   work,
@@ -27,11 +33,11 @@ export const WorkExperience = ({
   return (
     <WorkExperienceContainer>
       <WorkExperienceTitle id={id}>{title}</WorkExperienceTitle>
-      <div role='list' aria-labelledby={id}>
+      <WorkList role='list' aria-labelledby={id}>
         {work?.map((workItem, index) => (
           <WorkItem key={index} {...workItem} />
         ))}
-      </div>
+      </WorkList>
     </WorkExperienceContainer>
   );
 };
