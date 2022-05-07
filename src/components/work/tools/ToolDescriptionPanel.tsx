@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { useMemo, ReactElement } from 'react';
 import Panel, { PanelProps } from '@shared/Panel';
 import styled from 'styled-components';
 import spacing from 'styles/spacing';
@@ -7,6 +7,7 @@ import { Heading } from 'styles/typography';
 import { color } from 'styles';
 
 export interface ToolDescriptionPanelProps extends PanelProps {
+  id: string;
   tool?: Tool;
 }
 
@@ -39,21 +40,30 @@ const ToolTitle = styled(Heading).attrs({ level: 4 })`
 `;
 
 const ToolDescriptionPanel = ({
+  id,
   tool,
   isOpen,
-}: ToolDescriptionPanelProps): ReactElement => (
-  <Panel isOpen={isOpen}>
-    {isOpen && tool && (
-      <>
-        <ToolTitle>{tool.name}</ToolTitle>
-        <PanelList>
-          {tool.description?.map((item, i) => (
-            <PanelListItem key={i}>{item}</PanelListItem>
-          ))}
-        </PanelList>
-      </>
-    )}
-  </Panel>
-);
+}: ToolDescriptionPanelProps): ReactElement => {
+  const panelContent = useMemo(
+    () =>
+      isOpen &&
+      tool && (
+        <>
+          <ToolTitle>{tool.name}</ToolTitle>
+          <PanelList id={id}>
+            {tool.description?.map((item, i) => (
+              <PanelListItem key={i}>{item}</PanelListItem>
+            ))}
+          </PanelList>
+        </>
+      ),
+    [isOpen, tool]
+  );
+  return (
+    <Panel isOpen={isOpen} aria-live='polite'>
+      {panelContent}
+    </Panel>
+  );
+};
 
 export default ToolDescriptionPanel;

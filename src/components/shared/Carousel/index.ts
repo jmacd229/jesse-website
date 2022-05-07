@@ -9,4 +9,6 @@ interface CarouselComposition extends FC<CarouselProps> {
 const Carousel = CarouselContainer as CarouselComposition;
 Carousel.Item = CarouselItem;
 
+export { CarouselItemDimensions } from './CarouselItem';
+
 export default Carousel;

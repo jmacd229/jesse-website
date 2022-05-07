@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
 
@@ -7,10 +7,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { spacing, color, media } from 'styles';
 import { Heading } from 'styles/typography';
 import { Tool } from 'components/work/tools/tool_items';
-import Carousel from '@shared/Carousel';
+import Carousel, { CarouselItemDimensions } from '@shared/Carousel';
 import ToolDescriptionPanel from 'components/work/tools/ToolDescriptionPanel';
 
 const ICON_SIZE = '10rem';
+const TOOL_ICON_DIMENSIONS: CarouselItemDimensions = {
+  expanded: spacing(6),
+  collapsed: spacing(3),
+  padding: spacing(1),
+};
 
 export interface WorkItemProps {
   title: string;
@@ -35,7 +40,7 @@ const WorkItemContainer = styled.div`
   }
 `;
 
-const WorkItemInfo = styled.div`
+const WorkItemInfo = styled.div<{ $toolsLength: number }>`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -43,7 +48,17 @@ const WorkItemInfo = styled.div`
     padding-left: ${spacing(3)};
     // Must be manually calculated due to the way the accordion calculates width
     // spacing(8) is used to account for the spacing(3) on the WorkItemContainer padding, with an additional margin of spacing(2)
-    width: calc(100% - calc(${ICON_SIZE} + ${spacing(8)}));
+    max-width: calc(100% - calc(${ICON_SIZE} + ${spacing(8)}));
+    width: calc(
+      calc(
+          ${TOOL_ICON_DIMENSIONS.collapsed} *
+            ${({ $toolsLength }) => $toolsLength}
+        ) +
+        calc(
+          ${TOOL_ICON_DIMENSIONS.padding} *
+            ${({ $toolsLength }) => $toolsLength * 2}
+        ) + ${TOOL_ICON_DIMENSIONS.expanded}
+    );
   }
 `;
 
@@ -86,10 +101,11 @@ export const WorkItem = ({
   const [expanded, setExpanded] = useState(false);
   const [openTool, setOpenTool] = useState(undefined);
   const id = title.replace(/\s+/g, '');
+
   return (
     <WorkItemContainer role='listitem'>
       <Icon src={icon.src} round={icon.round} alt={icon.alt} />
-      <WorkItemInfo>
+      <WorkItemInfo $toolsLength={Number(tools?.length)}>
         <Accordion
           expanded={expanded}
           onChange={(_, isExpanded) => setExpanded(isExpanded)}
@@ -116,15 +132,25 @@ export const WorkItem = ({
           </AccordionDetails>
         </Accordion>
         <Carousel
+          title={title}
           onItemOpen={id => setOpenTool(tools.find(tool => tool.id === id))}
         >
           {tools?.map(tool => (
-            <Carousel.Item key={tool.id} id={tool.id}>
-              <img src={tool.src} alt={tool.name} />
+            <Carousel.Item
+              key={tool.id}
+              id={tool.id}
+              aria-label={tool.name}
+              aria-describedby={`${id}-panel`}
+            >
+              <img src={tool.src} aria-hidden />
             </Carousel.Item>
           ))}
         </Carousel>
-        <ToolDescriptionPanel tool={openTool} isOpen={Boolean(openTool)} />
+        <ToolDescriptionPanel
+          tool={openTool}
+          isOpen={Boolean(openTool)}
+          id={`${id}-panel`}
+        />
       </WorkItemInfo>
     </WorkItemContainer>
   );

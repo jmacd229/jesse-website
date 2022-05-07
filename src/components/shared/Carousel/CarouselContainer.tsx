@@ -3,40 +3,66 @@ import React, {
   useState,
   useRef,
   useEffect,
-  createContext,
+  useMemo,
   DOMAttributes,
 } from 'react';
-import { debounce, noop } from 'lodash';
-import ArrowLeft from '@mui/icons-material/ArrowLeft';
-import ArrowRight from '@mui/icons-material/ArrowRight';
-import { uniqueId } from 'lodash';
-import styled from 'styled-components';
+import { debounce, uniqueId } from 'lodash';
+import styled, { css } from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 
 import { color, spacing } from 'styles';
 import { toPx } from 'utilities/parsing';
-import Button from '@shared/Button';
 
-const DEFAULT_ITEM_DIMENSIONS: CarouselItemDimensions = {
-  expanded: spacing(6),
-  collapsed: spacing(3),
-  padding: spacing(1),
-};
+import {
+  CarouselItemDimensions,
+  DEFAULT_ITEM_DIMENSIONS,
+} from './CarouselItem';
+import { CarouselContext } from './Carousel.context';
+import { CarouselControl } from './CarouselControl';
 
 const ControlsContainer = styled.div`
   display: flex;
+  position: relative;
   align-items: center;
   margin-top: ${spacing(1)};
 `;
 
+const maxSizeGradient = css`
+  background-image: linear-gradient(
+    90deg,
+    ${color.GREY},
+    transparent 10%,
+    transparent 90%,
+    ${color.GREY}
+  );
+`;
+
+const withButtonsGradient = css`
+  background-image: linear-gradient(
+    90deg,
+    ${color.GREY} 10%,
+    transparent 25%,
+    transparent 75%,
+    ${color.GREY} 90%
+  );
+`;
+
 const ItemsContainer = styled(animated.div)<{
   $itemDimensions: CarouselItemDimensions;
+  $isMaxSize: boolean;
+  $isEven: boolean;
 }>`
   display: flex;
-  align-items: center;
-  position: relative;
   width: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   padding: ${spacing(1)} 0;
+  // If there is an even number of items in the carousel, this offsets by 1 so that the selected item always appears in the center
+  padding-right: ${({ $isEven, $itemDimensions, $isMaxSize }) =>
+    $isEven && !$isMaxSize
+      ? `calc(${$itemDimensions.collapsed} + calc(${$itemDimensions.padding} * 2))`
+      : 0};
   overflow: hidden;
   // Ensures the height of the box doesn't shrink when there are no selected items
   min-height: calc(
@@ -53,60 +79,36 @@ const ItemsContainer = styled(animated.div)<{
     position: absolute;
     left: 0;
     top: 0;
-    background-image: linear-gradient(
-      90deg,
-      ${color.GREY},
-      transparent 10%,
-      transparent 90%,
-      ${color.GREY}
-    );
+    ${({ $isMaxSize }) => ($isMaxSize ? maxSizeGradient : withButtonsGradient)};
   }
 `;
-
-const CarouselControl = styled(Button)`
-  background-color: transparent;
-  padding: 0;
-  margin: 0 ${spacing(1)};
-  display: flex;
-  border-radius: 50%;
-  border: none;
-  font-size: ${spacing(5)};
-`;
-
-export const CarouselContext = createContext({
-  carouselId: undefined,
-  openItem: -1,
-  triggerItemOpen: noop,
-  onItemOpen: noop,
-  itemDimensions: DEFAULT_ITEM_DIMENSIONS,
-});
-
-interface CarouselItemDimensions {
-  expanded: string;
-  collapsed: string;
-  padding: string;
-}
-
 export interface CarouselProps extends DOMAttributes<Element> {
+  title: string;
   itemDimensions?: CarouselItemDimensions;
   onItemOpen: (id: string) => void;
 }
 
 export default function CarouselContainer({
+  title,
   children,
   itemDimensions = DEFAULT_ITEM_DIMENSIONS,
   onItemOpen,
 }: CarouselProps): ReactElement {
   const [openItem, setOpenItem] = useState(-1);
-  // Used to calculate if all of the items can fit within their container without buttons
-  const [numItemsOnScreen, setNumItemsOnScreen] = useState(0);
   const [itemList, setItemList] = useState(React.Children.toArray(children));
+  const [isMaxSize, setMaxSize] = useState(false);
   // Used to generate a unique Id that identifies items within a specific carousel for focussing
   const carouselId = useRef(uniqueId('carousel')).current;
   const containerRef = useRef<HTMLDivElement>();
+  const allItemsLength = useMemo(
+    () =>
+      (toPx(itemDimensions.collapsed) + toPx(itemDimensions.padding) * 2) *
+      itemList.length,
+    [itemList, itemDimensions]
+  );
 
   const triggerItemOpen = (index: number) => {
-    const middleIndex = Math.floor(numItemsOnScreen / 2);
+    const middleIndex = Math.floor(itemList.length / 2);
     // The open item will always be the middle element, therefore this number won't change unless the number of visible elements changes
     setOpenItem(middleIndex);
     // Instead what changes is the array itself, which will place the selected item index at the middle of its elements
@@ -128,26 +130,24 @@ export default function CarouselContainer({
 
   useEffect(() => {
     // Lets us know how many items are currently visible minus the items hidden by overflow
-    const handleResize = debounce(() => {
-      setNumItemsOnScreen(
-        Math.floor(
-          containerRef?.current?.getBoundingClientRect().width /
-            (toPx(itemDimensions.collapsed) + toPx(itemDimensions.padding) * 2)
-        )
-      );
-    }, 300);
+    const handleResize = debounce(
+      () =>
+        setMaxSize(
+          containerRef?.current?.getBoundingClientRect().width > allItemsLength
+        ),
+      300
+    );
 
     window.addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // If the screen was resized then we need to re-shift the array so that the item is still in the middle
   useEffect(() => {
     if (openItem > -1) {
-      triggerItemOpen(openItem);
+      onItemOpen((itemList[openItem] as ReactElement).props.id);
     }
-  }, [numItemsOnScreen]);
+  }, [openItem, itemList]);
 
   // Focus needs to be handled manually since want to allow users to navigate with arrow keys, not tab
   const onCarouselKeyPress = event => {
@@ -164,46 +164,36 @@ export default function CarouselContainer({
     trail: 100,
   });
 
-  const handleArrowClick = (direction: 'left' | 'right'): void => {
-    if (openItem > -1) {
-      triggerItemOpen(direction === 'left' ? openItem - 1 : openItem + 1);
-    } else {
-      // No item currently open, so open middle
-      triggerItemOpen(Math.floor(numItemsOnScreen / 2));
-    }
-  };
-
   return (
     <CarouselContext.Provider
       value={{
         carouselId,
         openItem,
         triggerItemOpen,
-        onItemOpen,
+        isMaxSize,
         itemDimensions,
       }}
     >
       <ControlsContainer>
-        <CarouselControl onClick={() => handleArrowClick('left')}>
-          <ArrowLeft fontSize='inherit' />
-        </CarouselControl>
+        <CarouselControl direction='left' />
         <ItemsContainer
           role='list'
+          aria-label={title}
           onKeyDown={onCarouselKeyPress}
           ref={containerRef}
           $itemDimensions={itemDimensions}
+          $isMaxSize={isMaxSize}
+          $isEven={itemList.length % 2 === 0}
         >
           {transitions((style, item, _, index) => (
-            <animated.div style={style}>
+            <animated.div style={style} role='presentation'>
               {React.cloneElement(item as ReactElement, {
                 index,
               })}
             </animated.div>
           ))}
         </ItemsContainer>
-        <CarouselControl onClick={() => handleArrowClick('right')}>
-          <ArrowRight fontSize='inherit' />
-        </CarouselControl>
+        <CarouselControl direction='right' />
       </ControlsContainer>
     </CarouselContext.Provider>
   );
