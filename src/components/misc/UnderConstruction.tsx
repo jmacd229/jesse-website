@@ -1,6 +1,5 @@
-import React, { useEffect, createRef, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styled, { css } from 'styled-components';
-import lottie from 'lottie-web';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -11,11 +10,12 @@ import spacing from 'styles/spacing';
 import linkedIn_image from 'assets/linkedin.svg';
 import { SmallText } from 'styles/typography';
 import { FadeIn } from '@shared/fade-in/fade-in';
+import Animation from '@shared/Animation';
 import media from 'styles/media';
 import logoGradient from 'styles/logoGradient';
 import createLineGradient from 'styles/lineGradient';
 import { Position } from 'model/enums/position.enum';
-import animation from '../../animations/under-construction.json';
+import box_animation from '../../animations/under-construction.json';
 
 const LINKEDIN_DIMENSIONS = css`
   width: ${spacing(19)};
@@ -48,7 +48,7 @@ const UnderConstructionContainer = styled.div`
   }
 `;
 
-const PackageIcon = styled.div`
+const PackageIcon = styled(Animation).attrs({ data: box_animation })`
   grid-area: icon;
   height: fit-content;
 `;
@@ -102,24 +102,11 @@ const panelContent: React.ReactElement[] = [
 ];
 
 const UnderConstruction = (): ReactElement => {
-  const animationContainer = createRef<HTMLDivElement>();
   const [expanded, setExpanded] = useState(false);
-
-  useEffect(() => {
-    lottie.loadAnimation({
-      name: 'package',
-      container: animationContainer.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: animation,
-    });
-    return () => lottie.destroy('package');
-  }, []);
 
   return (
     <UnderConstructionContainer>
-      <PackageIcon ref={animationContainer} />
+      <PackageIcon />
       <Message>
         Sorry, this site is <em>still</em> in progress - please check back later
         for updates!

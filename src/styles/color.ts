@@ -10,6 +10,8 @@ enum Color {
   LIGHT_PURPLE = '#d97aff',
   PURPLE = '#b500ff',
   DARK_PURPLE = '#3c2445',
+  TRANSPARENT = 'rgba(0,0,0,0)',
+  SEMI_TRANSPARENT = 'rgba(0,0,0,0.3)',
 }
 
 export default Color;

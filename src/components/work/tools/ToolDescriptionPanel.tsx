@@ -7,7 +7,7 @@ import { Heading } from 'styles/typography';
 import { color } from 'styles';
 
 export interface ToolDescriptionPanelProps extends PanelProps {
-  id: string;
+  workId: string;
   tool?: Tool;
 }
 
@@ -39,8 +39,19 @@ const ToolTitle = styled(Heading).attrs({ level: 4 })`
   margin-left: ${spacing(1)};
 `;
 
+export const getPanelId = (workId: string): string => `${workId}-panel`;
+
+const getDescription = (tool: Tool, workId: string): Array<string> => {
+  // If there is only one description for the tool since it was only used in one workplace, return as is
+  if (tool.description instanceof Array) {
+    return tool.description as Array<string>;
+  }
+  // Otherwise, attempt to retrieve the workplace specific description
+  return tool.description[workId];
+};
+
 const ToolDescriptionPanel = ({
-  id,
+  workId,
   tool,
   isOpen,
 }: ToolDescriptionPanelProps): ReactElement => {
@@ -50,8 +61,8 @@ const ToolDescriptionPanel = ({
       tool && (
         <>
           <ToolTitle>{tool.name}</ToolTitle>
-          <PanelList id={id}>
-            {tool.description?.map((item, i) => (
+          <PanelList id={getPanelId(workId)}>
+            {getDescription(tool, workId).map((item, i) => (
               <PanelListItem key={i}>{item}</PanelListItem>
             ))}
           </PanelList>

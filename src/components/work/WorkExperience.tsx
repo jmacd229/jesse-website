@@ -2,7 +2,9 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
 import WorkItem, { WorkItemProps } from 'components/work/WorkItem';
-import { Subtitle } from 'styles/typography';
+import InProgress from 'components/misc/InProgress';
+import { Heading, Subtitle } from 'styles/typography';
+import { spacing, media } from 'styles';
 
 export interface WorkExperienceProps {
   title: string;
@@ -12,7 +14,15 @@ export interface WorkExperienceProps {
 const WorkExperienceContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 50%;
+  &:not(:first-child) {
+    margin-top: ${spacing(5)};
+    ${media.medium} {
+      margin-top: 0;
+    }
+  }
+  ${media.medium} {
+    max-width: 70rem;
+  }
 `;
 
 const WorkExperienceTitle = styled(Subtitle)`
@@ -33,11 +43,19 @@ export const WorkExperience = ({
   return (
     <WorkExperienceContainer>
       <WorkExperienceTitle id={id}>{title}</WorkExperienceTitle>
-      <WorkList role='list' aria-labelledby={id}>
-        {work?.map((workItem, index) => (
-          <WorkItem key={index} {...workItem} />
-        ))}
-      </WorkList>
+      {work ? (
+        <WorkList role='list' aria-labelledby={id}>
+          {work.map((workItem, index) => (
+            <WorkItem key={index} {...workItem} />
+          ))}
+        </WorkList>
+      ) : (
+        <InProgress>
+          <Heading level={3}>
+            Sorry, I&apos;m still working on this section of the site.
+          </Heading>
+        </InProgress>
+      )}
     </WorkExperienceContainer>
   );
 };

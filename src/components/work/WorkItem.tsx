@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
 
@@ -8,9 +8,12 @@ import { spacing, color, media } from 'styles';
 import { Heading } from 'styles/typography';
 import { Tool } from 'components/work/tools/tool_items';
 import Carousel, { CarouselItemDimensions } from '@shared/Carousel';
-import ToolDescriptionPanel from 'components/work/tools/ToolDescriptionPanel';
+import ToolDescriptionPanel, {
+  getPanelId,
+} from 'components/work/tools/ToolDescriptionPanel';
 
-const ICON_SIZE = '10rem';
+const DESKTOP_ICON_SIZE = '6rem';
+const MOBILE_ICON_SIZE = '10rem';
 const TOOL_ICON_DIMENSIONS: CarouselItemDimensions = {
   expanded: spacing(6),
   collapsed: spacing(3),
@@ -18,11 +21,12 @@ const TOOL_ICON_DIMENSIONS: CarouselItemDimensions = {
 };
 
 export interface WorkItemProps {
+  id: string;
   title: string;
   icon: { src: string; round?: boolean; alt: string };
   startDate: Date;
   endDate: Date;
-  description: string[];
+  description?: string[];
   tools?: Tool[];
 }
 
@@ -37,6 +41,7 @@ const WorkItemContainer = styled.div`
     flex-direction: row;
     align-items: flex-start;
     gap: 0;
+    max-width: 70rem;
   }
 `;
 
@@ -48,7 +53,7 @@ const WorkItemInfo = styled.div<{ $toolsLength: number }>`
     padding-left: ${spacing(3)};
     // Must be manually calculated due to the way the accordion calculates width
     // spacing(8) is used to account for the spacing(3) on the WorkItemContainer padding, with an additional margin of spacing(2)
-    max-width: calc(100% - calc(${ICON_SIZE} + ${spacing(8)}));
+    max-width: calc(100% - calc(${DESKTOP_ICON_SIZE} + ${spacing(8)}));
     width: calc(
       calc(
           ${TOOL_ICON_DIMENSIONS.collapsed} *
@@ -63,9 +68,11 @@ const WorkItemInfo = styled.div<{ $toolsLength: number }>`
 `;
 
 const Icon = styled.img`
-  width: ${ICON_SIZE};
-  height: ${ICON_SIZE};
+  width: ${MOBILE_ICON_SIZE};
   border-radius: ${(props: { round: boolean }) => (props.round ? '50%' : 0)};
+  ${media.medium} {
+    width: ${DESKTOP_ICON_SIZE};
+  }
 `;
 
 const WorkDate = styled.div`
@@ -77,6 +84,12 @@ const SummaryContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+
+const NoDescriptionSummaryContainer = styled(SummaryContainer)`
+  height: 100%;
+  justify-content: center;
+  padding-left: ${spacing(3)};
 `;
 
 const WorkDetails = styled.p`
@@ -91,6 +104,7 @@ const formatDate = (date: Date) => {
 };
 
 export const WorkItem = ({
+  id,
   title,
   icon,
   startDate,
@@ -100,58 +114,67 @@ export const WorkItem = ({
 }: WorkItemProps): ReactElement => {
   const [expanded, setExpanded] = useState(false);
   const [openTool, setOpenTool] = useState(undefined);
-  const id = title.replace(/\s+/g, '');
-
   return (
     <WorkItemContainer role='listitem'>
       <Icon src={icon.src} round={icon.round} alt={icon.alt} />
-      <WorkItemInfo $toolsLength={Number(tools?.length)}>
-        <Accordion
-          expanded={expanded}
-          onChange={(_, isExpanded) => setExpanded(isExpanded)}
-          elevation={0}
-          TransitionProps={{ timeout: 2000 }}
-        >
-          <AccordionSummary
-            sx={{ width: '100%' }}
-            expandIcon={<ExpandMoreIcon fontSize='large' />}
-            aria-controls={`workItem-${id}-content`}
-            id={`workItem-${id}`}
+      {description ? (
+        <WorkItemInfo $toolsLength={Number(tools?.length)}>
+          <Accordion
+            expanded={expanded}
+            onChange={(_, isExpanded) => setExpanded(isExpanded)}
+            elevation={0}
+            TransitionProps={{ timeout: 2000 }}
           >
-            <SummaryContainer>
-              <Heading level={3}>{title}</Heading>
-              <WorkDate>
-                {formatDate(startDate)} - {formatDate(endDate)}
-              </WorkDate>
-            </SummaryContainer>
-          </AccordionSummary>
-          <AccordionDetails>
-            {description.map((item, i) => (
-              <WorkDetails key={i}>{item}</WorkDetails>
-            ))}
-          </AccordionDetails>
-        </Accordion>
-        <Carousel
-          title={title}
-          onItemOpen={id => setOpenTool(tools.find(tool => tool.id === id))}
-        >
-          {tools?.map(tool => (
-            <Carousel.Item
-              key={tool.id}
-              id={tool.id}
-              aria-label={tool.name}
-              aria-describedby={`${id}-panel`}
+            <AccordionSummary
+              sx={{ width: '100%' }}
+              expandIcon={<ExpandMoreIcon fontSize='large' />}
+              aria-controls={`workItem-${id}-content`}
+              id={`workItem-${id}`}
             >
-              <img src={tool.src} aria-hidden />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-        <ToolDescriptionPanel
-          tool={openTool}
-          isOpen={Boolean(openTool)}
-          id={`${id}-panel`}
-        />
-      </WorkItemInfo>
+              <SummaryContainer>
+                <Heading level={3}>{title}</Heading>
+                <WorkDate>
+                  {formatDate(startDate)} - {formatDate(endDate)}
+                </WorkDate>
+              </SummaryContainer>
+            </AccordionSummary>
+            <AccordionDetails>
+              {description.map((item, i) => (
+                <WorkDetails key={i}>{item}</WorkDetails>
+              ))}
+            </AccordionDetails>
+          </Accordion>
+          <Carousel
+            title={title}
+            onItemOpen={id => setOpenTool(tools.find(tool => tool.id === id))}
+          >
+            {tools?.map(tool =>
+              tool ? (
+                <Carousel.Item
+                  key={tool.id}
+                  id={tool.id}
+                  aria-label={tool.name}
+                  aria-describedby={getPanelId(id)}
+                >
+                  <img src={tool.src} aria-hidden />
+                </Carousel.Item>
+              ) : null
+            )}
+          </Carousel>
+          <ToolDescriptionPanel
+            tool={openTool}
+            isOpen={Boolean(openTool)}
+            workId={id}
+          />
+        </WorkItemInfo>
+      ) : (
+        <NoDescriptionSummaryContainer>
+          <Heading level={3}>{title}</Heading>
+          <WorkDate>
+            {formatDate(startDate)} - {formatDate(endDate)}
+          </WorkDate>
+        </NoDescriptionSummaryContainer>
+      )}
     </WorkItemContainer>
   );
 };

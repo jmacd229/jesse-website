@@ -12,12 +12,21 @@ import mongo from 'assets/logos/mongo.png';
 import csharp from 'assets/logos/csharp.png';
 import asp from 'assets/logos/asp.png';
 import unix from 'assets/logos/unix.png';
+import backbone from 'assets/logos/backbone.png';
+import redux from 'assets/logos/redux.png';
+import cypress from 'assets/logos/cypress.png';
+import storybook from 'assets/logos/storybook.png';
+import postgresql from 'assets/logos/postgresql.png';
+import styledcomponents from 'assets/logos/styledcomponents.png';
+import graphql from 'assets/logos/graphql.svg';
+import javascript from 'assets/logos/javascript.png';
+import react from 'assets/logos/react.svg';
 
 export interface Tool {
   id: string;
   name: string;
   src: string;
-  description?: string[];
+  description?: Array<string> | { [key: string]: Array<string> };
 }
 
 const Tools: { [tool: string]: Tool } = {
@@ -38,7 +47,7 @@ const Tools: { [tool: string]: Tool } = {
       'Developed middleware with Java Spring Boot',
       'Experience in consuming APIs from .NET backend, and exposing API endpoints to Angular front-end',
       'Integrated with other libraries such as MongoDB and Redis',
-      'Experience with MVC, CompleteableFutures, and JUnit',
+      'Experience with MVC, CompletableFutures, and JUnit',
     ],
   },
   Python: {
@@ -46,7 +55,7 @@ const Tools: { [tool: string]: Tool } = {
     name: 'Python',
     src: python,
     description: [
-      'Periodic writing and maintaining of batch scripts for data visualization using Spark dataframes',
+      'Periodic writing and maintaining of batch scripts for data visualization using Spark DataFrames',
     ],
   },
   Oracle: {
@@ -71,18 +80,28 @@ const Tools: { [tool: string]: Tool } = {
     id: 'typescript',
     name: 'TypeScript',
     src: typescript,
-    description: [
-      'All Angular and Node applications & unit tests were written in TypeScript',
-    ],
+    description: {
+      prodigy: [
+        'Worked on team converting our component library from JavaScript to TypeScript',
+      ],
+      canada_life: [
+        'All Angular and Node applications & unit tests were written in TypeScript',
+      ],
+    },
   },
   Docker: {
     id: 'docker',
     name: 'Docker',
     src: docker,
-    description: [
-      'Experience writing Docker and Docker Compose files for building and deploying Java and Angular apps',
-      'Work often involved SSHing into running Docker Containers for configuration and debugging',
-    ],
+    description: {
+      prodigy: [
+        'Updated CI configuration to enable Docker Layer Caching and reduce deployment times',
+      ],
+      canada_life: [
+        'Experience writing Docker and Docker Compose files for building and deploying Java and Angular apps',
+        'Work often involved SSHing into running Docker Containers for configuration and debugging',
+      ],
+    },
   },
   C: {
     id: 'c',
@@ -108,7 +127,7 @@ const Tools: { [tool: string]: Tool } = {
     src: mongo,
     description: [
       'Maintained and configured various Mongo collections',
-      'Often wrote complex data migration and data investigation queries',
+      'Often wrote complex data migration scripts and data investigation queries',
     ],
   },
   CSharp: {
@@ -133,7 +152,87 @@ const Tools: { [tool: string]: Tool } = {
     name: 'Unix',
     src: unix,
     description: [
-      'Supported mulitple Unix servers that hosted sites via Docker containers, often SSHing in to configure and debug',
+      'Supported multiple Unix servers that hosted sites via Docker containers, often SSHing in to configure and debug',
+    ],
+  },
+  Backbone: {
+    id: 'backbone',
+    name: 'Backbone',
+    src: backbone,
+    description: [
+      'Often worked in legacy backbone code to update pages and fix bugs',
+      'Migrated many components to React, re-writing from scratch',
+    ],
+  },
+  Redux: {
+    id: 'redux',
+    name: 'Redux',
+    src: redux,
+    description: [
+      'Much of the legacy code relied on Redux for state management',
+      'Often had to work with complex actions, reducers, and dispatchers',
+    ],
+  },
+  Cypress: {
+    id: 'cypress',
+    name: 'Cypress',
+    src: cypress,
+    description: [
+      'Rewrote entire test suites for improved reliability',
+      'Reduced total runtime of E2E tests by ~20 minutes',
+      'Experience writing custom commands and working with Cypress Testing Library',
+    ],
+  },
+  StoryBook: {
+    id: 'storybook',
+    name: 'StoryBook',
+    src: storybook,
+    description: [
+      'All work in the component library required updates to StoryBook',
+    ],
+  },
+  PostgreSQL: {
+    id: 'postgresql',
+    name: 'PostgreSQL',
+    src: postgresql,
+    description: [
+      'Created tables, seeders, and migrations required for various features',
+      'Often wrote queries to analyze and manipulate data in dev databases',
+    ],
+  },
+  StyledComponents: {
+    id: 'styledcomponents',
+    name: 'Styled Components',
+    src: styledcomponents,
+    description: [
+      'Designed components with complex interactions using props, attributes, and css selectors',
+    ],
+  },
+  GraphQL: {
+    id: 'graphql',
+    name: 'GraphQL',
+    src: graphql,
+    description: [
+      'Created resolvers and services to support new features',
+      'Wrote many mutations and queries to manipulate and view data from the front-end',
+    ],
+  },
+  JavaScript: {
+    id: 'javascript',
+    name: 'JavaScript',
+    src: javascript,
+    description: [
+      'Both the front-end and back-end were maintained and written in JavaScript',
+    ],
+  },
+  React: {
+    id: 'react',
+    name: 'React',
+    src: react,
+    description: [
+      'Front-end was written in React',
+      'Experience with many libraries such as react-router and react-spring',
+      'Extensive unit testing with Jest and React Testing Library',
     ],
   },
 };

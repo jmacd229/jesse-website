@@ -10,7 +10,7 @@ import { debounce, uniqueId } from 'lodash';
 import styled, { css } from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 
-import { color, spacing } from 'styles';
+import { spacing } from 'styles';
 import { toPx } from 'utilities/parsing';
 
 import {
@@ -28,22 +28,22 @@ const ControlsContainer = styled.div`
 `;
 
 const maxSizeGradient = css`
-  background-image: linear-gradient(
+  -webkit-mask-image: linear-gradient(
     90deg,
-    ${color.GREY},
-    transparent 10%,
-    transparent 90%,
-    ${color.GREY}
+    transparent,
+    #000000 10%,
+    #000000 90%,
+    transparent
   );
 `;
 
 const withButtonsGradient = css`
-  background-image: linear-gradient(
+  -webkit-mask-image: linear-gradient(
     90deg,
-    ${color.GREY} 10%,
-    transparent 25%,
-    transparent 75%,
-    ${color.GREY} 90%
+    transparent 10%,
+    #000000 25%,
+    #000000 75%,
+    transparent 90%
   );
 `;
 
@@ -69,18 +69,8 @@ const ItemsContainer = styled(animated.div)<{
     ${({ $itemDimensions }) => $itemDimensions.expanded} +
       calc(${({ $itemDimensions }) => $itemDimensions.padding} * 2)
   );
-  // Creates a gradient effect to hide the edges of the carousel
-  &:before {
-    pointer-events: none;
-    z-index: 1;
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    ${({ $isMaxSize }) => ($isMaxSize ? maxSizeGradient : withButtonsGradient)};
-  }
+  // Creates a gradient effect to hide the edges of the carousel using a mask
+  ${({ $isMaxSize }) => ($isMaxSize ? maxSizeGradient : withButtonsGradient)};
 `;
 export interface CarouselProps extends DOMAttributes<Element> {
   title: string;
@@ -157,7 +147,7 @@ export default function CarouselContainer({
     }
   };
 
-  const transitions = useTransition(itemList, {
+  const itemEnterTransition = useTransition(itemList, {
     from: { opacity: 0, transform: `translateY(1rem)` },
     enter: { opacity: 1, transform: `translateY(0rem)` },
     leave: { opacity: 0, transform: `translateY(1rem)` },
@@ -185,7 +175,7 @@ export default function CarouselContainer({
           $isMaxSize={isMaxSize}
           $isEven={itemList.length % 2 === 0}
         >
-          {transitions((style, item, _, index) => (
+          {itemEnterTransition((style, item, _, index) => (
             <animated.div style={style} role='presentation'>
               {React.cloneElement(item as ReactElement, {
                 index,
