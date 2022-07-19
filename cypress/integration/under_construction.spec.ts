@@ -3,8 +3,10 @@ context('Under Construction', () => {
     cy.visit(Cypress.config().baseUrl);
   });
 
-  it('Should say "More coming soon..." instead of navigation links', () => {
-    cy.findByRole('banner').should('have.text', 'More pages coming soon...');
+  it('Should show building blocks animation with tooltip instead of navigation links', () => {
+    cy.findByRole('group', {
+      name: 'More pages are currently in progress',
+    }).should('exist');
   });
 
   it('Should expand and collapse on click with tabbing inside', () => {

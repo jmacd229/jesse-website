@@ -3,6 +3,7 @@ import Color from 'styles/color';
 import dialog from 'styles/material-ui-overrides/dialog';
 import accordion from './accordion';
 import button from './button';
+import tooltip from './tooltip';
 
 export default createTheme({
   palette: {
@@ -22,5 +23,6 @@ export default createTheme({
     ...accordion,
     ...button,
     ...dialog,
+    ...tooltip,
   },
 });

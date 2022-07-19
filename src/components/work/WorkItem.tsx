@@ -115,7 +115,10 @@ export const WorkItem = ({
   const [expanded, setExpanded] = useState(false);
   const [openTool, setOpenTool] = useState(undefined);
   return (
-    <WorkItemContainer role='listitem'>
+    <WorkItemContainer
+      role='listitem'
+      aria-labelledby={description && `workItem-heading-${id}`}
+    >
       <Icon src={icon.src} round={icon.round} alt={icon.alt} />
       {description ? (
         <WorkItemInfo $toolsLength={Number(tools?.length)}>
@@ -132,7 +135,9 @@ export const WorkItem = ({
               id={`workItem-${id}`}
             >
               <SummaryContainer>
-                <Heading level={3}>{title}</Heading>
+                <Heading level={3} id={`workItem-heading-${id}`}>
+                  {title}
+                </Heading>
                 <WorkDate>
                   {formatDate(startDate)} - {formatDate(endDate)}
                 </WorkDate>

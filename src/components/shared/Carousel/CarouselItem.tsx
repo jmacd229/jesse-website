@@ -1,7 +1,6 @@
 import React, { DOMAttributes, ReactElement, useContext } from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
-import { spacing } from 'styles';
 
 import { CarouselContext } from './Carousel.context';
 
@@ -10,12 +9,6 @@ export interface CarouselItemDimensions {
   collapsed: string;
   padding: string;
 }
-
-export const DEFAULT_ITEM_DIMENSIONS: CarouselItemDimensions = {
-  expanded: spacing(6),
-  collapsed: spacing(3),
-  padding: spacing(1),
-};
 
 const ItemContainer = styled(animated.div)<{
   $itemPadding: string;

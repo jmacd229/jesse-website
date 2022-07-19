@@ -20,6 +20,7 @@ const StyledLink = styled(AniLink)`
   color: ${Color.WHITE};
   margin: 0 ${spacing(1)};
   text-decoration: none;
+  white-space: nowrap;
 `;
 
 export interface HeaderLinkProps {

@@ -15,6 +15,6 @@ context('404', () => {
 
   it('Should go back to home page on button click', () => {
     cy.findByText('Back to home').click();
-    cy.url().should('eq', Cypress.config().baseUrl + '/');
+    cy.url().should('eq', Cypress.config().baseUrl);
   });
 });

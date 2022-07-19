@@ -13,11 +13,8 @@ import { useTransition, animated } from 'react-spring';
 import { spacing } from 'styles';
 import { toPx } from 'utilities/parsing';
 
-import {
-  CarouselItemDimensions,
-  DEFAULT_ITEM_DIMENSIONS,
-} from './CarouselItem';
-import { CarouselContext } from './Carousel.context';
+import { CarouselItemDimensions } from './CarouselItem';
+import { CarouselContext, DEFAULT_ITEM_DIMENSIONS } from './Carousel.context';
 import { CarouselControl } from './CarouselControl';
 
 const ControlsContainer = styled.div`
