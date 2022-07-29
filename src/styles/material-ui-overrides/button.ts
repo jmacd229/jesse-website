@@ -1,9 +1,11 @@
-import { Overrides } from '@material-ui/core/styles/overrides';
+import { Components } from '@mui/material/styles';
 
 export default {
   MuiButtonBase: {
-    root: {
-      outline: null,
+    styleOverrides: {
+      root: {
+        outline: 'unset',
+      },
     },
   },
-} as Overrides;
+} as Components;

@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import AniLink from 'gatsby-plugin-transition-link/AniLink';
-import { Page } from 'enums/pages.enum';
+import { Page } from 'model/enums/pages.enum';
 import spacing from 'styles/spacing';
-import color from 'styles/color';
+import Color from 'styles/color';
 
 function getPageName(page: Page): string {
   switch (page) {
@@ -17,9 +17,10 @@ function getPageName(page: Page): string {
 }
 
 const StyledLink = styled(AniLink)`
-  color: ${color.white};
+  color: ${Color.WHITE};
   margin: 0 ${spacing(1)};
   text-decoration: none;
+  white-space: nowrap;
 `;
 
 export interface HeaderLinkProps {

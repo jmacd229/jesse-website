@@ -22,11 +22,12 @@ export const Index = (): ReactElement => {
           placeholder='blurred'
           height={1000}
         />
-      }>
+      }
+    >
       <SEO title='Home' />
       <div>
         <FadeIn isVisible forwards={{ initialDelay: 0, delay: 500 }}>
-          <Title>Hi, I&apos;m Jesse</Title>
+          <Title large>Hi, I&apos;m Jesse</Title>
           <StyledSubtitle>
             A full-stack web developer based in Toronto
           </StyledSubtitle>

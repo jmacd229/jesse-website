@@ -1,29 +1,31 @@
 import React, { DOMAttributes, ReactElement, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { SimpleInterpolation } from 'styled-components';
+import { color } from 'styles';
+import createLinearGradient from 'styles/createLinearGradient';
 
-const BackgroundElement = styled.div.attrs({ 'aria-hidden': true })`
+const BackgroundElement = styled.div.attrs({ 'aria-hidden': true })<{
+  $gradient: SimpleInterpolation;
+}>`
+  width: 100%;
   height: 100%;
-  min-width: calc(100vh * 1.46);
   position: fixed;
   top: 0;
   right: 0;
-  -webkit-mask-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(rgba(0, 0, 0, 1)),
-    to(rgba(0, 0, 0, 0))
-  );
-  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  mask-image: ${props => props.$gradient};
   > * {
     width: 100%;
     height: 100%;
   }
 `;
 
+export interface BackgroundImageProps extends DOMAttributes<Element> {
+  gradient?: SimpleInterpolation;
+}
+
 const BackgroundImage = ({
   children,
-}: DOMAttributes<Element>): ReactElement => {
+  gradient = createLinearGradient(270, color.GREY, color.TRANSPARENT),
+}: BackgroundImageProps): ReactElement => {
   const MAX_OPACITY_WIDTH = 1200;
   const [opacity, setOpacity] = useState(0);
 
@@ -41,7 +43,7 @@ const BackgroundImage = ({
   });
 
   return (
-    <BackgroundElement style={{ opacity: opacity }}>
+    <BackgroundElement style={{ opacity: opacity }} $gradient={gradient}>
       {children}
     </BackgroundElement>
   );

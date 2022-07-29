@@ -1,26 +1,28 @@
-import { createTheme } from '@material-ui/core/styles';
-import color from 'styles/color';
+import { createTheme } from '@mui/material/styles';
+import Color from 'styles/color';
 import dialog from 'styles/material-ui-overrides/dialog';
 import accordion from './accordion';
 import button from './button';
+import tooltip from './tooltip';
 
 export default createTheme({
   palette: {
-    type: 'dark',
+    mode: 'dark',
     primary: {
-      main: color.purple,
+      main: Color.PURPLE,
     },
     secondary: {
-      main: color.blue,
+      main: Color.BLUE,
     },
     background: {
-      paper: color.grey,
+      paper: Color.GREY,
     },
   },
 
-  overrides: {
+  components: {
     ...accordion,
     ...button,
     ...dialog,
+    ...tooltip,
   },
 });

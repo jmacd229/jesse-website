@@ -1,5 +1,5 @@
-import { TimeDuration } from '../../model/time-duration';
-import { TimeUnit } from 'enums/time-unit';
+import { TimeDuration } from 'model/time-duration';
+import { TimeUnit } from 'model/enums/time-unit';
 import React, { DOMAttributes, ReactElement, useEffect, useState } from 'react';
 import { timer } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';

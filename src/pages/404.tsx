@@ -7,9 +7,11 @@ import Button from '@shared/Button';
 import circuit from 'assets/circuit.svg';
 
 import { Subtitle, Title } from 'styles/typography';
-import { Page } from 'enums/pages.enum';
+import { Page } from 'model/enums/pages.enum';
 import { ReactElement } from 'react';
 import spacing from 'styles/spacing';
+import Color from 'styles/color';
+import createLinearGradient from 'styles/createLinearGradient';
 
 const NotFoundBackground = styled.div`
   background-image: url(${circuit});
@@ -29,7 +31,10 @@ const BackToHomeButton = styled(Button)`
 
 const NotFound = (): ReactElement => {
   return (
-    <Layout image={<NotFoundBackground />}>
+    <Layout
+      image={<NotFoundBackground />}
+      gradient={createLinearGradient(270, Color.GREY)}
+    >
       <SEO title='Page Not Found' />
       <NotFoundContainer>
         <Title>404</Title>

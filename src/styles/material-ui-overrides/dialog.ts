@@ -1,9 +1,11 @@
-import { Overrides } from '@material-ui/core/styles/overrides';
+import { Components } from '@mui/material/styles';
 
 export default {
   MuiDialogActions: {
-    root: {
-      justifyContent: 'center',
+    styleOverrides: {
+      root: {
+        justifyContent: 'center',
+      },
     },
   },
-} as Overrides;
+} as Components;

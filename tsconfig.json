@@ -1,18 +1,15 @@
 {
-    "compilerOptions": {
-      "jsx": "react",
-      "esModuleInterop": true,
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "baseUrl": "./src",
-      "paths": {
-        "@misc/*": ["components/misc/*"],
-        "@pages/*": ["components/pages/*"],
-        "@shared/*": ["components/shared/*"],
-        "*": [
-          "types/*",
-          "*"
-        ]
-      }
-    },
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
+      "@misc/*": ["components/misc/*"],
+      "@shared/*": ["components/shared/*"],
+      "*": ["types/*", "*"]
+    }
   }
+}

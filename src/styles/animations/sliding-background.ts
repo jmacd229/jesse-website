@@ -1,7 +1,7 @@
 import {
   css,
   CSSObject,
-  FlattenSimpleInterpolation,
+  SimpleInterpolation,
   keyframes,
 } from 'styled-components';
 
@@ -14,7 +14,7 @@ const slide = keyframes`
     }
 `;
 
-const slidingBackground = (image: CSSObject): FlattenSimpleInterpolation => css`
+const slidingBackground = (image: CSSObject): SimpleInterpolation => css`
   background-image: url(${image});
   background-repeat: repeat;
   animation: ${slide} 10s linear infinite;
