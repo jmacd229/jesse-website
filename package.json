@@ -2,7 +2,7 @@
   "name": "jesse-website",
   "private": true,
   "description": "A personal portfolio website for Jesse MacDougall",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "releaseDate": "11-22-2020",
   "license": "0BSD",
   "scripts": {
