@@ -8,6 +8,7 @@ import createLineGradient from 'styles/lineGradient';
 import { Position } from 'model/enums/position.enum';
 import Animation from 'components/shared/Animation';
 import bricks from 'animations/bricks.json';
+import useCurrentUrl from 'hooks/useCurrentUrl';
 
 const HeaderContainer = styled(Paper)`
   display: flex;
@@ -34,9 +35,6 @@ const BackToHomeLink = styled(HeaderLink)`
   margin-right: auto;
 `;
 
-const getcurrentUrl = () =>
-  typeof window !== 'undefined' ? window.location.pathname : '';
-
 const getLinks = () => {
   const availableLinks = JSON.parse(process.env.AVAILABLE_LINKS);
   return (
@@ -56,11 +54,14 @@ const getLinks = () => {
   );
 };
 
-const Header = (): ReactElement => (
-  <HeaderContainer elevation={3} role='banner'>
-    {getcurrentUrl() !== Page.HOME && <BackToHomeLink page={Page.HOME} />}
-    {getLinks()}
-  </HeaderContainer>
-);
+const Header = (): ReactElement => {
+  const currentUrl = useCurrentUrl();
+  return (
+    <HeaderContainer elevation={3} role='banner'>
+      {currentUrl !== Page.HOME && <BackToHomeLink page={Page.HOME} />}
+      {getLinks()}
+    </HeaderContainer>
+  );
+};
 
 export default Header;
