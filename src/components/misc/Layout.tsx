@@ -12,7 +12,9 @@ interface LayoutProps extends BackgroundImageProps {
   image?: ReactElement;
 }
 
-const Content = styled.main`
+const Content = styled.main.attrs({
+  tabIndex: -1,
+})`
   position: relative;
   z-index: ${zIndex.MAIN};
   padding: ${spacing(3)};

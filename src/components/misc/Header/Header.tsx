@@ -9,6 +9,7 @@ import { Position } from 'model/enums/position.enum';
 import Animation from 'components/shared/Animation';
 import bricks from 'animations/bricks.json';
 import useCurrentUrl from 'hooks/useCurrentUrl';
+import SkipToContent from '@misc/Header/SkipToContent';
 
 const HeaderContainer = styled(Paper)`
   display: flex;
@@ -83,6 +84,7 @@ const Header = (): ReactElement => {
   const currentUrl = useCurrentUrl();
   return (
     <HeaderContainer elevation={3} role='banner'>
+      <SkipToContent />
       {currentUrl !== Page.HOME && <BackToHomeLink page={Page.HOME} />}
       {getLinks()}
     </HeaderContainer>
