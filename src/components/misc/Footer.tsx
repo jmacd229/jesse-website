@@ -9,6 +9,7 @@ import { SmallText } from 'styles/typography';
 import Color from 'styles/color';
 import { ButtonTheme } from '@shared/Button';
 import Button from '@shared/Button';
+import { parse } from 'date-fns/esm';
 
 const StyledFooter = styled.footer`
   display: flex;
@@ -32,7 +33,11 @@ const Footer = (): ReactElement => {
         A personal website built by and for Jesse MacDougall
         <br />V{packageJson.version}
         <br />
-        Last Updated: {new Date(packageJson.releaseDate).toDateString()}
+        {`Last Updated: ${parse(
+          packageJson.releaseDate,
+          'MM-dd-yyyy',
+          new Date()
+        ).toDateString()}`}
         <br />
         <Button
           theme={ButtonTheme.LINK}
