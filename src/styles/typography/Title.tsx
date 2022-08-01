@@ -20,12 +20,12 @@ const TITLE_SIZE_BOUNDS = {
 
 const getFontSize = (isLarge: boolean) => {
   const size = TITLE_SIZE_BOUNDS[isLarge ? 'LARGE' : 'REGULAR'];
-  return `clamp(${size.MIN}, 30vw, ${size.MAX})`;
+  return `clamp(${size.MIN}, 25vw, ${size.MAX})`;
 };
 
 const StyledTitle = styled(BaseText)`
   font-size: ${(props: { large: boolean }) => getFontSize(props.large)};
-  line-height: 30vw;
+  line-height: 25vw;
   word-break: keep-all;
   overflow-wrap: normal;
   font-weight: 900;

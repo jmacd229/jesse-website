@@ -31,20 +31,26 @@ const LinkedIn = styled(OutboundLink)`
 `;
 
 const ReadMore = styled(SmallText)`
-  margin-left: ${spacing(1)};
+  margin-left: ${spacing(6)};
   text-decoration: underline;
+  ${media.medium} {
+    margin-left: 0;
+  }
 `;
 
 const UnderConstructionContainer = styled.div`
   display: grid;
   grid-template-areas:
     'icon message'
-    'icon accordion';
+    'accordion accordion';
   grid-template-columns: ${spacing(4)} 1fr;
   grid-column-gap: ${spacing(2)};
   grid-row-gap: ${spacing(0.5)};
   ${media.medium} {
     grid-template-columns: ${spacing(4)} ${spacing(66)};
+    grid-template-areas:
+      'icon message'
+      'icon accordion';
   }
 `;
 

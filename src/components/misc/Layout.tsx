@@ -17,7 +17,7 @@ interface LayoutProps extends BackgroundImageProps {
 const Content = styled.main`
   position: relative;
   z-index: 1;
-  padding: ${spacing(5)};
+  padding: ${spacing(3)};
   flex-grow: 1;
   transition: height 1s linear;
 
