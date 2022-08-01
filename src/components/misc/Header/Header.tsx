@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
-import { Paper, Tooltip } from '@mui/material';
+import { ClickAwayListener, Paper, Tooltip } from '@mui/material';
 import styled from 'styled-components';
 import { Page } from 'model/enums/pages.enum';
-import spacing from 'styles/spacing';
+import { spacing, zIndex } from 'styles';
 import HeaderLink from '@misc/Header/HeaderLink';
 import createLineGradient from 'styles/lineGradient';
 import { Position } from 'model/enums/position.enum';
@@ -17,7 +17,7 @@ const HeaderContainer = styled(Paper)`
   position: relative;
   height: ${spacing(6)};
   padding: 0 ${spacing(4)};
-  z-index: 1;
+  z-index: ${zIndex.HEADER};
   flex-shrink: 0;
   ${createLineGradient(Position.BELOW)}
 `;
@@ -37,18 +37,43 @@ const BackToHomeLink = styled(HeaderLink)`
 
 const getLinks = () => {
   const availableLinks = JSON.parse(process.env.AVAILABLE_LINKS);
+  const [open, setOpen] = React.useState(false);
+  const handleTooltipClose = () => setOpen(false);
+  const handleTooltipOpen = () => setOpen(true);
+
   return (
     <>
       {availableLinks.map(pageName => (
         <HeaderLink page={Page[pageName]} key={pageName} />
       ))}
       {/* Subtract 1 since the Page enum contains 'HOME' */}
-      {availableLinks.length < Object.keys(Page).length - 1 && (
-        <Tooltip arrow title='More pages are currently in progress'>
-          <div role='group'>
-            <InProgress />
+      {availableLinks.length < Object.keys(Page).length && (
+        <ClickAwayListener onClickAway={handleTooltipClose}>
+          <div>
+            <Tooltip
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener
+              arrow
+              title='More pages are currently in progress'
+              PopperProps={{
+                disablePortal: true,
+              }}
+              onClose={handleTooltipClose}
+              open={open}
+            >
+              <button
+                onClick={handleTooltipOpen}
+                onMouseEnter={handleTooltipOpen}
+                onFocus={handleTooltipOpen}
+                onMouseLeave={handleTooltipClose}
+                onBlur={handleTooltipClose}
+              >
+                <InProgress />
+              </button>
+            </Tooltip>
           </div>
-        </Tooltip>
+        </ClickAwayListener>
       )}
     </>
   );

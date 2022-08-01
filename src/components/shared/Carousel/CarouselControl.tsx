@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ArrowLeft from '@mui/icons-material/ArrowLeft';
 import ArrowRight from '@mui/icons-material/ArrowRight';
 
-import { spacing } from 'styles';
+import { spacing, zIndex } from 'styles';
 import Button from '@shared/Button';
 
 import { CarouselContext } from './Carousel.context';
@@ -24,7 +24,7 @@ const ArrowButton = styled(Button)`
 const AnimationContainer = styled(animated.div)<{ $right?: boolean }>`
   position: absolute;
   ${({ $right }) => $right && `right: 0;`}
-  z-index: 2;
+  z-index: ${zIndex.CAROUSEL_CONTROL};
 `;
 
 export const CarouselControl = ({

@@ -6,9 +6,7 @@ import Header from '@misc/Header/Header';
 import { ThemeProvider } from '@mui/material';
 import GlobalStyle from 'styles/GlobalStyle';
 import materialUIThemeOverride from 'styles/material-ui-overrides/themeOverride';
-import spacing from 'styles/spacing';
-import Color from 'styles/color';
-import media from 'styles/media';
+import { spacing, zIndex, color, media } from 'styles';
 
 interface LayoutProps extends BackgroundImageProps {
   image?: ReactElement;
@@ -16,7 +14,7 @@ interface LayoutProps extends BackgroundImageProps {
 
 const Content = styled.main`
   position: relative;
-  z-index: 1;
+  z-index: ${zIndex.MAIN};
   padding: ${spacing(3)};
   flex-grow: 1;
   transition: height 1s linear;
@@ -31,7 +29,7 @@ const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   position: relative;
-  background-color: ${Color.GREY};
+  background-color: ${color.GREY};
   overflow-x: hidden;
   overflow-y: auto;
 `;
