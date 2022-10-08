@@ -29,8 +29,10 @@ const AnimationContainer = styled(animated.div)<{ $right?: boolean }>`
 
 export const CarouselControl = ({
   direction,
+  onBlur,
 }: {
   direction: Direction;
+  onBlur: () => void;
 }): ReactElement => {
   const { openItem, triggerItemOpen, isMaxSize } = useContext(CarouselContext);
   const isRight = direction === 'right';
@@ -56,6 +58,7 @@ export const CarouselControl = ({
       item && (
         <AnimationContainer style={style} $right={isRight}>
           <ArrowButton
+            onBlur={onBlur}
             onClick={handleArrowClick}
             aria-label={isRight ? 'Next item' : 'Previous item'}
           >

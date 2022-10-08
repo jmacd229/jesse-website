@@ -6,7 +6,7 @@ import React, {
   useMemo,
   DOMAttributes,
 } from 'react';
-import { debounce, uniqueId } from 'lodash';
+import { debounce, uniqueId, noop } from 'lodash';
 import styled, { css } from 'styled-components';
 import { useTransition, animated } from 'react-spring';
 
@@ -73,6 +73,8 @@ export interface CarouselProps extends DOMAttributes<Element> {
   title: string;
   itemDimensions?: CarouselItemDimensions;
   onItemOpen: (id: string) => void;
+  onCarouselBlur?: () => void;
+  onItemFocus?: (id: string) => void;
 }
 
 export default function CarouselContainer({
@@ -80,6 +82,8 @@ export default function CarouselContainer({
   children,
   itemDimensions = DEFAULT_ITEM_DIMENSIONS,
   onItemOpen,
+  onCarouselBlur = noop,
+  onItemFocus = noop,
 }: CarouselProps): ReactElement {
   const [openItem, setOpenItem] = useState(-1);
   const [itemList, setItemList] = useState(React.Children.toArray(children));
@@ -157,12 +161,14 @@ export default function CarouselContainer({
         carouselId,
         openItem,
         triggerItemOpen,
+        triggerItemFocus: onItemFocus,
+        triggerItemBlur: onCarouselBlur,
         isMaxSize,
         itemDimensions,
       }}
     >
       <ControlsContainer>
-        <CarouselControl direction='left' />
+        <CarouselControl direction='left' onBlur={onCarouselBlur} />
         <ItemsContainer
           role='list'
           aria-label={title}
@@ -180,7 +186,7 @@ export default function CarouselContainer({
             </animated.div>
           ))}
         </ItemsContainer>
-        <CarouselControl direction='right' />
+        <CarouselControl direction='right' onBlur={onCarouselBlur} />
       </ControlsContainer>
     </CarouselContext.Provider>
   );
