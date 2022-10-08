@@ -6,6 +6,7 @@ export default {
     styleOverrides: {
       tooltip: {
         fontSize: spacing(1.5),
+        lineHeight: spacing(1.5),
       },
     },
   },

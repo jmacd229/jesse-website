@@ -8,9 +8,7 @@ import { spacing, color, media } from 'styles';
 import { Heading } from 'styles/typography';
 import { Tool } from 'components/work/tools/tool_items';
 import Carousel, { CarouselItemDimensions } from '@shared/Carousel';
-import ToolDescriptionPanel, {
-  getPanelId,
-} from 'components/work/tools/ToolDescriptionPanel';
+import ToolPanel, { getPanelId } from 'components/work/tools/ToolPanel';
 
 const DESKTOP_ICON_SIZE = '6rem';
 const MOBILE_ICON_SIZE = '10rem';
@@ -99,6 +97,14 @@ const WorkDetails = styled.p`
   }
 `;
 
+const ToolPanelContainer = styled.div`
+  position: relative;
+`;
+const ToolPanelAbsolutePositioning = styled.div`
+  position: absolute;
+  width: 100%;
+`;
+
 const formatDate = (date: Date) => {
   return isToday(date) ? 'Present' : format(date, 'MMM yyyy');
 };
@@ -114,6 +120,7 @@ export const WorkItem = ({
 }: WorkItemProps): ReactElement => {
   const [expanded, setExpanded] = useState(false);
   const [openTool, setOpenTool] = useState(undefined);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
   return (
     <WorkItemContainer
       role='listitem'
@@ -151,7 +158,12 @@ export const WorkItem = ({
           </Accordion>
           <Carousel
             title={title}
-            onItemOpen={id => setOpenTool(tools.find(tool => tool.id === id))}
+            onItemOpen={id => {
+              setOpenTool(tools.find(tool => tool.id === id));
+              setIsPanelOpen(true);
+            }}
+            onCarouselBlur={() => setIsPanelOpen(false)}
+            onItemFocus={() => setIsPanelOpen(true)}
           >
             {tools?.map(tool =>
               tool ? (
@@ -159,18 +171,18 @@ export const WorkItem = ({
                   key={tool.id}
                   id={tool.id}
                   aria-label={tool.name}
-                  aria-describedby={getPanelId(id)}
+                  aria-describedby={isPanelOpen ? getPanelId(id) : null}
                 >
                   <img src={tool.src} aria-hidden />
                 </Carousel.Item>
               ) : null
             )}
           </Carousel>
-          <ToolDescriptionPanel
-            tool={openTool}
-            isOpen={Boolean(openTool)}
-            workId={id}
-          />
+          <ToolPanelContainer>
+            <ToolPanelAbsolutePositioning>
+              <ToolPanel tool={openTool} isOpen={isPanelOpen} />
+            </ToolPanelAbsolutePositioning>
+          </ToolPanelContainer>
         </WorkItemInfo>
       ) : (
         <NoDescriptionSummaryContainer>

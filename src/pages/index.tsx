@@ -7,9 +7,14 @@ import { FadeIn } from '@shared/fade-in/fade-in';
 import React, { ReactElement } from 'react';
 import { Title, Subtitle } from 'styles/typography';
 import spacing from 'styles/spacing';
+import media from 'styles/media';
 
 const StyledSubtitle = styled(Subtitle)`
   margin-bottom: ${spacing(4)};
+  margin-top: ${spacing(3)};
+  ${media.medium} {
+    margin-top: 0;
+  }
 `;
 
 export const Index = (): ReactElement => {

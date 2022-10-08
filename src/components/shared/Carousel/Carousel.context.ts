@@ -13,6 +13,8 @@ export const CarouselContext = createContext({
   carouselId: undefined,
   openItem: -1,
   triggerItemOpen: noop,
+  triggerItemFocus: noop,
+  triggerItemBlur: noop,
   isMaxSize: false,
   itemDimensions: DEFAULT_ITEM_DIMENSIONS,
 });

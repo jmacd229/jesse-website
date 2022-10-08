@@ -35,8 +35,14 @@ export const CarouselItem = ({
   index,
   ...rest
 }: CarouselItemProps): ReactElement => {
-  const { carouselId, openItem, triggerItemOpen, itemDimensions } =
-    useContext(CarouselContext);
+  const {
+    carouselId,
+    openItem,
+    triggerItemOpen,
+    triggerItemBlur,
+    triggerItemFocus,
+    itemDimensions,
+  } = useContext(CarouselContext);
   const isOpenItem = openItem === index;
 
   const collapsedItem = {
@@ -63,7 +69,11 @@ export const CarouselItem = ({
       onMouseLeave={() => {
         if (!isOpenItem) set(collapsedItem);
       }}
-      onFocus={() => triggerItemOpen(index)}
+      onFocus={() => {
+        triggerItemOpen(index);
+        triggerItemFocus();
+      }}
+      onBlur={() => triggerItemBlur()}
       style={expandStyle}
       role='listitem'
       // Only the open item is focusable. If no item is currently open, then make the first item in the list focusable

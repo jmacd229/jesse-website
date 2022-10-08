@@ -4,7 +4,7 @@ context('Under Construction', () => {
   });
 
   it('Should show building blocks animation with tooltip instead of navigation links', () => {
-    cy.findByRole('group', {
+    cy.findByRole('button', {
       name: 'More pages are currently in progress',
     }).should('exist');
   });

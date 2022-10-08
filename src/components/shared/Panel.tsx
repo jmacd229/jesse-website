@@ -6,20 +6,25 @@ import { color, spacing } from 'styles';
 import createLineGradient from 'styles/lineGradient';
 import { getFlipConfig } from 'styles/animations/spring/flip';
 
-const PanelContainer = styled(animated.div)<{ $isOpen: boolean }>`
+const PanelContainer = styled(animated.div)<{
+  $isOpen: boolean;
+  $gradientPosition: Position;
+}>`
   color: ${({ $isOpen }) => (!$isOpen ? 'transparent' : color.WHITE)};
   background-color: ${color.DARKEST_GREY};
   padding: ${spacing(1)};
-  ${createLineGradient(Position.LEFT)}
+  ${({ $gradientPosition }) => createLineGradient($gradientPosition)}
 `;
 
 export interface PanelProps extends DOMAttributes<Element> {
   isOpen?: boolean;
+  gradientPosition?: Position;
 }
 
 const Panel = ({
   children,
   isOpen = false,
+  gradientPosition = Position.LEFT,
   ...rest
 }: PanelProps): ReactElement => {
   const backgroundTransition = useTransition(isOpen, {
@@ -38,7 +43,12 @@ const Panel = ({
   return backgroundTransition(
     (flipStyles, panel) =>
       panel && (
-        <PanelContainer $isOpen={isOpen} style={flipStyles} {...rest}>
+        <PanelContainer
+          $isOpen={isOpen}
+          $gradientPosition={gradientPosition}
+          style={flipStyles}
+          {...rest}
+        >
           {contentTransition((fadeStyles, item) => (
             <animated.div style={fadeStyles}>{item}</animated.div>
           ))}

@@ -15,6 +15,12 @@ export default createGlobalStyle`
     margin: unset;
   }
 
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
+
   body {
     margin:0;
     font-size: ${spacing(2)};
